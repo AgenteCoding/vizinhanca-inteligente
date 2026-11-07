@@ -46,7 +46,7 @@ Detalhes: `docs/ARCHITECTURE.md`.
 ## 3. Tecnologias (versões fixadas)
 
 Next.js 16.4.5 (App Router), React 19.3, TypeScript 5.9 (strict), Tailwind CSS 4.3,
-ESLint 9, Vitest 5.1. Node 24. Zod entra na etapa 2 para validar `src/data/`.
+ESLint 9, Vitest 5.1, Zod 4.6 (valida `src/data/`). Node 24.
 
 - `.npmrc` usa `save-exact=true`. **Não atualize dependências antes da feira.**
 - `eslint-plugin-jsx-a11y` está declarado diretamente (já vinha com o `eslint-config-next`)
@@ -102,6 +102,12 @@ public/images/      ilustrações (criada quando houver a primeira imagem)
 - **Nunca invente** dados científicos, percentuais de economia, valores em kWh ou em reais.
 - Toda afirmação factual em `src/data/` deve ter `sourceIds` apontando para `sources.json`
   (órgãos oficiais: Inmetro/PBE, Procel, ANEEL, EPE, INPE) **ou** `status: "pending"`.
+- Uma fonte só é `verified` depois de aberta e lida; `supportedClaims` registra, em paráfrase,
+  o que ela sustenta. Uma explicação só é `verified` se o texto se apoiar nessas afirmações e
+  todas as fontes citadas forem `verified`. Na dúvida, `pending`. O esquema Zod
+  (`src/data/schema.ts`) impõe essas regras e os testes falham se forem violadas.
+- Conteúdo `pending` nunca é apresentado ao visitante como fato comprovado.
+- Nunca invente URLs, títulos ou publicações: só cadastre fontes que foram abertas e conferidas.
 - Sem fonte confirmada → texto **qualitativo** ("reduz o consumo"), nunca número estimado.
 - Horário de ponta varia por distribuidora: não fixe um horário único como regra nacional.
 - Pontuação de minigame é "pontos do jogo", nunca apresentada como economia real.

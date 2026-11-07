@@ -1,0 +1,144 @@
+[
+  {
+    "id": "aneel-ren-1000-2021",
+    "organization": "Agência Nacional de Energia Elétrica (ANEEL)",
+    "title": "Resolução Normativa ANEEL nº 1.000, de 7 de dezembro de 2021",
+    "url": "https://www2.aneel.gov.br/cedoc/ren20211000.html",
+    "topic": "Regras de prestação do serviço de distribuição de energia elétrica, incluindo a definição dos postos tarifários (ponta, intermediário e fora de ponta).",
+    "supportedClaims": [
+      "O posto tarifário ponta é um período de 3 horas diárias consecutivas definidas pela distribuidora, considerando a curva de carga de seu sistema elétrico, e aprovado pela ANEEL para toda a área de concessão ou permissão.",
+      "O posto ponta não se aplica aos sábados, domingos, terça-feira de carnaval, sexta-feira da Paixão, Corpus Christi e aos feriados nacionais listados na resolução.",
+      "O posto intermediário tem duas horas, uma imediatamente antes e outra imediatamente depois do horário de ponta, e se aplica apenas ao grupo B.",
+      "O posto fora de ponta é formado pelas demais horas do dia."
+    ],
+    "status": "verified",
+    "accessedAt": "2026-11-06"
+  },
+  {
+    "id": "aneel-tarifa-branca",
+    "organization": "Agência Nacional de Energia Elétrica (ANEEL)",
+    "title": "Tarifa Branca",
+    "url": "https://www.gov.br/aneel/pt-br/assuntos/tarifas/tarifa-branca",
+    "topic": "Modalidade tarifária com valores diferentes ao longo do dia para consumidores de baixa tensão.",
+    "supportedClaims": [
+      "Na Tarifa Branca, nos dias úteis, há três postos: ponta (tarifa mais elevada), intermediário e fora de ponta (tarifa de menor valor).",
+      "Nos fins de semana e feriados nacionais, aplica-se a tarifa fora de ponta.",
+      "A tarifa fora de ponta tem valor inferior ao da tarifa convencional, o que a torna indicada para quem consegue concentrar o consumo fora do horário de ponta.",
+      "A Tarifa Branca é voltada a consumidores de baixa tensão (grupo B) e não está disponível para a subclasse residencial baixa renda que recebe benefício tarifário nem para a iluminação pública."
+    ],
+    "status": "verified",
+    "accessedAt": "2026-11-06"
+  },
+  {
+    "id": "aneel-mmgd",
+    "organization": "Agência Nacional de Energia Elétrica (ANEEL)",
+    "title": "Micro e Minigeração Distribuída",
+    "url": "https://www.gov.br/aneel/pt-br/assuntos/geracao-distribuida",
+    "topic": "Regras da micro e minigeração distribuída e do Sistema de Compensação de Energia Elétrica.",
+    "supportedClaims": [
+      "A Resolução Normativa nº 1.059/2023 adequou os regulamentos da ANEEL às disposições da Lei nº 14.300/2022.",
+      "Entre as modalidades previstas estão autoconsumo local, autoconsumo remoto, empreendimentos com múltiplas unidades consumidoras e geração compartilhada.",
+      "A instalação da geração distribuída é iniciativa do consumidor; a ANEEL não define o custo dos equipamentos nem as condições de financiamento, e cabe ao consumidor avaliar a relação custo/benefício.",
+      "Para unidades do grupo B (baixa tensão), o custo de disponibilidade continua devido mesmo quando a energia injetada supera o consumo."
+    ],
+    "status": "verified",
+    "accessedAt": "2026-11-06"
+  },
+  {
+    "id": "lei-14300-2022",
+    "organization": "Presidência da República (Planalto)",
+    "title": "Lei nº 14.300, de 6 de janeiro de 2022",
+    "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/lei/l14300.htm",
+    "topic": "Marco legal da micro e minigeração distribuída.",
+    "supportedClaims": [
+      "A lei institui o marco legal da microgeração e minigeração distribuída e o Sistema de Compensação de Energia Elétrica (SCEE)."
+    ],
+    "status": "verified",
+    "accessedAt": "2026-11-06"
+  },
+  {
+    "id": "aneel-consumo-consciente",
+    "organization": "Agência Nacional de Energia Elétrica (ANEEL)",
+    "title": "Consumo de energia consciente - Levante esta bandeira.",
+    "url": "https://www2.aneel.gov.br/hotsite/energiaconsciente/",
+    "topic": "Dicas de consumo consciente de energia (página antiga da campanha das bandeiras tarifárias; a dica de trocar incandescentes por fluorescentes está desatualizada e não é usada no projeto).",
+    "supportedClaims": [
+      "Não deixar portas e janelas abertas em ambientes com ar-condicionado e manter os filtros limpos.",
+      "Não deixar a porta da geladeira aberta mais tempo que o necessário e verificar se a borracha de vedação está em boas condições.",
+      "Preferir a iluminação natural.",
+      "Ao sair, apagar a luz.",
+      "Trocar o eletrodoméstico antigo por um novo com Selo Procel."
+    ],
+    "status": "verified",
+    "accessedAt": "2026-11-06"
+  },
+  {
+    "id": "mme-selo-procel",
+    "organization": "Ministério de Minas e Energia (MME) / Procel",
+    "title": "Conheça o Selo Procel de Economia de Energia",
+    "url": "https://www.gov.br/mme/pt-br/assuntos/noticias/julho-26/conheca-o-selo-procel-de-economia-de-energia",
+    "topic": "Selo Procel e sua relação com a Etiqueta Nacional de Conservação de Energia (ENCE) do Inmetro.",
+    "supportedClaims": [
+      "O Programa Nacional de Conservação de Energia Elétrica (Procel) é coordenado pelo Ministério de Minas e Energia.",
+      "O Selo Procel é concedido a produtos que recebem classificação A na Etiqueta Nacional de Conservação de Energia (ENCE).",
+      "A ENCE informa o nível de eficiência energética dos equipamentos e auxilia o consumidor na comparação entre diferentes modelos."
+    ],
+    "status": "verified",
+    "accessedAt": "2026-11-06"
+  },
+  {
+    "id": "epe-abc-eficiencia-energetica",
+    "organization": "Empresa de Pesquisa Energética (EPE)",
+    "title": "Eficiência Energética",
+    "url": "https://www.epe.gov.br/pt/abcdenergia/eficiencia-energetica",
+    "topic": "Conceito de eficiência energética, etiquetas e selos de eficiência e hábitos de uso.",
+    "supportedClaims": [
+      "Eficiência energética é fazer mais, ou pelo menos o mesmo, com menos energia, mantendo o conforto e a qualidade.",
+      "A etiqueta do Inmetro classifica os produtos em faixas, da classe A (mais eficiente) até a classe de menor eficiência, que varia conforme o produto.",
+      "O Selo Procel indica os produtos com os melhores níveis de eficiência energética dentro de sua categoria.",
+      "Evitar acender lâmpadas durante o dia e aproveitar a luz do sol, abrindo janelas, cortinas e persianas."
+    ],
+    "status": "verified",
+    "accessedAt": "2026-11-06"
+  },
+  {
+    "id": "inmetro-pbe-refrigeradores",
+    "organization": "Instituto Nacional de Metrologia, Qualidade e Tecnologia (Inmetro) - Programa Brasileiro de Etiquetagem",
+    "title": "Refrigeradores, frigobares, combinados, combinados frost-free",
+    "url": "https://www.gov.br/inmetro/pt-br/assuntos/regulamentacao/avaliacao-da-conformidade/programa-brasileiro-de-etiquetagem/tabelas-de-eficiencia-energetica/refrigeradores-frigobares-combinados-combinados-frost-free",
+    "topic": "Tabelas de eficiência energética do PBE e consulta de produtos etiquetados.",
+    "supportedClaims": [
+      "O Sistema PBE do Inmetro (pbe.inmetro.gov.br) permite consultar o consumo energético dos produtos registrados e filtrá-los por características como marca, modelo, capacidade e classificação da etiqueta."
+    ],
+    "status": "verified",
+    "accessedAt": "2026-11-06"
+  },
+  {
+    "id": "inmetro-air-reles-fotocontroladores-2017",
+    "organization": "Instituto Nacional de Metrologia, Qualidade e Tecnologia (Inmetro)",
+    "title": "Nota Técnica DCONF/DIQRE/005/2017 - Análise de impacto regulatório (AIR) nível 1 de relés fotocontroladores para iluminação pública",
+    "url": "https://www.gov.br/inmetro/pt-br/assuntos/regulamentacao/analise-de-impacto-regulatorio/realizadas/2017/reles-fotocontroladores-para-iluminacao-publica/relatorio",
+    "topic": "Funcionamento e problemas de relés fotocontroladores usados na iluminação pública.",
+    "supportedClaims": [
+      "O relé fotocontrolador é um dispositivo que liga ou desliga um circuito de iluminação de acordo com o nível de iluminamento do ambiente.",
+      "Na iluminação pública, o relé permite o acendimento automático ao entardecer e o desligamento automático ao amanhecer das luminárias dos postes.",
+      "Relés que acendem antes e apagam depois do momento desejado, definido em norma técnica, provocam desperdício de energia na iluminação pública.",
+      "Relés com vida útil mais curta que a estabelecida em norma causam alta frequência de substituição e descarte excessivo de material."
+    ],
+    "status": "verified",
+    "accessedAt": "2026-11-06"
+  },
+  {
+    "id": "inpe-atlas-solar-2017",
+    "organization": "Instituto Nacional de Pesquisas Espaciais (INPE) - LABREN",
+    "title": "Atlas Brasileiro de Energia Solar - 2ª Edição (2017)",
+    "url": "https://labren.ccst.inpe.br/atlas_2017.html",
+    "topic": "Base de dados da irradiação solar no território brasileiro.",
+    "supportedClaims": [
+      "O atlas reúne uma base de dados com médias anuais e mensais da irradiação solar diária no Brasil, construída a partir de dados de satélite.",
+      "O atlas analisa a variabilidade espacial e temporal do recurso solar."
+    ],
+    "status": "verified",
+    "accessedAt": "2026-11-06"
+  }
+]

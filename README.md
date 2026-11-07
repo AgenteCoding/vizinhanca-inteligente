@@ -56,7 +56,7 @@ sistema especialista baseado em regras. As informações científicas vêm de fo
 | Next.js 16 (App Router, export estático) | Gera um site estático que roda sem servidor e sem internet |
 | React 19 + TypeScript (strict) | Interface em componentes, com dados e regras tipados |
 | Tailwind CSS 4 | Estilização rápida e consistente |
-| JSON (+ Zod na próxima etapa) | Base de conhecimento editável e validada |
+| JSON + Zod | Base de conhecimento editável e validada |
 | Vitest | Testes automatizados da lógica de decisão |
 | ESLint | Padrões de código e regras de segurança |
 | Git + Vercel | Controle de versões e publicação |
@@ -88,8 +88,11 @@ notebook sem internet durante a feira.
 **Etapa 1 — Fundação (concluída):** projeto configurado, documentação, contratos de dados e
 estrutura de testes. A página inicial é provisória.
 
-Próximas etapas: núcleo inteligente (base de conhecimento, classificador e motor de decisão),
-interface, minigames e entrega. Veja [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md).
+**Etapa 2 — Núcleo inteligente (em andamento):** base de conhecimento das seis categorias com
+fontes oficiais conferidas e validação automática (bloco A concluído). Próximos blocos:
+classificador de texto e motor de decisão.
+
+Depois: interface, minigames e entrega. Veja [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md).
 
 ## Documentação
 

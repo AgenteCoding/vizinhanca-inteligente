@@ -48,8 +48,8 @@ mais fácil de explicar aos avaliadores.
 | `src/types/` | Interfaces e tipos compartilhados (`knowledge.ts`). | Depender de qualquer outra camada. |
 | `tests/` | Testes automatizados espelhando `src/`. | — |
 
-**Estado atual (etapa 1):** existem `src/app/` e `src/types/`. As demais pastas serão criadas na
-etapa em que receberem o primeiro arquivo, para evitar diretórios vazios.
+**Estado atual (etapa 2, bloco A):** existem `src/app/`, `src/data/` e `src/types/`. As demais
+pastas serão criadas na etapa em que receberem o primeiro arquivo, para evitar diretórios vazios.
 
 ## 3. Fluxo de informações
 
@@ -110,11 +110,132 @@ src/data/
 ```
 
 - Cada categoria segue o contrato `ProblemCategory`: título, resumo, palavras-chave com peso
-  (`WeightedKeyword`: termo normalizado + peso; sinônimos são termos próprios), causas,
-  alternativas (benefícios e limitações), desafio e explicação final.
+  (`WeightedKeyword`: termo normalizado + peso de 1 a 3; sinônimos são termos próprios), causas,
+  consequências, alternativas (benefícios e limitações), alternativa recomendada
+  (`recommendedAlternativeId`), explicação científica, desafio de três opções e explicação final.
 - Cada trecho científico é um `Explanation` com `sourceIds` e `status` (`pending` ou `verified`).
-- Testes garantem que: as seis categorias existem; todo `sourceId` existe em `sources.json`; todo
-  desafio tem exatamente uma opção correta e feedback em todas as opções.
+- Cada fonte (`Source`) registra instituição, título, URL https, tema, afirmações que sustenta
+  (`supportedClaims`), status de verificação e data de acesso.
+- **Tipos sem duplicação:** os tipos ficam em `src/types/knowledge.ts`; os esquemas Zod são
+  declarados com `satisfies z.ZodType<Tipo>` e testes de igualdade de tipos fazem o `typecheck`
+  falhar se esquema e contrato divergirem.
+- O esquema rejeita: campos ausentes ou desconhecidos; IDs duplicados ou fora do padrão; categoria
+  ausente; fonte inexistente ou não citada; explicação `verified` sem fonte ou apoiada em fonte
+  `pending`; fonte `verified` sem afirmações; `%`, `kWh` ou `R# Arquitetura — Vizinhança Inteligente
+
+## 1. Arquitetura geral
+
+A aplicação é um **site estático** gerado pelo Next.js (`output: "export"`). O `next build`
+produz a pasta `out/` com HTML, CSS e JavaScript. Toda a "inteligência" roda no navegador do
+visitante.
+
+Por que assim:
+
+- **Sem servidor, sem segredos:** não há API nem banco para proteger.
+- **Funciona offline:** essencial numa feira, onde o Wi-Fi é instável.
+- **Deploy simples:** Vercel ou qualquer servidor de arquivos.
+- **Prazo curto:** menos peças, menos pontos de falha.
+
+A "IA" é um **sistema especialista determinístico**: regras explícitas, testáveis e explicáveis.
+Isso é mais confiável que um modelo generativo para um conteúdo científico que não pode errar, e
+mais fácil de explicar aos avaliadores.
+
+## 2. Camadas e responsabilidades
+
+```
+┌──────────────────────────────────────────────┐
+│ src/app/          Rotas (páginas)            │
+├──────────────────────────────────────────────┤
+│ src/components/   Interface (React)          │
+├──────────────────────────────────────────────┤
+│ src/hooks/        Ligação React ↔ lógica     │
+├──────────────────────────────────────────────┤
+│ src/lib/          Lógica: classificador,     │
+│                   motor de decisão, jogos    │  ← TypeScript puro, sem React
+├──────────────────────────────────────────────┤
+│ src/data/         Base de conhecimento (JSON)│
+│                   + validação (Zod)          │
+├──────────────────────────────────────────────┤
+│ src/types/        Contratos de dados         │
+└──────────────────────────────────────────────┘
+   Dependências apontam sempre para baixo.
+```
+
+| Módulo | Responsabilidade | Não pode |
+|---|---|---|
+| `src/app/` | Definir rotas e montar a página com componentes. | Conter regra de negócio. |
+| `src/components/` | Exibir estado, capturar ações, acessibilidade. Subpastas por área: `ui/` (botão, cartão, feedback genéricos), `home/`, `assistant/` (fluxo), `challenges/`, `results/`, `minigames/`. | Decidir diagnóstico, avaliar respostas, conter textos científicos fixos. |
+| `src/hooks/` | Hooks finos que conectam o React à lógica: `use-diagnostico.ts` (`useReducer` + `flow-engine`) e `use-game-session.ts` (rodada, acertos, reinício dos jogos). | Tomar decisões: só repassam eventos para `src/lib/` e devolvem o estado. |
+| `src/lib/` | `normalize.ts` (texto), `classifier.ts` (categoria + confiança), `flow-engine.ts` (máquina de estados do fluxo), `games/*.ts` (regras dos minigames). | Importar React, acessar `window`, ter efeitos colaterais. |
+| `src/data/` | Conteúdo das categorias, fontes e dados dos jogos; `schema.ts` valida; `index.ts` exporta dados tipados. | Conter lógica de decisão. |
+| `src/types/` | Interfaces e tipos compartilhados (`knowledge.ts`). | Depender de qualquer outra camada. |
+| `tests/` | Testes automatizados espelhando `src/`. | — |
+
+**Estado atual (etapa 2, bloco A):** existem `src/app/`, `src/data/` e `src/types/`. As demais
+pastas serão criadas na etapa em que receberem o primeiro arquivo, para evitar diretórios vazios.
+
+## 3. Fluxo de informações
+
+```
+Visitante
+  │ escolhe cena ou digita texto
+  ▼
+Componente (assistant/)  ──dispatch(evento)──►  useDiagnostico (hooks/) → useReducer
+                                                 │
+                                                 ▼
+                                   flow-engine.next(estado, evento)
+                                                 │ usa
+                         ┌───────────────────────┴──────────┐
+                         ▼                                  ▼
+                classifier.classify(texto)          data/ (categoria,
+                  │ usa normalize + keywords           causas, desafio)
+                  ▼
+           { categoria | ambíguo | desconhecido, termos reconhecidos }
+                                                 │
+                                                 ▼
+                                         novo estado
+                                                 │
+Componente renderiza a etapa atual ◄─────────────┘
+```
+
+- O **motor** é uma função pura `next(estado, evento) → estado`. Os eventos são, por exemplo,
+  `ENVIAR_RELATO`, `CONFIRMAR_CATEGORIA`, `AVANCAR`, `RESPONDER_DESAFIO`, `RECOMECAR`.
+- As etapas são as definidas em `FLOW_STEPS` (`src/types/knowledge.ts`).
+- O **classificador** devolve um resultado com três formas possíveis: categoria identificada,
+  ambíguo (duas candidatas próximas) ou desconhecido (abaixo do limite de confiança). Ele também
+  devolve os termos reconhecidos, para exibição.
+
+## 4. Separação entre interface e lógica de decisão
+
+Toda decisão (qual categoria, qual etapa vem a seguir, se a resposta está certa) acontece em
+`src/lib/`. Os componentes apenas:
+
+1. leem o estado;
+2. mostram a etapa correspondente;
+3. enviam eventos ao motor.
+
+Benefícios:
+
+- A lógica é testada em milissegundos com Vitest, sem navegador.
+- Trocar o visual não arrisca quebrar o diagnóstico.
+- Uma futura IA generativa ou outra interface podem reutilizar o mesmo motor.
+
+## 5. Organização da base de conhecimento
+
+```
+src/data/
+  problems.json      seis categorias (ProblemCategory)
+  sources.json       fontes oficiais (Source)
+  games/detetive.json
+  games/casa.json
+  schema.ts          esquemas Zod equivalentes aos tipos de src/types/
+  index.ts           carrega, valida e exporta dados tipados
+```
+
+ em texto `pending`; menos de
+  duas alternativas; desafio sem exatamente uma opção correta entre três; alternativa recomendada
+  inexistente; palavra-chave não normalizada ou repetida.
+- `src/data/index.ts` valida tudo uma vez ao carregar o módulo (erro aparece no teste/build).
 - Fontes de referência: Inmetro (PBE), Procel, ANEEL (horário de ponta, Tarifa Branca,
   geração distribuída — Lei 14.300/2022), EPE, INPE (Atlas Brasileiro de Energia Solar).
 
@@ -149,7 +270,9 @@ evita duplicação entre os três.
 | Sem banco de dados e sem contas | Não há dados a persistir; privacidade de menores. |
 | Classificação por palavras-chave com pesos | Determinística, testável e explicável; cabe no prazo. |
 | Máquina de estados pura + `useReducer` | Fluxo previsível e testável, sem biblioteca extra. |
-| Zod (etapa 2) | Erros de conteúdo aparecem no teste e no build, não para o visitante. |
+| Zod 4.6.7 (etapa 2) | Erros de conteúdo aparecem no teste e no build, não para o visitante. Já existia na árvore (dependência do ESLint); agora é dependência direta. |
+| Campos `consequences`, `recommendedAlternativeId` e `scientificExplanation` | Pedidos na etapa 2: o fluxo precisa de consequências, de uma solução recomendada e de uma explicação científica por problema. |
+| Fonte com `topic`, `supportedClaims` e `status` | Torna rastreável o que cada fonte sustenta e permite marcar fontes não conferidas. |
 | Testes em `tests/` espelhando `src/` | Separação clara entre código e verificação. |
 | Versões fixadas (`save-exact`) | Evitar quebras inesperadas antes da feira. |
 | `@types/node` 24 | Alinhado ao Node 24 do ambiente e exigido pelo Vitest 5. |

@@ -1,0 +1,988 @@
+[
+  {
+    "id": "iluminacao-publica-dia",
+    "title": "Iluminação pública ligada durante o dia",
+    "summary": "As lâmpadas dos postes continuam acesas de dia, quando a luz do sol já ilumina a rua.",
+    "keywords": [
+      { "term": "poste", "weight": 3 },
+      { "term": "luz da rua", "weight": 3 },
+      { "term": "iluminacao publica", "weight": 3 },
+      { "term": "lampada do poste", "weight": 3 },
+      { "term": "fotocelula", "weight": 3 },
+      { "term": "rele", "weight": 2 },
+      { "term": "luminaria", "weight": 2 },
+      { "term": "de dia", "weight": 2 },
+      { "term": "durante o dia", "weight": 2 },
+      { "term": "rua", "weight": 1 },
+      { "term": "avenida", "weight": 1 },
+      { "term": "praca", "weight": 1 },
+      { "term": "manha", "weight": 1 },
+      { "term": "acesa", "weight": 1 },
+      { "term": "ligada", "weight": 1 }
+    ],
+    "causes": [
+      {
+        "id": "rele-fora-de-especificacao",
+        "title": "Relé fotocontrolador com defeito ou fora da norma",
+        "explanation": {
+          "text": "O relé fotocontrolador liga e desliga a iluminação de acordo com a luz do ambiente. Quando ele não funciona como a norma técnica determina, as lâmpadas acendem antes e apagam depois do momento certo.",
+          "sourceIds": ["inmetro-air-reles-fotocontroladores-2017"],
+          "status": "verified"
+        }
+      },
+      {
+        "id": "falta-de-manutencao",
+        "title": "Falta de inspeção e manutenção",
+        "explanation": {
+          "text": "Sem inspeção regular da rede de iluminação, um equipamento com defeito pode continuar funcionando de forma errada por muito tempo sem que ninguém perceba.",
+          "sourceIds": [],
+          "status": "pending"
+        }
+      }
+    ],
+    "consequences": [
+      {
+        "id": "energia-desperdicada",
+        "title": "Energia gasta sem necessidade",
+        "explanation": {
+          "text": "Relés que acendem antes e apagam depois do horário desejado provocam desperdício de energia na iluminação pública.",
+          "sourceIds": ["inmetro-air-reles-fotocontroladores-2017"],
+          "status": "verified"
+        }
+      },
+      {
+        "id": "troca-e-descarte",
+        "title": "Mais trocas e mais descarte de material",
+        "explanation": {
+          "text": "Relés que duram menos do que a norma prevê precisam ser substituídos com mais frequência, o que gera mais descarte de material.",
+          "sourceIds": ["inmetro-air-reles-fotocontroladores-2017"],
+          "status": "verified"
+        }
+      }
+    ],
+    "alternatives": [
+      {
+        "id": "rele-adequado",
+        "title": "Usar relés fotocontroladores adequados à norma",
+        "description": "Verificar e substituir os relés com defeito por modelos que atendam à norma técnica, instalados corretamente.",
+        "benefits": [
+          {
+            "text": "O relé permite que as luminárias acendam automaticamente ao entardecer e apaguem ao amanhecer, sem depender de alguém para ligar e desligar.",
+            "sourceIds": ["inmetro-air-reles-fotocontroladores-2017"],
+            "status": "verified"
+          }
+        ],
+        "limitations": [
+          {
+            "text": "O relé precisa ser escolhido e instalado corretamente para a sua finalidade: um equipamento de baixa qualidade, sujo ou mal posicionado pode errar o horário de acender e apagar.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ]
+      },
+      {
+        "id": "manutencao-programada",
+        "title": "Inspeção e manutenção programada",
+        "description": "Fazer vistorias periódicas na iluminação pública e incentivar os moradores a avisar a prefeitura quando virem lâmpadas acesas de dia.",
+        "benefits": [
+          {
+            "text": "Encontrar e trocar rapidamente os equipamentos com defeito evita que o desperdício continue por muito tempo.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ],
+        "limitations": [
+          {
+            "text": "Depende de equipe, planejamento e organização do município.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ]
+      },
+      {
+        "id": "telegestao",
+        "title": "Telegestão da iluminação",
+        "description": "Sistema que permite acompanhar e controlar as luminárias a distância.",
+        "benefits": [
+          {
+            "text": "Ajuda a identificar falhas mais rápido e a ajustar o funcionamento das luminárias.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ],
+        "limitations": [
+          {
+            "text": "Exige investimento, comunicação entre os equipamentos e equipe capacitada, e precisa ser dimensionada para o tamanho da rede de iluminação.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ]
+      }
+    ],
+    "recommendedAlternativeId": "rele-adequado",
+    "scientificExplanation": {
+      "text": "O relé fotocontrolador funciona como um sensor de luz: ele mede o nível de iluminação do ambiente e liga o circuito quando escurece e desliga quando clareia. Se ele erra esse momento, a lâmpada fica acesa quando a luz do sol já é suficiente e gasta energia sem necessidade.",
+      "sourceIds": ["inmetro-air-reles-fotocontroladores-2017"],
+      "status": "verified"
+    },
+    "challenge": {
+      "id": "desafio-iluminacao-publica",
+      "question": "Os postes de uma rua continuam acesos até o meio da manhã. Qual é a decisão mais adequada?",
+      "options": [
+        {
+          "id": "verificar-rele",
+          "text": "Pedir a verificação do relé fotocontrolador e trocá-lo por um que atenda à norma.",
+          "isCorrect": true,
+          "feedback": "Isso mesmo! O relé é o componente que decide quando a lâmpada acende e apaga. Corrigir a causa resolve o problema."
+        },
+        {
+          "id": "lampadas-mais-fortes",
+          "text": "Trocar as lâmpadas da rua por lâmpadas mais fortes.",
+          "isCorrect": false,
+          "feedback": "Lâmpadas mais fortes não resolvem o problema: elas continuariam acesas de dia, porque quem controla o horário é o relé."
+        },
+        {
+          "id": "desligar-tudo",
+          "text": "Desligar de vez a iluminação da rua para economizar.",
+          "isCorrect": false,
+          "feedback": "A iluminação pública é importante para a segurança à noite. O objetivo é evitar o desperdício, não deixar a rua no escuro."
+        }
+      ]
+    },
+    "finalExplanation": {
+      "text": "Na iluminação pública, quem decide a hora de acender e apagar é o relé fotocontrolador. Quando ele falha, as lâmpadas ficam acesas de dia e desperdiçam energia. A solução é corrigir a causa, com equipamentos adequados à norma e manutenção.",
+      "sourceIds": ["inmetro-air-reles-fotocontroladores-2017"],
+      "status": "pending"
+    }
+  },
+  {
+    "id": "luzes-ambientes-vazios",
+    "title": "Luzes acesas em ambientes vazios",
+    "summary": "Luzes ficam acesas em salas, quartos, banheiros ou corredores sem ninguém.",
+    "keywords": [
+      { "term": "sem ninguem", "weight": 3 },
+      { "term": "sala vazia", "weight": 3 },
+      { "term": "sensor de presenca", "weight": 3 },
+      { "term": "ninguem", "weight": 2 },
+      { "term": "vazio", "weight": 2 },
+      { "term": "vazia", "weight": 2 },
+      { "term": "luz acesa", "weight": 2 },
+      { "term": "lampada acesa", "weight": 2 },
+      { "term": "apagar a luz", "weight": 2 },
+      { "term": "esquece", "weight": 2 },
+      { "term": "esqueceu", "weight": 2 },
+      { "term": "esquecem", "weight": 2 },
+      { "term": "quarto", "weight": 1 },
+      { "term": "banheiro", "weight": 1 },
+      { "term": "corredor", "weight": 1 },
+      { "term": "sala", "weight": 1 },
+      { "term": "luz", "weight": 1 },
+      { "term": "lampada", "weight": 1 }
+    ],
+    "causes": [
+      {
+        "id": "esquecimento",
+        "title": "Esquecimento e hábito",
+        "explanation": {
+          "text": "Muitas vezes a luz fica acesa porque a pessoa sai do cômodo e esquece de apagar.",
+          "sourceIds": [],
+          "status": "pending"
+        }
+      },
+      {
+        "id": "ambientes-de-passagem",
+        "title": "Ambientes de passagem sem controle automático",
+        "explanation": {
+          "text": "Em corredores, garagens e banheiros as pessoas ficam pouco tempo, e nem sempre alguém se lembra de desligar a luz ao sair.",
+          "sourceIds": [],
+          "status": "pending"
+        }
+      },
+      {
+        "id": "luz-natural-ignorada",
+        "title": "Lâmpadas acesas mesmo com luz natural",
+        "explanation": {
+          "text": "Acender lâmpadas durante o dia, quando seria possível aproveitar a luz do sol abrindo janelas, cortinas e persianas, também é desperdício.",
+          "sourceIds": ["epe-abc-eficiencia-energetica"],
+          "status": "verified"
+        }
+      }
+    ],
+    "consequences": [
+      {
+        "id": "energia-sem-uso",
+        "title": "Energia gasta sem benefício",
+        "explanation": {
+          "text": "Uma lâmpada acesa em um cômodo vazio consome energia sem iluminar ninguém.",
+          "sourceIds": [],
+          "status": "pending"
+        }
+      },
+      {
+        "id": "conta-maior",
+        "title": "Conta de energia maior",
+        "explanation": {
+          "text": "Esse consumo desnecessário entra na conta de energia da casa ou da escola.",
+          "sourceIds": [],
+          "status": "pending"
+        }
+      }
+    ],
+    "alternatives": [
+      {
+        "id": "sensor-de-presenca",
+        "title": "Sensor de presença nos ambientes de passagem",
+        "description": "Dispositivo que acende a luz quando detecta alguém e apaga depois de um tempo sem movimento, instalado e ajustado para cada ambiente.",
+        "benefits": [
+          {
+            "text": "Desliga a luz automaticamente quando o ambiente fica vazio, sem depender da memória das pessoas.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ],
+        "limitations": [
+          {
+            "text": "Precisa ser adequado ao local: em ambientes onde as pessoas ficam paradas por muito tempo, como uma sala de aula ou de leitura, um sensor mal posicionado ou mal ajustado pode apagar a luz com gente dentro.",
+            "sourceIds": [],
+            "status": "pending"
+          },
+          {
+            "text": "Exige a compra e a instalação do equipamento.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ]
+      },
+      {
+        "id": "habito-de-apagar",
+        "title": "Criar o hábito de apagar a luz ao sair",
+        "description": "Combinar com todos que usam o ambiente que a última pessoa a sair apaga a luz.",
+        "benefits": [
+          {
+            "text": "Apagar a luz ao sair é uma das dicas de consumo consciente de energia divulgadas pela ANEEL.",
+            "sourceIds": ["aneel-consumo-consciente"],
+            "status": "verified"
+          },
+          {
+            "text": "Não exige a compra de nenhum equipamento.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ],
+        "limitations": [
+          {
+            "text": "Depende da memória e da colaboração de todos que usam o ambiente.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ]
+      },
+      {
+        "id": "luz-natural",
+        "title": "Aproveitar a luz natural",
+        "description": "Durante o dia, abrir janelas, cortinas e persianas antes de acender as lâmpadas.",
+        "benefits": [
+          {
+            "text": "Aproveitar a luz do sol evita acender lâmpadas durante o dia.",
+            "sourceIds": ["epe-abc-eficiencia-energetica", "aneel-consumo-consciente"],
+            "status": "verified"
+          }
+        ],
+        "limitations": [
+          {
+            "text": "Só funciona de dia e em ambientes com janelas; à noite a iluminação artificial continua necessária.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ]
+      }
+    ],
+    "recommendedAlternativeId": "sensor-de-presenca",
+    "scientificExplanation": {
+      "text": "Uma lâmpada transforma energia elétrica em luz, e um pouco de calor, durante todo o tempo em que está ligada. Por isso, quanto mais tempo ela fica acesa, mais energia consome: o tempo acesa sem ninguém no ambiente é energia desperdiçada.",
+      "sourceIds": [],
+      "status": "pending"
+    },
+    "challenge": {
+      "id": "desafio-ambientes-vazios",
+      "question": "Na escola, as luzes do corredor e dos banheiros ficam acesas o dia todo, mesmo quando ninguém está passando. Qual decisão faz mais sentido?",
+      "options": [
+        {
+          "id": "sensor-nos-corredores",
+          "text": "Instalar sensores de presença bem posicionados no corredor e nos banheiros.",
+          "isCorrect": true,
+          "feedback": "Ótima escolha! Em ambientes de passagem as pessoas ficam pouco tempo, então o sensor acende a luz só quando há alguém e apaga depois."
+        },
+        {
+          "id": "trocar-lampadas-e-manter",
+          "text": "Trocar as lâmpadas e continuar deixando tudo aceso.",
+          "isCorrect": false,
+          "feedback": "Trocar a lâmpada não resolve o problema principal: a luz continuaria acesa sem ninguém no ambiente."
+        },
+        {
+          "id": "sensor-sem-ajuste-nas-salas",
+          "text": "Instalar sensores de presença em todas as salas de aula, sem nenhum ajuste.",
+          "isCorrect": false,
+          "feedback": "Na sala de aula os alunos ficam sentados e se mexem pouco. Um sensor mal ajustado pode apagar a luz durante a aula. Sensores precisam ser adequados ao uso de cada ambiente."
+        }
+      ]
+    },
+    "finalExplanation": {
+      "text": "Luz acesa sem ninguém é energia gasta sem benefício. O hábito de apagar a luz ao sair, o aproveitamento da luz natural e sensores de presença adequados a cada ambiente ajudam a evitar esse desperdício.",
+      "sourceIds": ["aneel-consumo-consciente", "epe-abc-eficiencia-energetica"],
+      "status": "pending"
+    }
+  },
+  {
+    "id": "consumo-horario-pico",
+    "title": "Muitos equipamentos ligados ao mesmo tempo no horário de ponta",
+    "summary": "Vários aparelhos de alto consumo são ligados juntos justamente no horário de ponta definido pela distribuidora.",
+    "keywords": [
+      { "term": "horario de pico", "weight": 3 },
+      { "term": "horario de ponta", "weight": 3 },
+      { "term": "tarifa branca", "weight": 3 },
+      { "term": "ao mesmo tempo", "weight": 3 },
+      { "term": "mesma hora", "weight": 3 },
+      { "term": "pico", "weight": 2 },
+      { "term": "simultaneamente", "weight": 2 },
+      { "term": "tudo ligado", "weight": 2 },
+      { "term": "fim da tarde", "weight": 2 },
+      { "term": "chuveiro", "weight": 2 },
+      { "term": "ferro de passar", "weight": 2 },
+      { "term": "demanda", "weight": 2 },
+      { "term": "forno", "weight": 1 },
+      { "term": "maquina de lavar", "weight": 1 },
+      { "term": "todo mundo", "weight": 1 },
+      { "term": "ponta", "weight": 1 },
+      { "term": "noite", "weight": 1 }
+    ],
+    "causes": [
+      {
+        "id": "rotinas-no-mesmo-horario",
+        "title": "Rotinas parecidas no mesmo horário",
+        "explanation": {
+          "text": "Muitas famílias chegam em casa, tomam banho, cozinham e ligam outros aparelhos em um mesmo período do dia.",
+          "sourceIds": [],
+          "status": "pending"
+        }
+      },
+      {
+        "id": "horario-de-ponta-desconhecido",
+        "title": "Não saber qual é o horário de ponta",
+        "explanation": {
+          "text": "O horário de ponta é um período de 3 horas consecutivas definido por cada distribuidora, de acordo com a curva de carga do seu sistema elétrico, e aprovado pela ANEEL. Por isso ele não é o mesmo em todo o país, e é preciso consultar a distribuidora da região.",
+          "sourceIds": ["aneel-ren-1000-2021"],
+          "status": "verified"
+        }
+      }
+    ],
+    "consequences": [
+      {
+        "id": "demanda-concentrada",
+        "title": "Demanda concentrada no sistema elétrico",
+        "explanation": {
+          "text": "Quando muitos aparelhos funcionam ao mesmo tempo, a rede precisa fornecer muita potência de uma só vez, o que exige mais da estrutura de geração e distribuição.",
+          "sourceIds": [],
+          "status": "pending"
+        }
+      },
+      {
+        "id": "tarifa-mais-cara-na-ponta",
+        "title": "Energia mais cara para quem tem Tarifa Branca",
+        "explanation": {
+          "text": "Na Tarifa Branca, a energia usada no horário de ponta dos dias úteis tem a tarifa mais elevada do dia.",
+          "sourceIds": ["aneel-tarifa-branca"],
+          "status": "verified"
+        }
+      }
+    ],
+    "alternatives": [
+      {
+        "id": "deslocar-atividades-flexiveis",
+        "title": "Deslocar atividades flexíveis para fora da ponta",
+        "description": "Usar fora do horário de ponta os aparelhos cujo uso pode esperar, como a máquina de lavar roupa e o ferro de passar.",
+        "benefits": [
+          {
+            "text": "Diminui a quantidade de aparelhos ligados ao mesmo tempo no horário de maior demanda.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ],
+        "limitations": [
+          {
+            "text": "Deslocar o uso muda o horário do consumo, mas não reduz necessariamente a quantidade total de energia consumida.",
+            "sourceIds": [],
+            "status": "pending"
+          },
+          {
+            "text": "Nem toda atividade pode mudar de horário: o banho e o preparo das refeições, por exemplo, dependem da rotina da família.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ]
+      },
+      {
+        "id": "avaliar-tarifa-branca",
+        "title": "Avaliar a Tarifa Branca",
+        "description": "Modalidade tarifária regulada pela ANEEL com valores diferentes ao longo do dia nos dias úteis.",
+        "benefits": [
+          {
+            "text": "A tarifa fora de ponta da Tarifa Branca é menor que a tarifa convencional, o que a torna indicada para quem consegue concentrar o consumo fora do horário de ponta.",
+            "sourceIds": ["aneel-tarifa-branca"],
+            "status": "verified"
+          }
+        ],
+        "limitations": [
+          {
+            "text": "No horário de ponta a tarifa é a mais elevada, por isso a modalidade pode não compensar para quem não consegue mudar o horário de uso dos aparelhos.",
+            "sourceIds": ["aneel-tarifa-branca"],
+            "status": "pending"
+          },
+          {
+            "text": "Não está disponível para todos: não vale, por exemplo, para a subclasse residencial baixa renda que recebe benefício tarifário.",
+            "sourceIds": ["aneel-tarifa-branca"],
+            "status": "verified"
+          }
+        ]
+      },
+      {
+        "id": "combinar-horarios-em-casa",
+        "title": "Combinar horários dentro de casa",
+        "description": "Evitar ligar ao mesmo tempo vários aparelhos de alta potência, como chuveiro, forno elétrico e ferro de passar.",
+        "benefits": [
+          {
+            "text": "Reduz os picos de demanda da própria casa.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ],
+        "limitations": [
+          {
+            "text": "Exige organização e conversa entre os moradores.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ]
+      }
+    ],
+    "recommendedAlternativeId": "deslocar-atividades-flexiveis",
+    "scientificExplanation": {
+      "text": "Potência é a energia usada a cada instante; a energia consumida é a potência multiplicada pelo tempo de uso. Mudar o horário de um aparelho não muda quanta energia ele gasta, mas espalha a demanda ao longo do dia e alivia o sistema elétrico justamente no período em que a curva de carga é mais alta.",
+      "sourceIds": ["aneel-ren-1000-2021"],
+      "status": "pending"
+    },
+    "challenge": {
+      "id": "desafio-horario-de-ponta",
+      "question": "Uma família liga chuveiro, forno elétrico, máquina de lavar e ferro de passar no começo da noite, que é o horário de ponta da distribuidora da região. O que mais ajuda a aliviar o horário de ponta?",
+      "options": [
+        {
+          "id": "lavar-e-passar-fora-da-ponta",
+          "text": "Deixar para lavar e passar a roupa fora do horário de ponta.",
+          "isCorrect": true,
+          "feedback": "Correto! Lavar e passar roupa são atividades flexíveis. Mudá-las de horário diminui a demanda na ponta. O consumo total dessas tarefas continua parecido: o que muda é quando ele acontece."
+        },
+        {
+          "id": "ligar-tudo-junto",
+          "text": "Ligar tudo ao mesmo tempo para terminar mais rápido.",
+          "isCorrect": false,
+          "feedback": "Ligar tudo junto concentra ainda mais a demanda no horário de ponta, que é justamente o que queremos evitar."
+        },
+        {
+          "id": "deixar-de-tomar-banho",
+          "text": "Deixar de tomar banho.",
+          "isCorrect": false,
+          "feedback": "O banho é uma necessidade. A ideia é reorganizar as atividades que podem mudar de horário, e não abrir mão do essencial."
+        }
+      ]
+    },
+    "finalExplanation": {
+      "text": "O horário de ponta é definido por cada distribuidora. Mudar as atividades flexíveis para fora desse período reduz a concentração da demanda no sistema elétrico, mesmo que o total de energia consumida continue parecido. Para quem tem Tarifa Branca, isso também pode significar pagar uma tarifa menor por essa energia.",
+      "sourceIds": ["aneel-ren-1000-2021", "aneel-tarifa-branca"],
+      "status": "pending"
+    }
+  },
+  {
+    "id": "eletrodomesticos-ineficientes",
+    "title": "Eletrodomésticos antigos ou ineficientes",
+    "summary": "Aparelhos que gastam mais energia do que outros modelos que fazem o mesmo serviço, como geladeiras e freezers de baixa eficiência.",
+    "keywords": [
+      { "term": "selo procel", "weight": 3 },
+      { "term": "etiqueta do inmetro", "weight": 3 },
+      { "term": "eletrodomestico", "weight": 3 },
+      { "term": "procel", "weight": 3 },
+      { "term": "inmetro", "weight": 3 },
+      { "term": "geladeira", "weight": 2 },
+      { "term": "refrigerador", "weight": 2 },
+      { "term": "freezer", "weight": 2 },
+      { "term": "aparelho", "weight": 1 },
+      { "term": "velho", "weight": 2 },
+      { "term": "velha", "weight": 2 },
+      { "term": "antigo", "weight": 2 },
+      { "term": "antiga", "weight": 2 },
+      { "term": "gasta muito", "weight": 2 },
+      { "term": "consome muito", "weight": 2 },
+      { "term": "etiqueta", "weight": 2 },
+      { "term": "borracha", "weight": 2 },
+      { "term": "eficiencia", "weight": 1 }
+    ],
+    "causes": [
+      {
+        "id": "modelo-pouco-eficiente",
+        "title": "Modelo de baixa eficiência energética",
+        "explanation": {
+          "text": "Aparelhos que fazem o mesmo serviço podem ter níveis diferentes de eficiência energética. A Etiqueta Nacional de Conservação de Energia (ENCE), do Inmetro, informa o nível de eficiência de cada modelo.",
+          "sourceIds": ["mme-selo-procel", "epe-abc-eficiencia-energetica"],
+          "status": "verified"
+        }
+      },
+      {
+        "id": "conservacao-e-uso",
+        "title": "Conservação e uso inadequados",
+        "explanation": {
+          "text": "Deixar a porta da geladeira aberta além do necessário ou usar o aparelho com a borracha de vedação gasta faz com que ele trabalhe mais para manter os alimentos frios.",
+          "sourceIds": ["aneel-consumo-consciente"],
+          "status": "pending"
+        }
+      }
+    ],
+    "consequences": [
+      {
+        "id": "mais-energia-para-o-mesmo-servico",
+        "title": "Mais energia para o mesmo serviço",
+        "explanation": {
+          "text": "Um aparelho menos eficiente precisa de mais energia para entregar o mesmo resultado, como manter os alimentos frios.",
+          "sourceIds": ["epe-abc-eficiencia-energetica"],
+          "status": "pending"
+        }
+      },
+      {
+        "id": "conta-maior",
+        "title": "Conta de energia maior",
+        "explanation": {
+          "text": "O consumo maior do aparelho aparece na conta de energia todos os meses.",
+          "sourceIds": [],
+          "status": "pending"
+        }
+      }
+    ],
+    "alternatives": [
+      {
+        "id": "comparar-consumo-e-classificacao",
+        "title": "Comparar consumo e classificação energética antes de decidir",
+        "description": "Avaliar o consumo e a classificação na etiqueta do Inmetro do aparelho atual e dos modelos novos, e procurar o Selo Procel, antes de decidir trocar. A idade, sozinha, não comprova que um aparelho é ineficiente.",
+        "benefits": [
+          {
+            "text": "A ENCE ajuda a comparar diferentes modelos, e o Selo Procel é concedido aos produtos com classificação A na etiqueta.",
+            "sourceIds": ["mme-selo-procel"],
+            "status": "verified"
+          },
+          {
+            "text": "O Sistema PBE do Inmetro permite consultar o consumo energético dos produtos registrados e filtrá-los pela classificação da etiqueta.",
+            "sourceIds": ["inmetro-pbe-refrigeradores"],
+            "status": "verified"
+          }
+        ],
+        "limitations": [
+          {
+            "text": "Comprar um aparelho novo exige investimento, e trocar um aparelho que ainda funciona bem gera descarte e nem sempre compensa.",
+            "sourceIds": [],
+            "status": "pending"
+          },
+          {
+            "text": "Um aparelho antigo pode não ter mais a etiqueta ou o manual, o que dificulta a comparação.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ]
+      },
+      {
+        "id": "habitos-conscientes",
+        "title": "Hábitos conscientes de uso",
+        "description": "Usar e conservar bem os aparelhos que a família já tem.",
+        "benefits": [
+          {
+            "text": "Não deixar a porta da geladeira aberta mais tempo que o necessário e verificar a borracha de vedação são dicas de consumo consciente da ANEEL.",
+            "sourceIds": ["aneel-consumo-consciente"],
+            "status": "verified"
+          }
+        ],
+        "limitations": [
+          {
+            "text": "Bons hábitos reduzem o desperdício, mas não transformam um aparelho de baixa eficiência em um aparelho eficiente.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ]
+      }
+    ],
+    "recommendedAlternativeId": "comparar-consumo-e-classificacao",
+    "scientificExplanation": {
+      "text": "Eficiência energética é fazer o mesmo serviço usando menos energia, mantendo o conforto e a qualidade. A etiqueta do Inmetro classifica os aparelhos em faixas, da classe A, a mais eficiente, até a classe de menor eficiência, e ajuda a comparar modelos que fazem o mesmo serviço.",
+      "sourceIds": ["epe-abc-eficiencia-energetica", "mme-selo-procel"],
+      "status": "verified"
+    },
+    "challenge": {
+      "id": "desafio-eletrodomesticos",
+      "question": "A geladeira da Dona Ana é bem antiga, e ela quer saber se deve trocá-la. Qual é a forma mais adequada de decidir?",
+      "options": [
+        {
+          "id": "comparar-etiquetas",
+          "text": "Comparar o consumo e a classificação na etiqueta da geladeira atual com os de modelos novos, e verificar o estado da borracha de vedação.",
+          "isCorrect": true,
+          "feedback": "Isso! A idade sozinha não prova que um aparelho é ineficiente. Comparar consumo e classificação energética, e conferir a conservação, leva a uma decisão fundamentada."
+        },
+        {
+          "id": "trocar-pela-idade",
+          "text": "Trocar imediatamente, porque todo aparelho antigo é ineficiente.",
+          "isCorrect": false,
+          "feedback": "Nem sempre. A idade, isoladamente, não comprova a ineficiência. É preciso comparar consumo e classificação energética."
+        },
+        {
+          "id": "comprar-o-mais-barato",
+          "text": "Comprar o modelo mais barato da loja, sem olhar a etiqueta.",
+          "isCorrect": false,
+          "feedback": "O preço não informa o consumo. Sem olhar a etiqueta, é possível levar para casa um aparelho que gasta mais energia."
+        }
+      ]
+    },
+    "finalExplanation": {
+      "text": "Para saber se um eletrodoméstico é ineficiente, não basta olhar a idade: é preciso comparar o consumo e a classificação energética informados na etiqueta do Inmetro. Bons hábitos de uso e conservação também evitam desperdício.",
+      "sourceIds": ["mme-selo-procel", "epe-abc-eficiencia-energetica", "inmetro-pbe-refrigeradores"],
+      "status": "pending"
+    }
+  },
+  {
+    "id": "ar-condicionado-aberto",
+    "title": "Ar-condicionado ligado com portas e janelas abertas",
+    "summary": "O ar-condicionado fica ligado enquanto portas ou janelas do ambiente estão abertas.",
+    "keywords": [
+      { "term": "ar condicionado", "weight": 3 },
+      { "term": "janela aberta", "weight": 3 },
+      { "term": "porta aberta", "weight": 3 },
+      { "term": "climatizador", "weight": 2 },
+      { "term": "split", "weight": 2 },
+      { "term": "filtro", "weight": 2 },
+      { "term": "vedacao", "weight": 2 },
+      { "term": "refrigerado", "weight": 2 },
+      { "term": "ar", "weight": 1 },
+      { "term": "janela", "weight": 1 },
+      { "term": "porta", "weight": 1 },
+      { "term": "aberta", "weight": 1 },
+      { "term": "aberto", "weight": 1 },
+      { "term": "frio", "weight": 1 },
+      { "term": "gelado", "weight": 1 },
+      { "term": "calor", "weight": 1 }
+    ],
+    "causes": [
+      {
+        "id": "aberturas-durante-o-uso",
+        "title": "Portas e janelas abertas com o aparelho ligado",
+        "explanation": {
+          "text": "Com portas ou janelas abertas, o ar resfriado escapa e o ar quente de fora entra no ambiente.",
+          "sourceIds": [],
+          "status": "pending"
+        }
+      },
+      {
+        "id": "vedacao-ruim",
+        "title": "Frestas e vedação ruim",
+        "explanation": {
+          "text": "Mesmo fechadas, portas e janelas com frestas deixam o ar quente entrar.",
+          "sourceIds": [],
+          "status": "pending"
+        }
+      },
+      {
+        "id": "filtros-sujos",
+        "title": "Filtros sujos e falta de manutenção",
+        "explanation": {
+          "text": "Filtros sujos dificultam a passagem do ar pelo aparelho; por isso a limpeza dos filtros faz parte do uso adequado.",
+          "sourceIds": ["aneel-consumo-consciente"],
+          "status": "pending"
+        }
+      }
+    ],
+    "consequences": [
+      {
+        "id": "aparelho-trabalha-mais",
+        "title": "O aparelho trabalha mais",
+        "explanation": {
+          "text": "Como o calor continua entrando, o aparelho precisa funcionar por mais tempo e com mais esforço para tentar resfriar o ambiente.",
+          "sourceIds": [],
+          "status": "pending"
+        }
+      },
+      {
+        "id": "menos-conforto",
+        "title": "Menos conforto",
+        "explanation": {
+          "text": "Mesmo gastando mais energia, o ambiente pode não chegar à temperatura desejada.",
+          "sourceIds": [],
+          "status": "pending"
+        }
+      }
+    ],
+    "alternatives": [
+      {
+        "id": "fechar-o-ambiente",
+        "title": "Manter portas e janelas fechadas durante o uso",
+        "description": "Fechar portas e janelas sempre que o ar-condicionado estiver ligado.",
+        "benefits": [
+          {
+            "text": "Não deixar portas e janelas abertas em ambientes com ar-condicionado é uma das dicas de consumo consciente da ANEEL.",
+            "sourceIds": ["aneel-consumo-consciente"],
+            "status": "verified"
+          }
+        ],
+        "limitations": [
+          {
+            "text": "Às vezes é preciso renovar o ar do ambiente; isso pode ser feito com o aparelho desligado ou nos intervalos de uso.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ]
+      },
+      {
+        "id": "melhorar-vedacao",
+        "title": "Melhorar a vedação de portas e janelas",
+        "description": "Corrigir frestas com reparos simples, como veda-portas e borrachas de vedação.",
+        "benefits": [
+          {
+            "text": "Reduz a entrada de ar quente pelas frestas.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ],
+        "limitations": [
+          {
+            "text": "Pode exigir pequenos reparos e a compra de materiais.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ]
+      },
+      {
+        "id": "manutencao-e-filtros",
+        "title": "Limpeza dos filtros e manutenção",
+        "description": "Limpar os filtros com regularidade e fazer a manutenção do aparelho.",
+        "benefits": [
+          {
+            "text": "Manter os filtros limpos é uma das dicas de consumo consciente da ANEEL.",
+            "sourceIds": ["aneel-consumo-consciente"],
+            "status": "verified"
+          }
+        ],
+        "limitations": [
+          {
+            "text": "A manutenção mais completa deve ser feita por um profissional qualificado.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ]
+      }
+    ],
+    "recommendedAlternativeId": "fechar-o-ambiente",
+    "scientificExplanation": {
+      "text": "O ar-condicionado retira calor de dentro do ambiente e o leva para fora. Se portas e janelas ficam abertas, o calor de fora entra o tempo todo, e o aparelho passa a tentar resfriar também o ar que vem de fora.",
+      "sourceIds": [],
+      "status": "pending"
+    },
+    "challenge": {
+      "id": "desafio-ar-condicionado",
+      "question": "Numa sala, o ar-condicionado está ligado e a janela está aberta porque alguém quer ventilar o ambiente. Qual é a melhor decisão?",
+      "options": [
+        {
+          "id": "fechar-e-ventilar-depois",
+          "text": "Fechar a janela enquanto o ar estiver ligado e ventilar a sala com o aparelho desligado.",
+          "isCorrect": true,
+          "feedback": "Correto! Com a janela fechada, o aparelho não precisa resfriar o ar que entra de fora. A ventilação pode ser feita em outro momento."
+        },
+        {
+          "id": "baixar-a-temperatura",
+          "text": "Baixar ao máximo a temperatura do aparelho para compensar a janela aberta.",
+          "isCorrect": false,
+          "feedback": "Isso só faz o aparelho trabalhar ainda mais, enquanto o calor continua entrando pela janela."
+        },
+        {
+          "id": "nao-faz-diferenca",
+          "text": "Manter a janela aberta e o ar ligado, porque não faz diferença.",
+          "isCorrect": false,
+          "feedback": "Faz diferença, sim: o ar resfriado escapa, o ar quente entra e o aparelho gasta energia tentando compensar."
+        }
+      ]
+    },
+    "finalExplanation": {
+      "text": "O ar-condicionado funciona melhor em um ambiente fechado e bem vedado. Fechar portas e janelas durante o uso, cuidar da vedação e manter os filtros limpos evita desperdício e melhora o conforto.",
+      "sourceIds": ["aneel-consumo-consciente"],
+      "status": "pending"
+    }
+  },
+  {
+    "id": "solar-sem-geracao",
+    "title": "Casa com boa incidência solar sem geração fotovoltaica",
+    "summary": "Residências que recebem bastante sol, mas não aproveitam essa energia para gerar eletricidade.",
+    "keywords": [
+      { "term": "placa solar", "weight": 3 },
+      { "term": "painel solar", "weight": 3 },
+      { "term": "energia solar", "weight": 3 },
+      { "term": "fotovoltaico", "weight": 3 },
+      { "term": "fotovoltaica", "weight": 3 },
+      { "term": "geracao distribuida", "weight": 3 },
+      { "term": "muito sol", "weight": 2 },
+      { "term": "telhado", "weight": 2 },
+      { "term": "ensolarada", "weight": 2 },
+      { "term": "gerar energia", "weight": 2 },
+      { "term": "solar", "weight": 2 },
+      { "term": "sol", "weight": 1 }
+    ],
+    "causes": [
+      {
+        "id": "falta-de-informacao",
+        "title": "Falta de informação sobre a geração própria",
+        "explanation": {
+          "text": "Muitas pessoas não sabem que é possível gerar a própria energia e se conectar à rede da distribuidora.",
+          "sourceIds": [],
+          "status": "pending"
+        }
+      },
+      {
+        "id": "investimento-inicial",
+        "title": "Investimento inicial do consumidor",
+        "explanation": {
+          "text": "Instalar um sistema de geração distribuída é iniciativa do próprio consumidor. A ANEEL não define o custo dos equipamentos nem as condições de financiamento.",
+          "sourceIds": ["aneel-mmgd"],
+          "status": "verified"
+        }
+      }
+    ],
+    "consequences": [
+      {
+        "id": "recurso-solar-nao-aproveitado",
+        "title": "Recurso solar não aproveitado",
+        "explanation": {
+          "text": "A energia do sol que chega ao telhado poderia ser usada para gerar eletricidade na própria casa.",
+          "sourceIds": [],
+          "status": "pending"
+        }
+      },
+      {
+        "id": "dependencia-da-rede",
+        "title": "Toda a energia vem da rede",
+        "explanation": {
+          "text": "A casa continua dependendo totalmente da energia fornecida pela distribuidora.",
+          "sourceIds": [],
+          "status": "pending"
+        }
+      }
+    ],
+    "alternatives": [
+      {
+        "id": "avaliar-sistema-fotovoltaico",
+        "title": "Avaliar a instalação de painéis fotovoltaicos",
+        "description": "Buscar uma avaliação técnica do telhado, da incidência solar no local, do consumo da casa e do investimento antes de decidir.",
+        "benefits": [
+          {
+            "text": "A geração própria é regulamentada no Brasil: a Lei nº 14.300/2022 instituiu o marco legal da micro e minigeração distribuída e o Sistema de Compensação de Energia Elétrica.",
+            "sourceIds": ["lei-14300-2022", "aneel-mmgd"],
+            "status": "verified"
+          },
+          {
+            "text": "Gera eletricidade a partir de uma fonte renovável, no próprio local de consumo.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ],
+        "limitations": [
+          {
+            "text": "Cabe ao consumidor avaliar a relação entre custo e benefício, e unidades de baixa tensão continuam pagando o custo de disponibilidade mesmo quando a energia injetada supera o consumo.",
+            "sourceIds": ["aneel-mmgd"],
+            "status": "verified"
+          },
+          {
+            "text": "A irradiação solar varia de lugar para lugar e ao longo do ano, por isso cada caso precisa ser avaliado com dados do local.",
+            "sourceIds": ["inpe-atlas-solar-2017"],
+            "status": "pending"
+          },
+          {
+            "text": "A instalação também depende de condições técnicas, como espaço, orientação e sombreamento do telhado e o estado da instalação elétrica.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ]
+      },
+      {
+        "id": "geracao-compartilhada",
+        "title": "Participar de geração compartilhada ou autoconsumo remoto",
+        "description": "Modalidades em que a energia é gerada em outro local e compensada na conta.",
+        "benefits": [
+          {
+            "text": "A regulamentação da ANEEL prevê modalidades como autoconsumo remoto e geração compartilhada.",
+            "sourceIds": ["aneel-mmgd"],
+            "status": "verified"
+          }
+        ],
+        "limitations": [
+          {
+            "text": "As regras e condições de cada modalidade precisam ser verificadas com cuidado antes da adesão.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ]
+      },
+      {
+        "id": "reduzir-desperdicio-primeiro",
+        "title": "Reduzir o desperdício antes de dimensionar o sistema",
+        "description": "Eliminar desperdícios de energia na casa antes de calcular o tamanho de um sistema solar.",
+        "benefits": [
+          {
+            "text": "Uma casa que desperdiça menos precisa de um sistema de geração menor para atender ao seu consumo.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ],
+        "limitations": [
+          {
+            "text": "Reduzir o desperdício não gera energia; apenas diminui a necessidade dela.",
+            "sourceIds": [],
+            "status": "pending"
+          }
+        ]
+      }
+    ],
+    "recommendedAlternativeId": "avaliar-sistema-fotovoltaico",
+    "scientificExplanation": {
+      "text": "Painéis fotovoltaicos convertem a luz do sol diretamente em eletricidade. A quantidade de energia que eles produzem depende da irradiação solar no local, que varia entre regiões e ao longo do ano, e de como o sistema é instalado.",
+      "sourceIds": ["inpe-atlas-solar-2017"],
+      "status": "pending"
+    },
+    "challenge": {
+      "id": "desafio-energia-solar",
+      "question": "Uma casa recebe muito sol no telhado e a família quer instalar painéis solares. Qual é o primeiro passo mais adequado?",
+      "options": [
+        {
+          "id": "avaliacao-tecnica",
+          "text": "Fazer uma avaliação técnica da incidência solar no local, do telhado, do consumo da casa e do investimento.",
+          "isCorrect": true,
+          "feedback": "Isso! A instalação depende de condições técnicas, da incidência solar, das características da instalação e do investimento. Avaliar antes evita surpresas."
+        },
+        {
+          "id": "comprar-sem-avaliar",
+          "text": "Comprar o maior número de painéis possível, sem avaliação.",
+          "isCorrect": false,
+          "feedback": "Sem avaliação, o sistema pode ficar maior ou menor que o necessário, ou nem caber no telhado. O dimensionamento é essencial."
+        },
+        {
+          "id": "desistir",
+          "text": "Desistir, porque energia solar só funciona em lugares sem nuvens.",
+          "isCorrect": false,
+          "feedback": "Não é bem assim. A produção varia com o clima e a região, e isso deve ser avaliado caso a caso, com dados de irradiação solar do local."
+        }
+      ]
+    },
+    "finalExplanation": {
+      "text": "Ter muito sol é uma oportunidade, mas não garante sozinho que um sistema fotovoltaico seja viável. A decisão depende de condições técnicas, da incidência solar no local, do investimento e das regras de geração distribuída.",
+      "sourceIds": ["aneel-mmgd", "lei-14300-2022", "inpe-atlas-solar-2017"],
+      "status": "pending"
+    }
+  }
+]
