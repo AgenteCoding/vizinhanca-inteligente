@@ -89,8 +89,8 @@ notebook sem internet durante a feira.
 estrutura de testes. A página inicial é provisória.
 
 **Etapa 2 — Núcleo inteligente (em andamento):** base de conhecimento das seis categorias com
-fontes oficiais conferidas e validação automática (bloco A concluído). Próximos blocos:
-classificador de texto e motor de decisão.
+fontes oficiais conferidas e validação automática (bloco A) e classificador de texto com
+tratamento de ambiguidade (bloco B). Próximo bloco: motor de decisão do fluxo.
 
 Depois: interface, minigames e entrega. Veja [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md).
 

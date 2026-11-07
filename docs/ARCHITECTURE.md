@@ -48,7 +48,7 @@ mais fácil de explicar aos avaliadores.
 | `src/types/` | Interfaces e tipos compartilhados (`knowledge.ts`). | Depender de qualquer outra camada. |
 | `tests/` | Testes automatizados espelhando `src/`. | — |
 
-**Estado atual (etapa 2, bloco A):** existem `src/app/`, `src/data/` e `src/types/`. As demais
+**Estado atual (etapa 2, bloco B):** existem `src/app/`, `src/data/`, `src/lib/` e `src/types/`. As demais
 pastas serão criadas na etapa em que receberem o primeiro arquivo, para evitar diretórios vazios.
 
 ## 3. Fluxo de informações
@@ -78,9 +78,29 @@ Componente renderiza a etapa atual ◄─────────────┘
 - O **motor** é uma função pura `next(estado, evento) → estado`. Os eventos são, por exemplo,
   `ENVIAR_RELATO`, `CONFIRMAR_CATEGORIA`, `AVANCAR`, `RESPONDER_DESAFIO`, `RECOMECAR`.
 - As etapas são as definidas em `FLOW_STEPS` (`src/types/knowledge.ts`).
-- O **classificador** devolve um resultado com três formas possíveis: categoria identificada,
-  ambíguo (duas candidatas próximas) ou desconhecido (abaixo do limite de confiança). Ele também
-  devolve os termos reconhecidos, para exibição.
+- O **classificador** (`src/lib/classifier.ts`) é criado a partir das categorias da base
+  (`createClassifier(problems)`) e devolve um `ClassificationResult` (`src/types/engine.ts`):
+  - `identified`: categoria com evidência suficiente;
+  - `ambiguous`: segunda colocada com pelo menos `AMBIGUITY_RATIO` (0,6) da pontuação da primeira;
+  - `low-confidence`: pontuação abaixo de `MIN_SCORE` (3);
+  - `negated`: uma palavra de negação ("não", "nunca", "jamais", "nem") aparece até 3 palavras
+    antes de um termo reconhecido;
+  - `unrelated` (nenhum termo da base), `too-short` (menos de 2 palavras) e `empty`.
+
+  Todo resultado traz a justificativa: pontuação por categoria, termos reconhecidos com seus pesos,
+  correções de digitação e negações encontradas. Fora de `identified`, a interface pede
+  esclarecimento ou oferece a escolha guiada das seis situações.
+- **Como pontua:** o normalizador (`src/lib/normalize.ts`) passa o texto para minúsculas, tira
+  acentos e pontuação, junta espaços e reduz plurais com poucas regras. Palavras com 6 letras ou
+  mais que não existem na base são trocadas pela única palavra conhecida a uma edição de distância
+  ("geladera" → "geladeira"). Os termos são procurados como palavras inteiras, o mais longo
+  primeiro e sem sobreposição; cada termo conta uma vez, e a pontuação de cada categoria é a soma
+  dos pesos cadastrados. `MIN_SCORE` e `AMBIGUITY_RATIO` são constantes de calibração do jogo,
+  não dados científicos.
+- **Negações não são interpretadas** (limitação assumida). A exceção vem dos dados: termos que já
+  incluem a negação, como "nao tem painel" (a ausência do painel é a própria situação), consomem a
+  palavra "não" e não bloqueiam o diagnóstico. Frases como "não temos energia solar", sem termo
+  correspondente, resultam em `negated` e pedem esclarecimento.
 
 ## 4. Separação entre interface e lógica de decisão
 
@@ -281,4 +301,6 @@ evita duplicação entre os três.
 | Palavras-chave com peso no contrato | Permite pontuação por categoria e detecção de ambiguidade no classificador. |
 | Regras recomendadas do `jsx-a11y` | Acessibilidade verificada automaticamente no lint. |
 | Alertas do `npm audit` (minimatch no ESLint) aceitos | Só afetam ferramentas de desenvolvimento; a correção forçada quebraria o lint. |
+| Classificador criado a partir dos dados (`createClassifier`) | Nenhuma categoria fixa no código; o índice é montado uma vez e a função é pura. |
+| Negação sinalizada, não interpretada | Evita diagnóstico confiante quando o visitante nega a situação; interpretar negações exigiria uma proposta separada. |
 | Licença MIT | Código aberto e reutilizável, adequado a projeto educacional público. |

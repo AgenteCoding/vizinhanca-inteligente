@@ -66,7 +66,7 @@ src/components/     ui/ (genéricos), assistant/, challenges/, minigames/, resul
 src/hooks/          use-diagnostico.ts, use-game-session.ts (ligam o React ao motor de src/lib/)
 src/lib/            normalize.ts, classifier.ts, flow-engine.ts, games/*.ts
 src/data/           problems.json, sources.json, games/*.json, schema.ts, index.ts
-src/types/          knowledge.ts (contratos)
+src/types/          knowledge.ts (contratos da base), engine.ts (classificador e motor)
 tests/              espelha src/: tests/lib/classifier.test.ts etc.
 docs/               documentação do projeto
 public/images/      ilustrações (criada quando houver a primeira imagem)

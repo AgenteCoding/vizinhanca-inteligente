@@ -19,7 +19,8 @@ Os testes ficam em `tests/`, espelhando `src/` (ex.: `tests/lib/classifier.test.
 - A entrada guiada (escolha de cena) deve levar à categoria correspondente em 100% dos casos.
 - O resultado deve listar os termos reconhecidos.
 
-Exemplos de frases a cobrir (lista completa na etapa 2):
+Lista completa em `tests/lib/classifier-phrases.ts` (frases escritas antes de ajustar as
+palavras-chave). Exemplos:
 - C1: "os postes ficam acesos de dia", "a luz da rua não apaga de manhã"
 - C2: "deixam a luz da sala acesa sem ninguém"
 - C3: "todo mundo liga chuveiro e forno no fim da tarde, na mesma hora"
@@ -49,8 +50,9 @@ Exemplos de frases a cobrir (lista completa na etapa 2):
 - Texto sem relação com energia ("gosto de futebol") → "não entendi" + oferta das cenas.
 - Texto acima do limite de tamanho → bloqueado ou truncado com aviso.
 - Caracteres especiais e HTML (`<script>`) → exibidos como texto puro, sem executar nada.
-- Negações conhecidas como limitação ("a luz não fica acesa") → documentadas; o sistema não
-  deve travar.
+- Negações ("os postes não ficam acesos") → resultado `negated`, sem categoria confiante. Frases
+  de ausência sem termo correspondente ("não temos energia solar") também caem em `negated`:
+  limitação documentada em `NEGATION_LIMITATION_PHRASES`.
 
 ## 5. Escolha das soluções (motor de decisão)
 
