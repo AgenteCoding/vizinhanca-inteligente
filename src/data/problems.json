@@ -9,16 +9,20 @@
       { "term": "iluminacao publica", "weight": 3 },
       { "term": "lampada do poste", "weight": 3 },
       { "term": "fotocelula", "weight": 3 },
+      { "term": "nao apaga", "weight": 3 },
       { "term": "rele", "weight": 2 },
       { "term": "luminaria", "weight": 2 },
       { "term": "de dia", "weight": 2 },
       { "term": "durante o dia", "weight": 2 },
+      { "term": "dia inteiro", "weight": 2 },
+      { "term": "dia todo", "weight": 2 },
       { "term": "rua", "weight": 1 },
       { "term": "avenida", "weight": 1 },
       { "term": "praca", "weight": 1 },
       { "term": "manha", "weight": 1 },
       { "term": "acesa", "weight": 1 },
-      { "term": "ligada", "weight": 1 }
+      { "term": "ligada", "weight": 1 },
+      { "term": "aceso", "weight": 1 }
     ],
     "causes": [
       {
@@ -26,7 +30,9 @@
         "title": "Relé fotocontrolador com defeito ou fora da norma",
         "explanation": {
           "text": "O relé fotocontrolador liga e desliga a iluminação de acordo com a luz do ambiente. Quando ele não funciona como a norma técnica determina, as lâmpadas acendem antes e apagam depois do momento certo.",
-          "sourceIds": ["inmetro-air-reles-fotocontroladores-2017"],
+          "sourceIds": [
+            "inmetro-air-reles-fotocontroladores-2017"
+          ],
           "status": "verified"
         }
       },
@@ -46,7 +52,9 @@
         "title": "Energia gasta sem necessidade",
         "explanation": {
           "text": "Relés que acendem antes e apagam depois do horário desejado provocam desperdício de energia na iluminação pública.",
-          "sourceIds": ["inmetro-air-reles-fotocontroladores-2017"],
+          "sourceIds": [
+            "inmetro-air-reles-fotocontroladores-2017"
+          ],
           "status": "verified"
         }
       },
@@ -55,7 +63,9 @@
         "title": "Mais trocas e mais descarte de material",
         "explanation": {
           "text": "Relés que duram menos do que a norma prevê precisam ser substituídos com mais frequência, o que gera mais descarte de material.",
-          "sourceIds": ["inmetro-air-reles-fotocontroladores-2017"],
+          "sourceIds": [
+            "inmetro-air-reles-fotocontroladores-2017"
+          ],
           "status": "verified"
         }
       }
@@ -68,7 +78,9 @@
         "benefits": [
           {
             "text": "O relé permite que as luminárias acendam automaticamente ao entardecer e apaguem ao amanhecer, sem depender de alguém para ligar e desligar.",
-            "sourceIds": ["inmetro-air-reles-fotocontroladores-2017"],
+            "sourceIds": [
+              "inmetro-air-reles-fotocontroladores-2017"
+            ],
             "status": "verified"
           }
         ],
@@ -122,7 +134,9 @@
     "recommendedAlternativeId": "rele-adequado",
     "scientificExplanation": {
       "text": "O relé fotocontrolador funciona como um sensor de luz: ele mede o nível de iluminação do ambiente e liga o circuito quando escurece e desliga quando clareia. Se ele erra esse momento, a lâmpada fica acesa quando a luz do sol já é suficiente e gasta energia sem necessidade.",
-      "sourceIds": ["inmetro-air-reles-fotocontroladores-2017"],
+      "sourceIds": [
+        "inmetro-air-reles-fotocontroladores-2017"
+      ],
       "status": "verified"
     },
     "challenge": {
@@ -151,7 +165,9 @@
     },
     "finalExplanation": {
       "text": "Na iluminação pública, quem decide a hora de acender e apagar é o relé fotocontrolador. Quando ele falha, as lâmpadas ficam acesas de dia e desperdiçam energia. A solução é corrigir a causa, com equipamentos adequados à norma e manutenção.",
-      "sourceIds": ["inmetro-air-reles-fotocontroladores-2017"],
+      "sourceIds": [
+        "inmetro-air-reles-fotocontroladores-2017"
+      ],
       "status": "pending"
     }
   },
@@ -177,7 +193,9 @@
       { "term": "corredor", "weight": 1 },
       { "term": "sala", "weight": 1 },
       { "term": "luz", "weight": 1 },
-      { "term": "lampada", "weight": 1 }
+      { "term": "lampada", "weight": 1 },
+      { "term": "aceso", "weight": 1 },
+      { "term": "acesa", "weight": 1 }
     ],
     "causes": [
       {
@@ -203,7 +221,9 @@
         "title": "Lâmpadas acesas mesmo com luz natural",
         "explanation": {
           "text": "Acender lâmpadas durante o dia, quando seria possível aproveitar a luz do sol abrindo janelas, cortinas e persianas, também é desperdício.",
-          "sourceIds": ["epe-abc-eficiencia-energetica"],
+          "sourceIds": [
+            "epe-abc-eficiencia-energetica"
+          ],
           "status": "verified"
         }
       }
@@ -260,7 +280,9 @@
         "benefits": [
           {
             "text": "Apagar a luz ao sair é uma das dicas de consumo consciente de energia divulgadas pela ANEEL.",
-            "sourceIds": ["aneel-consumo-consciente"],
+            "sourceIds": [
+              "aneel-consumo-consciente"
+            ],
             "status": "verified"
           },
           {
@@ -284,7 +306,10 @@
         "benefits": [
           {
             "text": "Aproveitar a luz do sol evita acender lâmpadas durante o dia.",
-            "sourceIds": ["epe-abc-eficiencia-energetica", "aneel-consumo-consciente"],
+            "sourceIds": [
+              "epe-abc-eficiencia-energetica",
+              "aneel-consumo-consciente"
+            ],
             "status": "verified"
           }
         ],
@@ -329,7 +354,10 @@
     },
     "finalExplanation": {
       "text": "Luz acesa sem ninguém é energia gasta sem benefício. O hábito de apagar a luz ao sair, o aproveitamento da luz natural e sensores de presença adequados a cada ambiente ajudam a evitar esse desperdício.",
-      "sourceIds": ["aneel-consumo-consciente", "epe-abc-eficiencia-energetica"],
+      "sourceIds": [
+        "aneel-consumo-consciente",
+        "epe-abc-eficiencia-energetica"
+      ],
       "status": "pending"
     }
   },
@@ -343,6 +371,8 @@
       { "term": "tarifa branca", "weight": 3 },
       { "term": "ao mesmo tempo", "weight": 3 },
       { "term": "mesma hora", "weight": 3 },
+      { "term": "horario de maior consumo", "weight": 3 },
+      { "term": "pico de consumo", "weight": 3 },
       { "term": "pico", "weight": 2 },
       { "term": "simultaneamente", "weight": 2 },
       { "term": "tudo ligado", "weight": 2 },
@@ -350,11 +380,13 @@
       { "term": "chuveiro", "weight": 2 },
       { "term": "ferro de passar", "weight": 2 },
       { "term": "demanda", "weight": 2 },
+      { "term": "maior consumo", "weight": 2 },
+      { "term": "muito aparelho", "weight": 2 },
+      { "term": "aparelho ligado", "weight": 2 },
       { "term": "forno", "weight": 1 },
       { "term": "maquina de lavar", "weight": 1 },
       { "term": "todo mundo", "weight": 1 },
-      { "term": "ponta", "weight": 1 },
-      { "term": "noite", "weight": 1 }
+      { "term": "ponta", "weight": 1 }
     ],
     "causes": [
       {
@@ -371,7 +403,9 @@
         "title": "Não saber qual é o horário de ponta",
         "explanation": {
           "text": "O horário de ponta é um período de 3 horas consecutivas definido por cada distribuidora, de acordo com a curva de carga do seu sistema elétrico, e aprovado pela ANEEL. Por isso ele não é o mesmo em todo o país, e é preciso consultar a distribuidora da região.",
-          "sourceIds": ["aneel-ren-1000-2021"],
+          "sourceIds": [
+            "aneel-ren-1000-2021"
+          ],
           "status": "verified"
         }
       }
@@ -391,7 +425,9 @@
         "title": "Energia mais cara para quem tem Tarifa Branca",
         "explanation": {
           "text": "Na Tarifa Branca, a energia usada no horário de ponta dos dias úteis tem a tarifa mais elevada do dia.",
-          "sourceIds": ["aneel-tarifa-branca"],
+          "sourceIds": [
+            "aneel-tarifa-branca"
+          ],
           "status": "verified"
         }
       }
@@ -428,19 +464,25 @@
         "benefits": [
           {
             "text": "A tarifa fora de ponta da Tarifa Branca é menor que a tarifa convencional, o que a torna indicada para quem consegue concentrar o consumo fora do horário de ponta.",
-            "sourceIds": ["aneel-tarifa-branca"],
+            "sourceIds": [
+              "aneel-tarifa-branca"
+            ],
             "status": "verified"
           }
         ],
         "limitations": [
           {
             "text": "No horário de ponta a tarifa é a mais elevada, por isso a modalidade pode não compensar para quem não consegue mudar o horário de uso dos aparelhos.",
-            "sourceIds": ["aneel-tarifa-branca"],
+            "sourceIds": [
+              "aneel-tarifa-branca"
+            ],
             "status": "pending"
           },
           {
             "text": "Não está disponível para todos: não vale, por exemplo, para a subclasse residencial baixa renda que recebe benefício tarifário.",
-            "sourceIds": ["aneel-tarifa-branca"],
+            "sourceIds": [
+              "aneel-tarifa-branca"
+            ],
             "status": "verified"
           }
         ]
@@ -468,7 +510,9 @@
     "recommendedAlternativeId": "deslocar-atividades-flexiveis",
     "scientificExplanation": {
       "text": "Potência é a energia usada a cada instante; a energia consumida é a potência multiplicada pelo tempo de uso. Mudar o horário de um aparelho não muda quanta energia ele gasta, mas espalha a demanda ao longo do dia e alivia o sistema elétrico justamente no período em que a curva de carga é mais alta.",
-      "sourceIds": ["aneel-ren-1000-2021"],
+      "sourceIds": [
+        "aneel-ren-1000-2021"
+      ],
       "status": "pending"
     },
     "challenge": {
@@ -497,7 +541,10 @@
     },
     "finalExplanation": {
       "text": "O horário de ponta é definido por cada distribuidora. Mudar as atividades flexíveis para fora desse período reduz a concentração da demanda no sistema elétrico, mesmo que o total de energia consumida continue parecido. Para quem tem Tarifa Branca, isso também pode significar pagar uma tarifa menor por essa energia.",
-      "sourceIds": ["aneel-ren-1000-2021", "aneel-tarifa-branca"],
+      "sourceIds": [
+        "aneel-ren-1000-2021",
+        "aneel-tarifa-branca"
+      ],
       "status": "pending"
     }
   },
@@ -511,10 +558,10 @@
       { "term": "eletrodomestico", "weight": 3 },
       { "term": "procel", "weight": 3 },
       { "term": "inmetro", "weight": 3 },
+      { "term": "nao tem selo procel", "weight": 3 },
       { "term": "geladeira", "weight": 2 },
       { "term": "refrigerador", "weight": 2 },
       { "term": "freezer", "weight": 2 },
-      { "term": "aparelho", "weight": 1 },
       { "term": "velho", "weight": 2 },
       { "term": "velha", "weight": 2 },
       { "term": "antigo", "weight": 2 },
@@ -523,6 +570,9 @@
       { "term": "consome muito", "weight": 2 },
       { "term": "etiqueta", "weight": 2 },
       { "term": "borracha", "weight": 2 },
+      { "term": "consome bastante", "weight": 2 },
+      { "term": "gasta bastante", "weight": 2 },
+      { "term": "aparelho", "weight": 1 },
       { "term": "eficiencia", "weight": 1 }
     ],
     "causes": [
@@ -531,7 +581,10 @@
         "title": "Modelo de baixa eficiência energética",
         "explanation": {
           "text": "Aparelhos que fazem o mesmo serviço podem ter níveis diferentes de eficiência energética. A Etiqueta Nacional de Conservação de Energia (ENCE), do Inmetro, informa o nível de eficiência de cada modelo.",
-          "sourceIds": ["mme-selo-procel", "epe-abc-eficiencia-energetica"],
+          "sourceIds": [
+            "mme-selo-procel",
+            "epe-abc-eficiencia-energetica"
+          ],
           "status": "verified"
         }
       },
@@ -540,7 +593,9 @@
         "title": "Conservação e uso inadequados",
         "explanation": {
           "text": "Deixar a porta da geladeira aberta além do necessário ou usar o aparelho com a borracha de vedação gasta faz com que ele trabalhe mais para manter os alimentos frios.",
-          "sourceIds": ["aneel-consumo-consciente"],
+          "sourceIds": [
+            "aneel-consumo-consciente"
+          ],
           "status": "pending"
         }
       }
@@ -551,7 +606,9 @@
         "title": "Mais energia para o mesmo serviço",
         "explanation": {
           "text": "Um aparelho menos eficiente precisa de mais energia para entregar o mesmo resultado, como manter os alimentos frios.",
-          "sourceIds": ["epe-abc-eficiencia-energetica"],
+          "sourceIds": [
+            "epe-abc-eficiencia-energetica"
+          ],
           "status": "pending"
         }
       },
@@ -573,12 +630,16 @@
         "benefits": [
           {
             "text": "A ENCE ajuda a comparar diferentes modelos, e o Selo Procel é concedido aos produtos com classificação A na etiqueta.",
-            "sourceIds": ["mme-selo-procel"],
+            "sourceIds": [
+              "mme-selo-procel"
+            ],
             "status": "verified"
           },
           {
             "text": "O Sistema PBE do Inmetro permite consultar o consumo energético dos produtos registrados e filtrá-los pela classificação da etiqueta.",
-            "sourceIds": ["inmetro-pbe-refrigeradores"],
+            "sourceIds": [
+              "inmetro-pbe-refrigeradores"
+            ],
             "status": "verified"
           }
         ],
@@ -602,7 +663,9 @@
         "benefits": [
           {
             "text": "Não deixar a porta da geladeira aberta mais tempo que o necessário e verificar a borracha de vedação são dicas de consumo consciente da ANEEL.",
-            "sourceIds": ["aneel-consumo-consciente"],
+            "sourceIds": [
+              "aneel-consumo-consciente"
+            ],
             "status": "verified"
           }
         ],
@@ -618,7 +681,10 @@
     "recommendedAlternativeId": "comparar-consumo-e-classificacao",
     "scientificExplanation": {
       "text": "Eficiência energética é fazer o mesmo serviço usando menos energia, mantendo o conforto e a qualidade. A etiqueta do Inmetro classifica os aparelhos em faixas, da classe A, a mais eficiente, até a classe de menor eficiência, e ajuda a comparar modelos que fazem o mesmo serviço.",
-      "sourceIds": ["epe-abc-eficiencia-energetica", "mme-selo-procel"],
+      "sourceIds": [
+        "epe-abc-eficiencia-energetica",
+        "mme-selo-procel"
+      ],
       "status": "verified"
     },
     "challenge": {
@@ -647,7 +713,11 @@
     },
     "finalExplanation": {
       "text": "Para saber se um eletrodoméstico é ineficiente, não basta olhar a idade: é preciso comparar o consumo e a classificação energética informados na etiqueta do Inmetro. Bons hábitos de uso e conservação também evitam desperdício.",
-      "sourceIds": ["mme-selo-procel", "epe-abc-eficiencia-energetica", "inmetro-pbe-refrigeradores"],
+      "sourceIds": [
+        "mme-selo-procel",
+        "epe-abc-eficiencia-energetica",
+        "inmetro-pbe-refrigeradores"
+      ],
       "status": "pending"
     }
   },
@@ -659,6 +729,7 @@
       { "term": "ar condicionado", "weight": 3 },
       { "term": "janela aberta", "weight": 3 },
       { "term": "porta aberta", "weight": 3 },
+      { "term": "ar ligado", "weight": 3 },
       { "term": "climatizador", "weight": 2 },
       { "term": "split", "weight": 2 },
       { "term": "filtro", "weight": 2 },
@@ -697,7 +768,9 @@
         "title": "Filtros sujos e falta de manutenção",
         "explanation": {
           "text": "Filtros sujos dificultam a passagem do ar pelo aparelho; por isso a limpeza dos filtros faz parte do uso adequado.",
-          "sourceIds": ["aneel-consumo-consciente"],
+          "sourceIds": [
+            "aneel-consumo-consciente"
+          ],
           "status": "pending"
         }
       }
@@ -730,7 +803,9 @@
         "benefits": [
           {
             "text": "Não deixar portas e janelas abertas em ambientes com ar-condicionado é uma das dicas de consumo consciente da ANEEL.",
-            "sourceIds": ["aneel-consumo-consciente"],
+            "sourceIds": [
+              "aneel-consumo-consciente"
+            ],
             "status": "verified"
           }
         ],
@@ -768,7 +843,9 @@
         "benefits": [
           {
             "text": "Manter os filtros limpos é uma das dicas de consumo consciente da ANEEL.",
-            "sourceIds": ["aneel-consumo-consciente"],
+            "sourceIds": [
+              "aneel-consumo-consciente"
+            ],
             "status": "verified"
           }
         ],
@@ -813,7 +890,9 @@
     },
     "finalExplanation": {
       "text": "O ar-condicionado funciona melhor em um ambiente fechado e bem vedado. Fechar portas e janelas durante o uso, cuidar da vedação e manter os filtros limpos evita desperdício e melhora o conforto.",
-      "sourceIds": ["aneel-consumo-consciente"],
+      "sourceIds": [
+        "aneel-consumo-consciente"
+      ],
       "status": "pending"
     }
   },
@@ -828,11 +907,19 @@
       { "term": "fotovoltaico", "weight": 3 },
       { "term": "fotovoltaica", "weight": 3 },
       { "term": "geracao distribuida", "weight": 3 },
+      { "term": "sem painel", "weight": 3 },
+      { "term": "sem placa", "weight": 3 },
+      { "term": "nao tem painel", "weight": 3 },
+      { "term": "nao tem placa", "weight": 3 },
+      { "term": "nao possui painel", "weight": 3 },
+      { "term": "nao possui placa", "weight": 3 },
+      { "term": "nao tem energia solar", "weight": 3 },
       { "term": "muito sol", "weight": 2 },
       { "term": "telhado", "weight": 2 },
       { "term": "ensolarada", "weight": 2 },
       { "term": "gerar energia", "weight": 2 },
       { "term": "solar", "weight": 2 },
+      { "term": "bastante sol", "weight": 2 },
       { "term": "sol", "weight": 1 }
     ],
     "causes": [
@@ -850,7 +937,9 @@
         "title": "Investimento inicial do consumidor",
         "explanation": {
           "text": "Instalar um sistema de geração distribuída é iniciativa do próprio consumidor. A ANEEL não define o custo dos equipamentos nem as condições de financiamento.",
-          "sourceIds": ["aneel-mmgd"],
+          "sourceIds": [
+            "aneel-mmgd"
+          ],
           "status": "verified"
         }
       }
@@ -883,7 +972,10 @@
         "benefits": [
           {
             "text": "A geração própria é regulamentada no Brasil: a Lei nº 14.300/2022 instituiu o marco legal da micro e minigeração distribuída e o Sistema de Compensação de Energia Elétrica.",
-            "sourceIds": ["lei-14300-2022", "aneel-mmgd"],
+            "sourceIds": [
+              "lei-14300-2022",
+              "aneel-mmgd"
+            ],
             "status": "verified"
           },
           {
@@ -895,12 +987,16 @@
         "limitations": [
           {
             "text": "Cabe ao consumidor avaliar a relação entre custo e benefício, e unidades de baixa tensão continuam pagando o custo de disponibilidade mesmo quando a energia injetada supera o consumo.",
-            "sourceIds": ["aneel-mmgd"],
+            "sourceIds": [
+              "aneel-mmgd"
+            ],
             "status": "verified"
           },
           {
             "text": "A irradiação solar varia de lugar para lugar e ao longo do ano, por isso cada caso precisa ser avaliado com dados do local.",
-            "sourceIds": ["inpe-atlas-solar-2017"],
+            "sourceIds": [
+              "inpe-atlas-solar-2017"
+            ],
             "status": "pending"
           },
           {
@@ -917,7 +1013,9 @@
         "benefits": [
           {
             "text": "A regulamentação da ANEEL prevê modalidades como autoconsumo remoto e geração compartilhada.",
-            "sourceIds": ["aneel-mmgd"],
+            "sourceIds": [
+              "aneel-mmgd"
+            ],
             "status": "verified"
           }
         ],
@@ -952,7 +1050,9 @@
     "recommendedAlternativeId": "avaliar-sistema-fotovoltaico",
     "scientificExplanation": {
       "text": "Painéis fotovoltaicos convertem a luz do sol diretamente em eletricidade. A quantidade de energia que eles produzem depende da irradiação solar no local, que varia entre regiões e ao longo do ano, e de como o sistema é instalado.",
-      "sourceIds": ["inpe-atlas-solar-2017"],
+      "sourceIds": [
+        "inpe-atlas-solar-2017"
+      ],
       "status": "pending"
     },
     "challenge": {
@@ -981,7 +1081,11 @@
     },
     "finalExplanation": {
       "text": "Ter muito sol é uma oportunidade, mas não garante sozinho que um sistema fotovoltaico seja viável. A decisão depende de condições técnicas, da incidência solar no local, do investimento e das regras de geração distribuída.",
-      "sourceIds": ["aneel-mmgd", "lei-14300-2022", "inpe-atlas-solar-2017"],
+      "sourceIds": [
+        "aneel-mmgd",
+        "lei-14300-2022",
+        "inpe-atlas-solar-2017"
+      ],
       "status": "pending"
     }
   }
