@@ -1,0 +1,110 @@
+# Plano de testes — Vizinhança Inteligente
+
+## Estratégia
+
+| Nível | Ferramenta | O que cobre |
+|---|---|---|
+| Unitário | Vitest | `src/lib/` (classificador, motor, jogos) e validação de `src/data/` |
+| Estático | TypeScript strict + ESLint | Tipos, contratos, `any` proibido, HTML bruto proibido |
+| Build | `next build` | Export estático completo sem erros |
+| Manual | Roteiro abaixo | Interface, responsividade, acessibilidade, equipamento da feira |
+
+Comando único antes de cada entrega: `npm run validate`.
+Os testes ficam em `tests/`, espelhando `src/` (ex.: `tests/lib/classifier.test.ts`).
+
+## 1. Reconhecimento dos seis problemas
+
+- Para cada categoria, **pelo menos 10 frases** representativas, escritas como um visitante
+  escreveria, devem resultar na categoria correta.
+- A entrada guiada (escolha de cena) deve levar à categoria correspondente em 100% dos casos.
+- O resultado deve listar os termos reconhecidos.
+
+Exemplos de frases a cobrir (lista completa na etapa 2):
+- C1: "os postes ficam acesos de dia", "a luz da rua não apaga de manhã"
+- C2: "deixam a luz da sala acesa sem ninguém"
+- C3: "todo mundo liga chuveiro e forno às 19h"
+- C4: "minha geladeira é muito velha"
+- C5: "ligam o ar com a janela aberta"
+- C6: "minha casa pega muito sol e não tem placa solar"
+
+## 2. Sinônimos e variações de escrita
+
+- Maiúsculas e minúsculas: "LUZ ACESA" = "luz acesa".
+- Acentos: "iluminacao" = "iluminação"; "lampada" = "lâmpada".
+- Pontuação e espaços extras ignorados.
+- Sinônimos: lâmpada/luz/iluminação; ar/ar-condicionado/climatizador; poste/luz da rua;
+  placa solar/painel solar/fotovoltaico; geladeira/refrigerador.
+- Plural e singular ("lâmpadas" / "lâmpada").
+
+## 3. Entradas ambíguas
+
+- Frases com termos de duas categorias (ex.: "a luz e o ar ficam ligados com a janela aberta")
+  devem gerar o pedido de confirmação "Você quis dizer A ou B?".
+- Teste do limite: pontuações próximas → confirmação; diferença clara → categoria direta.
+- Ao confirmar uma opção, o fluxo segue para a categoria escolhida.
+
+## 4. Entradas inválidas
+
+- Texto vazio ou só espaços → não envia (botão desabilitado ou mensagem).
+- Texto sem relação com energia ("gosto de futebol") → "não entendi" + oferta das cenas.
+- Texto acima do limite de tamanho → bloqueado ou truncado com aviso.
+- Caracteres especiais e HTML (`<script>`) → exibidos como texto puro, sem executar nada.
+- Negações conhecidas como limitação ("a luz não fica acesa") → documentadas; o sistema não
+  deve travar.
+
+## 5. Escolha das soluções (motor de decisão)
+
+- Transições válidas em todas as etapas: relato → diagnóstico → causas → alternativas →
+  desafio → avaliação → explicação final.
+- Eventos fora de ordem são ignorados sem quebrar o estado.
+- Resposta correta e incorreta produzem a avaliação e o feedback da opção escolhida.
+- "Recomeçar" de qualquer etapa volta ao estado inicial, sem dados do visitante anterior.
+- Determinismo: mesma sequência de eventos → mesmo estado final.
+
+## 6. Explicações apresentadas
+
+Testes automatizados sobre `src/data/`:
+- As seis categorias existem e passam no esquema.
+- Cada categoria tem ≥ 1 causa, ≥ 2 alternativas, 1 desafio e explicação final.
+- Cada desafio tem exatamente uma opção correta e feedback em todas as opções.
+- Todo `sourceId` existe em `sources.json`.
+- Trechos sem fonte estão marcados como `pending`.
+- Nenhum texto contém números de economia (verificação por expressão regular de `%`, `kWh`,
+  `R$`) sem fonte associada.
+
+Revisão manual: linguagem acessível e revisão do professor orientador.
+
+## 7. Minigames
+
+- **Escolha Inteligente:** cada rodada apresenta três alternativas e uma correta; feedback por
+  opção; resultado final com acertos; reiniciar zera o estado.
+- **Detetive do Desperdício:** cada ponto encontrado é marcado uma única vez; o jogo termina
+  quando todos forem encontrados; cada ponto exibe a explicação da categoria ligada.
+- **Construa uma Casa Eficiente:** cada combinação de tecnologias resulta nas categorias
+  resolvidas corretas; nenhum resultado em kWh ou reais.
+- Todos: rota própria abre direto; botão de reiniciar funciona.
+
+## 8. Responsividade (manual)
+
+- Larguras: 360 px, 768 px, 1366 px e a tela real da feira.
+- Sem rolagem horizontal; textos não cortados; botões alcançáveis.
+- Orientação retrato e paisagem no tablet.
+- Zoom do navegador em 200% sem perda de conteúdo.
+
+## 9. Acessibilidade (manual + auditoria)
+
+- Navegar todo o fluxo e os jogos **só com teclado** (Tab, Shift+Tab, Enter, Espaço).
+- Foco sempre visível.
+- Leitor de tela (NVDA no Windows ou Narrador) anuncia etapa atual e feedback.
+- Contraste conferido nas cores definitivas (AA).
+- Acerto/erro compreensível sem cor (ícone + texto).
+- Alvos de toque ≥ 48 px na tela de toque.
+- `prefers-reduced-motion` respeitado.
+- Auditoria com Lighthouse (acessibilidade ≥ 90) e revisão de diretrizes de interface.
+
+## 10. Testes de entrega
+
+- `npm run validate` sem erros.
+- Site publicado na Vercel funcionando.
+- Cópia local de `out/` funcionando com o Wi-Fi desligado.
+- Teste com 2 ou 3 colegas que não conhecem o projeto, observando onde travam.
