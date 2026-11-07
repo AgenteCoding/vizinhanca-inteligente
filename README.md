@@ -99,3 +99,7 @@ interface, minigames e entrega. Veja [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT
 - [Plano de desenvolvimento](docs/DEVELOPMENT_PLAN.md)
 - [Plano de testes](docs/TEST_PLAN.md)
 - [Guia para desenvolvimento com Claude](CLAUDE.md)
+
+## Licença
+
+Distribuído sob a licença [MIT](LICENSE).

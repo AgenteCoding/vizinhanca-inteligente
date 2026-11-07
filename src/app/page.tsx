@@ -8,10 +8,7 @@ export default function Home() {
         Uma simulação educacional de inteligência artificial que ajuda você a entender e resolver
         desperdícios de energia em uma vizinhança.
       </p>
-      <p
-        role="status"
-        className="rounded-lg border border-current/20 px-4 py-3 text-base"
-      >
+      <p className="rounded-lg border border-current/20 px-4 py-3 text-base">
         Projeto em desenvolvimento para a feira de ciências.
       </p>
     </main>

@@ -22,7 +22,7 @@ Os testes ficam em `tests/`, espelhando `src/` (ex.: `tests/lib/classifier.test.
 Exemplos de frases a cobrir (lista completa na etapa 2):
 - C1: "os postes ficam acesos de dia", "a luz da rua não apaga de manhã"
 - C2: "deixam a luz da sala acesa sem ninguém"
-- C3: "todo mundo liga chuveiro e forno às 19h"
+- C3: "todo mundo liga chuveiro e forno no fim da tarde, na mesma hora"
 - C4: "minha geladeira é muito velha"
 - C5: "ligam o ar com a janela aberta"
 - C6: "minha casa pega muito sol e não tem placa solar"

@@ -70,14 +70,24 @@ export interface Challenge {
   options: ChallengeOption[];
 }
 
+/**
+ * Termo reconhecido pelo classificador de texto livre.
+ * `term` é escrito já normalizado (minúsculas, sem acentos); sinônimos são termos próprios.
+ * `weight` indica quanto o termo aponta para a categoria (ex.: 3 = muito específico, 1 = genérico).
+ */
+export interface WeightedKeyword {
+  term: string;
+  weight: number;
+}
+
 /** Uma categoria completa da base de conhecimento. */
 export interface ProblemCategory {
   id: ProblemCategoryId;
   title: string;
   /** Descrição curta da situação de desperdício. */
   summary: string;
-  /** Termos e sinônimos usados pelo classificador de texto livre (etapa 2). */
-  keywords: string[];
+  /** Termos e sinônimos, com pesos, usados pelo classificador de texto livre (etapa 2). */
+  keywords: WeightedKeyword[];
   causes: Cause[];
   alternatives: Alternative[];
   challenge: Challenge;

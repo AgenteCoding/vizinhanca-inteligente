@@ -25,6 +25,8 @@ mais fácil de explicar aos avaliadores.
 ├──────────────────────────────────────────────┤
 │ src/components/   Interface (React)          │
 ├──────────────────────────────────────────────┤
+│ src/hooks/        Ligação React ↔ lógica     │
+├──────────────────────────────────────────────┤
 │ src/lib/          Lógica: classificador,     │
 │                   motor de decisão, jogos    │  ← TypeScript puro, sem React
 ├──────────────────────────────────────────────┤
@@ -40,6 +42,7 @@ mais fácil de explicar aos avaliadores.
 |---|---|---|
 | `src/app/` | Definir rotas e montar a página com componentes. | Conter regra de negócio. |
 | `src/components/` | Exibir estado, capturar ações, acessibilidade. Subpastas por área: `ui/` (botão, cartão, feedback genéricos), `home/`, `assistant/` (fluxo), `challenges/`, `results/`, `minigames/`. | Decidir diagnóstico, avaliar respostas, conter textos científicos fixos. |
+| `src/hooks/` | Hooks finos que conectam o React à lógica: `use-diagnostico.ts` (`useReducer` + `flow-engine`) e `use-game-session.ts` (rodada, acertos, reinício dos jogos). | Tomar decisões: só repassam eventos para `src/lib/` e devolvem o estado. |
 | `src/lib/` | `normalize.ts` (texto), `classifier.ts` (categoria + confiança), `flow-engine.ts` (máquina de estados do fluxo), `games/*.ts` (regras dos minigames). | Importar React, acessar `window`, ter efeitos colaterais. |
 | `src/data/` | Conteúdo das categorias, fontes e dados dos jogos; `schema.ts` valida; `index.ts` exporta dados tipados. | Conter lógica de decisão. |
 | `src/types/` | Interfaces e tipos compartilhados (`knowledge.ts`). | Depender de qualquer outra camada. |
@@ -54,7 +57,7 @@ etapa em que receberem o primeiro arquivo, para evitar diretórios vazios.
 Visitante
   │ escolhe cena ou digita texto
   ▼
-Componente (assistant/)  ──dispatch(evento)──►  useReducer
+Componente (assistant/)  ──dispatch(evento)──►  useDiagnostico (hooks/) → useReducer
                                                  │
                                                  ▼
                                    flow-engine.next(estado, evento)
@@ -106,7 +109,8 @@ src/data/
   index.ts           carrega, valida e exporta dados tipados
 ```
 
-- Cada categoria segue o contrato `ProblemCategory`: título, resumo, palavras-chave, causas,
+- Cada categoria segue o contrato `ProblemCategory`: título, resumo, palavras-chave com peso
+  (`WeightedKeyword`: termo normalizado + peso; sinônimos são termos próprios), causas,
   alternativas (benefícios e limitações), desafio e explicação final.
 - Cada trecho científico é um `Explanation` com `sourceIds` e `status` (`pending` ou `verified`).
 - Testes garantem que: as seis categorias existem; todo `sourceId` existe em `sources.json`; todo
@@ -122,7 +126,8 @@ src/data/
 | Detetive do Desperdício | `games/detetive.json`: pontos da casa, cada um ligado a um `ProblemCategoryId` | `lib/games/detetive.ts`: marcar achados, verificar fim | Explicações vêm da categoria ligada a cada ponto. |
 | Construa uma Casa Eficiente | `games/casa.json`: tecnologias, cada uma ligada às categorias que resolve | `lib/games/casa.ts`: calcular quais categorias foram resolvidas | Resultado expresso em categorias resolvidas, nunca em kWh. |
 
-Um hook comum de sessão de jogo (rodada, acertos, reinício) evita duplicação entre os três.
+Um hook comum de sessão de jogo (`src/hooks/use-game-session.ts`: rodada, acertos, reinício)
+evita duplicação entre os três.
 
 ## 7. Evolução sem reescrita
 
@@ -149,3 +154,8 @@ Um hook comum de sessão de jogo (rodada, acertos, reinício) evita duplicação
 | Versões fixadas (`save-exact`) | Evitar quebras inesperadas antes da feira. |
 | `@types/node` 24 | Alinhado ao Node 24 do ambiente e exigido pelo Vitest 5. |
 | Pastas criadas sob demanda | Evitar estrutura vazia e arquivos sem propósito. |
+| Hooks em `src/hooks/` | Dar lugar próprio à ligação com o React sem permitir React em `src/lib/`. |
+| Palavras-chave com peso no contrato | Permite pontuação por categoria e detecção de ambiguidade no classificador. |
+| Regras recomendadas do `jsx-a11y` | Acessibilidade verificada automaticamente no lint. |
+| Alertas do `npm audit` (minimatch no ESLint) aceitos | Só afetam ferramentas de desenvolvimento; a correção forçada quebraria o lint. |
+| Licença MIT | Código aberto e reutilizável, adequado a projeto educacional público. |

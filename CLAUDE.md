@@ -36,6 +36,7 @@ Detalhes: `docs/PROJECT_BRIEF.md` e `docs/REQUIREMENTS.md`.
 |---|---|---|
 | Rotas | `src/app/` | Só monta páginas a partir de componentes. Sem regra de negócio. |
 | Interface | `src/components/` | Exibe estado e dispara ações. Sem regra de negócio. |
+| Ligação React | `src/hooks/` | Hooks finos (`useReducer`, sessão de jogo) que chamam `src/lib/`. Sem regra própria. |
 | Lógica | `src/lib/` | TypeScript puro, **sem React**. Classificador, motor, regras dos jogos. |
 | Conhecimento | `src/data/` | JSON + esquema Zod. Conteúdo editável sem mexer em código. |
 | Contratos | `src/types/` | Tipos compartilhados por todas as camadas. |
@@ -48,6 +49,11 @@ Next.js 16.4.5 (App Router), React 19.3, TypeScript 5.9 (strict), Tailwind CSS 4
 ESLint 9, Vitest 5.1. Node 24. Zod entra na etapa 2 para validar `src/data/`.
 
 - `.npmrc` usa `save-exact=true`. **Não atualize dependências antes da feira.**
+- `eslint-plugin-jsx-a11y` está declarado diretamente (já vinha com o `eslint-config-next`)
+  para ativar o conjunto recomendado de regras de acessibilidade.
+- `npm audit` acusa 8 alertas moderados vindos de `minimatch` dentro do ESLint (só
+  desenvolvimento, não chega ao site). **Risco aceito em 07/11/2026**: o `audit fix --force`
+  rebaixaria o `eslint-config-next` para a v15 e quebraria o lint. Não rode `audit fix --force`.
 - Proibido adicionar: bibliotecas de animação, banco de dados, autenticação, analytics,
   gerenciadores de estado, SDKs de IA generativa. Qualquer nova dependência exige justificativa
   escrita na resposta ao responsável e aprovação.
@@ -57,6 +63,7 @@ ESLint 9, Vitest 5.1. Node 24. Zod entra na etapa 2 para validar `src/data/`.
 ```
 src/app/            rotas (layout.tsx, page.tsx e, nas próximas etapas, diagnostico/ e jogos/)
 src/components/     ui/ (genéricos), assistant/, challenges/, minigames/, results/, home/
+src/hooks/          use-diagnostico.ts, use-game-session.ts (ligam o React ao motor de src/lib/)
 src/lib/            normalize.ts, classifier.ts, flow-engine.ts, games/*.ts
 src/data/           problems.json, sources.json, games/*.json, schema.ts, index.ts
 src/types/          knowledge.ts (contratos)
@@ -74,8 +81,9 @@ public/images/      ilustrações (criada quando houver a primeira imagem)
   sem acesso a `window`, `Date.now()` ou `Math.random()` sem injeção explícita.
 - Componentes pequenos, com uma responsabilidade. Server Components por padrão; `"use client"`
   só quando houver interatividade.
-- Estado do fluxo com `useReducer` chamando o motor de `src/lib/`. Nada de lógica de decisão em
-  `onClick`.
+- Estado do fluxo com `useReducer` chamando o motor de `src/lib/`, encapsulado em um hook de
+  `src/hooks/`. O hook só conecta; quem decide é `src/lib/`. Nada de lógica de decisão em
+  `onClick` nem dentro de hooks.
 - Sem duplicação: conteúdo vem sempre de `src/data/`, nunca escrito direto no JSX.
 - Importações com o alias `@/` (ex.: `@/lib/classifier`).
 - Textos da interface em português do Brasil, linguagem acessível para estudantes.
@@ -135,7 +143,18 @@ npm run build      # export estático em out/
 npm run validate   # tudo acima, em sequência
 ```
 
-## 12. Regras de trabalho
+## 12. Git e commits
+
+- Branch principal: `main`. Fins de linha normalizados em LF pelo `.gitattributes`.
+- Um commit por unidade lógica de trabalho, sempre com `npm run validate` passando.
+- Mensagem em português, no imperativo, com prefixo de tipo:
+  `feat:` (funcionalidade), `fix:` (correção), `docs:` (documentação), `test:` (testes),
+  `refactor:` (reorganização sem mudar comportamento), `chore:` (configuração e dependências),
+  `content:` (base de conhecimento). Ex.: `feat: adiciona classificador de palavras-chave`.
+- Nunca commitar `.env*`, `out/`, `.next/` ou dados pessoais.
+- Não fazer push, criar repositório remoto ou publicar sem autorização do responsável.
+
+## 13. Regras de trabalho
 
 - **Não crie funcionalidades sem justificativa** ligada ao objetivo educacional e aos requisitos.
 - **Não altere a arquitetura** (camadas, pastas, tecnologias, export estático) sem antes

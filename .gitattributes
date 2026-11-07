@@ -1,0 +1,10 @@
+# Normaliza fins de linha no repositório (evita diffs falsos entre Windows e GitHub).
+* text=auto eol=lf
+
+# Arquivos binários
+*.ico binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.woff2 binary
