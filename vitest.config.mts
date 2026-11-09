@@ -8,8 +8,9 @@ export default defineConfig({
     },
   },
   test: {
-    // A lógica do domínio é TypeScript puro: não precisa de navegador simulado.
+    // A lógica é TypeScript puro e os testes de integração usam a renderização do React no
+    // servidor (react-dom/server): nenhum navegador simulado é necessário.
     environment: "node",
-    include: ["tests/**/*.test.ts"],
+    include: ["tests/**/*.test.{ts,tsx}"],
   },
 });

@@ -16,7 +16,7 @@ de ilustração interativa).
 | CLAUDE.md, README e documentação em `docs/` | P0 |
 | Git iniciado com primeiro commit | P0 |
 
-## Etapa 2 — Núcleo inteligente (07/11)
+## Etapa 2 — Núcleo inteligente (07–09/11) ✅ concluída (GitHub e Vercel pendentes)
 
 | Entrega | Prior. |
 |---|---|

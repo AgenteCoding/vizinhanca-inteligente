@@ -69,7 +69,7 @@ Pré-requisito: [Node.js](https://nodejs.org) 24 ou superior.
 
 ```bash
 npm install        # instala as dependências (versões fixadas)
-npm run dev        # abre em http://localhost:3000
+npm run dev        # abre em http://localhost:3000 (fluxo em /diagnostico)
 ```
 
 Outros comandos:
@@ -90,8 +90,8 @@ estrutura de testes. A página inicial é provisória.
 
 **Etapa 2 — Núcleo inteligente (em andamento):** base de conhecimento das seis categorias com
 fontes oficiais conferidas e validação automática (bloco A) e classificador de texto com
-tratamento de ambiguidade (bloco B) e motor do fluxo de sete etapas (bloco C). Próximo bloco:
-integração navegável e auditoria.
+tratamento de ambiguidade (bloco B), motor do fluxo de sete etapas (bloco C) e uma versão
+navegável mínima em `/diagnostico` (bloco D), ainda sem o visual definitivo.
 
 Depois: interface, minigames e entrega. Veja [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md).
 

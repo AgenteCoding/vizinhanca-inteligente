@@ -95,7 +95,8 @@ public/images/      ilustrações (criada quando houver a primeira imagem)
 - Rotas em português (`/diagnostico`, `/jogos/detetive`), pois aparecem para o visitante.
 - Identificadores no código em inglês (`classifyProblem`, `ProblemCategory`); IDs de dados em
   português `kebab-case` (`luzes-ambientes-vazios`).
-- Testes: `tests/<mesmo caminho de src>/<arquivo>.test.ts`.
+- Testes: `tests/<mesmo caminho de src>/<arquivo>.test.ts`; testes de integração que atravessam
+  camadas ficam em `tests/integration/` (`.test.tsx` quando renderizam componentes).
 
 ## 7. Regras científicas (obrigatórias)
 

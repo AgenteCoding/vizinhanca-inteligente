@@ -48,8 +48,17 @@ mais fácil de explicar aos avaliadores.
 | `src/types/` | Interfaces e tipos compartilhados (`knowledge.ts`). | Depender de qualquer outra camada. |
 | `tests/` | Testes automatizados espelhando `src/`. | — |
 
-**Estado atual (etapa 2, bloco C):** existem `src/app/`, `src/data/`, `src/lib/` e `src/types/`. As demais
-pastas serão criadas na etapa em que receberem o primeiro arquivo, para evitar diretórios vazios.
+**Estado atual (etapa 2 concluída):** existem `src/app/` (rotas `/` e `/diagnostico`),
+`src/components/` (`ui/Button` e `assistant/`), `src/hooks/` (`use-diagnostico.ts`),
+`src/data/`, `src/lib/` e `src/types/`. As demais pastas serão criadas na etapa em que receberem
+o primeiro arquivo, para evitar diretórios vazios.
+
+**Integração (bloco D):** `useDiagnostico` usa `useReducer` com `diagnosticoReducer`, que só
+chama `flowEngine.transition` e guarda o motivo da última recusa. `DiagnosticoFlow` (único
+componente com `"use client"`) liga o hook a `DiagnosticoView`, que escolhe a visão da etapa em
+`StepViews.tsx`. Os componentes só exibem `content` e chamam as ações; rótulos e avisos da
+interface ficam em `components/assistant/messages.ts`. O foco vai para o título a cada troca de
+etapa, e o botão "Recomeçar" fica sempre visível.
 
 ## 3. Fluxo de informações
 

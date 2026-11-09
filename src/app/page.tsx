@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 // Página inicial provisória. A interface definitiva será construída na etapa de interface
 // (ver docs/DEVELOPMENT_PLAN.md).
 export default function Home() {
@@ -8,8 +10,15 @@ export default function Home() {
         Uma simulação educacional de inteligência artificial que ajuda você a entender e resolver
         desperdícios de energia em uma vizinhança.
       </p>
+      <Link
+        href="/diagnostico"
+        className="min-h-12 self-start rounded-lg bg-foreground px-6 py-3 text-lg font-semibold text-background"
+      >
+        Começar o diagnóstico
+      </Link>
       <p className="rounded-lg border border-current/20 px-4 py-3 text-base">
-        Projeto em desenvolvimento para a feira de ciências.
+        Projeto em desenvolvimento para a feira de ciências. Versão de teste, sem o visual
+        definitivo.
       </p>
     </main>
   );

@@ -66,6 +66,15 @@ palavras-chave). Exemplos:
 - A explicação final preserva `status` e `sourceIds` de cada explicação e separa fontes
   verificadas de pendentes (`tests/lib/flow-engine.test.ts`).
 
+## 5.1 Integração do fluxo navegável
+
+`tests/integration/diagnostico.test.tsx` conduz o estado pelo mesmo reducer do hook e renderiza
+cada etapa com os componentes reais (`react-dom/server`), sem dependências novas. Cobre: fluxo
+completo para as seis categorias (guiado e digitado), relato vazio, baixa confiança, ambiguidade,
+negação, texto sem relação, HTML no relato, respostas corretas e incorretas, ligação dos botões
+às ações, reinício e fontes na explicação final. Cliques reais e foco foram conferidos
+manualmente no navegador (`npm run dev` → `/diagnostico`).
+
 ## 6. Explicações apresentadas
 
 Testes automatizados sobre `src/data/`:
