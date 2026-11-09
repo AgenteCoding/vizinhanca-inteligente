@@ -62,6 +62,9 @@ palavras-chave). Exemplos:
 - Resposta correta e incorreta produzem a avaliação e o feedback da opção escolhida.
 - "Recomeçar" de qualquer etapa volta ao estado inicial, sem dados do visitante anterior.
 - Determinismo: mesma sequência de eventos → mesmo estado final.
+- Ação recusada devolve o mesmo objeto de estado (seguro para `useReducer`).
+- A explicação final preserva `status` e `sourceIds` de cada explicação e separa fontes
+  verificadas de pendentes (`tests/lib/flow-engine.test.ts`).
 
 ## 6. Explicações apresentadas
 

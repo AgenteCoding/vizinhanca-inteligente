@@ -48,7 +48,7 @@ mais fácil de explicar aos avaliadores.
 | `src/types/` | Interfaces e tipos compartilhados (`knowledge.ts`). | Depender de qualquer outra camada. |
 | `tests/` | Testes automatizados espelhando `src/`. | — |
 
-**Estado atual (etapa 2, bloco B):** existem `src/app/`, `src/data/`, `src/lib/` e `src/types/`. As demais
+**Estado atual (etapa 2, bloco C):** existem `src/app/`, `src/data/`, `src/lib/` e `src/types/`. As demais
 pastas serão criadas na etapa em que receberem o primeiro arquivo, para evitar diretórios vazios.
 
 ## 3. Fluxo de informações
@@ -75,8 +75,32 @@ Componente (assistant/)  ──dispatch(evento)──►  useDiagnostico (hooks/
 Componente renderiza a etapa atual ◄─────────────┘
 ```
 
-- O **motor** é uma função pura `next(estado, evento) → estado`. Os eventos são, por exemplo,
-  `ENVIAR_RELATO`, `CONFIRMAR_CATEGORIA`, `AVANCAR`, `RESPONDER_DESAFIO`, `RECOMECAR`.
+- O **motor** (`src/lib/flow-engine.ts`) é criado com `createFlowEngine(base)` e oferece
+  `transition(estado, ação)` (diz se a ação foi aceita e, se não, o motivo), `reducer` (pronto
+  para `useReducer`), `allowedActions(estado)` e `content(estado)` (conteúdo da etapa, montado
+  a partir da base). Ações: `SUBMIT_REPORT`, `SELECT_CATEGORY`, `ADVANCE`, `ANSWER_CHALLENGE`,
+  `RESTART`. Ação não permitida na etapa é recusada e o estado volta como a mesma referência.
+
+  | Etapa | Ações aceitas | Próxima etapa |
+  |---|---|---|
+  | relato | `SUBMIT_REPORT`, `SELECT_CATEGORY` | diagnóstico (relato vazio é recusado) |
+  | diagnóstico pendente | `SUBMIT_REPORT`, `SELECT_CATEGORY` | diagnóstico confirmado |
+  | diagnóstico confirmado | `ADVANCE` (ou reescrever/escolher) | causas |
+  | causas → alternativas | `ADVANCE` | alternativas → desafio |
+  | desafio | `ANSWER_CHALLENGE` | avaliação |
+  | avaliação | `ADVANCE` | explicação final |
+  | explicação final | só `RESTART` | — |
+
+  `RESTART` vale em todas as etapas e volta a `{ step: "relato" }`, sem dados anteriores.
+- A **avaliação** (`src/lib/evaluation.ts`) compara a opção escolhida com a correta e devolve os
+  dois feedbacks. A **explicação final** reúne problema, causa principal (a primeira causa
+  cadastrada), consequências, avaliação, solução recomendada (benefícios e limitações),
+  explicação científica, explicação final e as fontes citadas, separadas em verificadas e
+  pendentes. Cada `Explanation` mantém `status` e `sourceIds`; `hasPendingContent` avisa a
+  interface para marcar o conteúdo em revisão.
+- O estado guarda só a etapa e os dados dela (categoria, justificativa do classificador,
+  avaliação). O conteúdo vem sempre da base. O desafio é entregue à interface sem a indicação
+  da opção correta.
 - As etapas são as definidas em `FLOW_STEPS` (`src/types/knowledge.ts`).
 - O **classificador** (`src/lib/classifier.ts`) é criado a partir das categorias da base
   (`createClassifier(problems)`) e devolve um `ClassificationResult` (`src/types/engine.ts`):
