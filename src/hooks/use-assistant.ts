@@ -8,9 +8,10 @@
  *
  * Tudo fica na memória do navegador; nada é salvo nem enviado. "Novo diagnóstico" apaga tudo.
  */
-import { createContext, useCallback, useContext, useMemo, useReducer, useRef } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useRef } from "react";
 import { knowledgeBase } from "@/data";
 import { createDeterministicAssistant } from "@/lib/assistant/deterministic-assistant";
+import { minimumThinkingMs, withMinimumDelay } from "@/lib/assistant/thinking-time";
 import { conversationReducer, createConversation } from "@/lib/conversation";
 import type { AssistantService, ConversationState } from "@/types/assistant";
 import type { FlowAction, FlowActionType, StepContent } from "@/types/engine";
@@ -22,21 +23,11 @@ export const defaultAssistant: AssistantService = createDeterministicAssistant(k
 /** Ponto único para trocar o provedor do assistente (ou usar um serviço de teste). */
 export const AssistantServiceContext = createContext<AssistantService>(defaultAssistant);
 
-/**
- * Tempo mínimo em que o "analisando" fica na tela, por tipo de ação. O motor responde em menos
- * de 1 ms; sem esta pausa o visitante não perceberia a resposta chegando.
- */
-export const MIN_PENDING_MS: Partial<Record<FlowActionType, number>> = {
-  SUBMIT_REPORT: 700,
-  SELECT_CATEGORY: 350,
-  ADVANCE: 250,
-  ANSWER_CHALLENGE: 400,
-};
-
-const wait = (ms: number) =>
-  new Promise<void>((resolve) => {
-    setTimeout(resolve, ms);
-  });
+/** Uma espera em andamento do indicador "Pensando" (para poder cancelá-la). */
+interface PendingTimer {
+  id: ReturnType<typeof setTimeout>;
+  release: () => void;
+}
 
 export interface AssistantActions {
   /** Relato digitado. Resolve `true` se o assistente aceitou (a caixa de texto pode ser limpa). */
@@ -79,6 +70,40 @@ export function useAssistant(): AssistantView {
   const flowRef = useRef(conversation.flow);
   const busyRef = useRef(false);
   const generationRef = useRef(0);
+  // Esperas do "Pensando" em andamento. Recomeçar a conversa ou sair da página cancela todas.
+  const timersRef = useRef(new Set<PendingTimer>());
+
+  const sleep = useCallback(
+    (ms: number) =>
+      new Promise<void>((resolve) => {
+        const timer: PendingTimer = {
+          id: setTimeout(() => {
+            timersRef.current.delete(timer);
+            resolve();
+          }, ms),
+          release: resolve,
+        };
+        timersRef.current.add(timer);
+      }),
+    [],
+  );
+
+  const cancelTimers = useCallback(() => {
+    for (const timer of timersRef.current) {
+      clearTimeout(timer.id);
+      timer.release();
+    }
+    timersRef.current.clear();
+  }, []);
+
+  useEffect(
+    () => () => {
+      // Componente desmontado: respostas a caminho são descartadas e nenhum timer fica vivo.
+      generationRef.current += 1;
+      cancelTimers();
+    },
+    [cancelTimers],
+  );
 
   const send = useCallback(
     async (action: FlowAction, text: string): Promise<boolean> => {
@@ -87,10 +112,12 @@ export function useAssistant(): AssistantView {
       const generation = generationRef.current;
       dispatch({ type: "request", request: { action, text } });
       try {
-        const [transition] = await Promise.all([
-          service.respond(flowRef.current, action),
-          wait(MIN_PENDING_MS[action.type] ?? 0),
-        ]);
+        // Espera visual = máximo entre o mínimo do "Pensando" e o tempo real do provedor.
+        const transition = await withMinimumDelay(
+          Promise.resolve(service.respond(flowRef.current, action)),
+          minimumThinkingMs(action.type),
+          sleep,
+        );
         if (generation !== generationRef.current) return false;
         if (transition.ok) flowRef.current = transition.state;
         dispatch({ type: "response", transition, content: service.content(transition.state) });
@@ -102,16 +129,17 @@ export function useAssistant(): AssistantView {
         if (generation === generationRef.current) busyRef.current = false;
       }
     },
-    [service],
+    [service, sleep],
   );
 
   const restart = useCallback(() => {
     generationRef.current += 1;
     busyRef.current = false;
+    cancelTimers();
     const initial = service.initialState();
     flowRef.current = initial;
     dispatch({ type: "reset", initial });
-  }, [service]);
+  }, [service, cancelTimers]);
 
   const { failed } = conversation;
   const retry = useCallback(() => {
