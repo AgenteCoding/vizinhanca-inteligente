@@ -7,7 +7,7 @@ import { MobileMenu } from "./MobileMenu";
 export const NAV_LINKS = [
   { href: "/#como-funciona", label: "Como funciona" },
   { href: "/#situacoes", label: "Situações" },
-  { href: "/#minigames", label: "Minigames" },
+  { href: "/jogos", label: "Minigames" },
 ];
 
 /** Barra superior discreta: marca, três links e o botão "Começar". Sem login nem cadastro. */

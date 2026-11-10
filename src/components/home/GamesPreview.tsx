@@ -1,24 +1,8 @@
-import { Icon, type IconName } from "../ui/Icon";
+import Link from "next/link";
+import { GAMES } from "../minigames/games-list";
+import { Icon } from "../ui/Icon";
 
-const GAMES: { icon: IconName; title: string; text: string }[] = [
-  {
-    icon: "star",
-    title: "Escolha Inteligente",
-    text: "Leia a situação e escolha a melhor solução entre três alternativas.",
-  },
-  {
-    icon: "search",
-    title: "Detetive do Desperdício",
-    text: "Procure os desperdícios escondidos em uma casa fictícia.",
-  },
-  {
-    icon: "home",
-    title: "Construa uma Casa Eficiente",
-    text: "Escolha tecnologias e descubra quais problemas você resolve.",
-  },
-];
-
-/** Os três minigames. Ainda não foram construídos: aparecem anunciados, sem link. */
+/** Os três minigames, com link para cada um. */
 export function GamesPreview() {
   return (
     <section id="minigames" aria-labelledby="minigames-titulo" className="scroll-mt-20 border-t border-line/70">
@@ -36,9 +20,10 @@ export function GamesPreview() {
               <div>
                 <h3 className="font-bold">{game.title}</h3>
                 <p className="mt-1 text-petrol-soft">{game.text}</p>
-                <p className="mt-2 inline-flex rounded-full border border-dashed border-petrol/40 px-2.5 py-0.5 text-sm font-bold text-petrol-soft">
-                  Em breve
-                </p>
+                <Link href={game.href} className="mt-2 inline-flex min-h-12 items-center gap-1 font-bold underline-offset-4 hover:underline">
+                  Jogar
+                  <Icon name="chevron" className="size-5 -rotate-90" />
+                </Link>
               </div>
             </li>
           ))}

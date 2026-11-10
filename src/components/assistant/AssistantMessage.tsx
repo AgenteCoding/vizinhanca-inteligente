@@ -461,7 +461,7 @@ export function FinalBody({ content, active, actions }: BodyProps<"explicacao-fi
             <Icon name="restart" className="size-5" />
             Novo diagnóstico
           </Button>
-          <Link href="/#minigames" className={buttonClasses("secondary")}>
+          <Link href="/jogos" className={buttonClasses("secondary")}>
             <Icon name="gamepad" className="size-5" />
             Conhecer os minigames
           </Link>
