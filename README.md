@@ -1,4 +1,8 @@
-# Vizinhança Inteligente
+# SmartHood AI
+
+> O projeto se chamava **Vizinhança Inteligente** até 10/11/2026. O nome oficial agora é
+> **SmartHood AI**. Nomes técnicos (pasta, pacote npm, repositório) continuam os antigos.
+
 
 Aplicação web educacional que simula uma inteligência artificial de **eficiência energética** em
 uma vizinhança inteligente. Projeto desenvolvido para uma feira de ciências (apresentação em
@@ -95,13 +99,18 @@ fontes oficiais conferidas e validação automática (bloco A) e classificador d
 tratamento de ambiguidade (bloco B), motor do fluxo de sete etapas (bloco C) e uma versão
 navegável mínima em `/diagnostico` (bloco D).
 
-**Etapa 3 — Interface (em andamento):** experiência chat-first. A página inicial pergunta "Como
-posso ajudar sua vizinhança?" e o visitante conversa com o assistente, sem cadastro: diagnóstico,
+**Etapa 3 — Interface:** experiência chat-first com a identidade SmartHood AI (vidro fosco,
+esferas e uma vizinhança isométrica animada em CSS/SVG, sem biblioteca 3D). A página inicial
+pergunta "Como podemos tornar sua vizinhança mais inteligente?" e o visitante conversa com o assistente, sem cadastro: diagnóstico,
 causas, soluções, desafio, avaliação e explicação final aparecem uma etapa por resposta. Paleta
 Petrol Blue, Ice White e Signal Lime; fontes locais (o build funciona sem internet). A arquitetura
 está pronta para um futuro provedor de IA no servidor, sem nenhuma integração ativa.
 
-Minigames prontos (`/jogos`). Depois: entrega. Veja [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md).
+Ao enviar uma mensagem, o indicador "Pensando" fica visível por pelo menos 5 segundos (ou pelo
+tempo real da resposta, o que for maior). Minigames prontos (`/jogos`). Depois: entrega.
+
+**Logo:** o símbolo atual é provisório. Para trocar, edite só `LogoMark` em
+`src/components/ui/Logo.tsx` (e `src/app/icon.svg` para o ícone da aba). Veja [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md).
 
 ## Documentação
 

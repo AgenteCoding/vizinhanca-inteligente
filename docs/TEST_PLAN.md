@@ -1,4 +1,8 @@
-# Plano de testes — Vizinhança Inteligente
+# Plano de testes — SmartHood AI
+
+> O projeto se chamava **Vizinhança Inteligente** até 10/11/2026. O nome oficial agora é
+> **SmartHood AI**. Nomes técnicos (pasta, pacote npm, repositório) continuam os antigos.
+
 
 ## Estratégia
 
@@ -119,6 +123,17 @@ Automatizados: `tests/data/games.test.ts` (dados e esquema), `tests/lib/games/ga
 - Todos: rota própria (export estático); "Recomeçar", "Jogar novamente" e "Voltar aos minigames".
 - Manual (Chrome): celular, tablet e computador sem rolagem horizontal; partida completa de cada
   jogo; teclado (Tab, setas, Espaço, Enter) com foco movido para o título a cada etapa.
+
+## 7.1 Identidade e indicador "Pensando"
+
+Automatizados: `tests/lib/assistant/thinking-time.test.ts` (relógio falso: resposta instantânea
+espera 5 s; resposta de 8 s não espera mais nada; erro sai na hora; espera cancelada libera na
+hora) e `tests/integration/identidade.test.tsx` (nome novo em toda a interface, espaço único da
+logo, indicador na conversa, cena decorativa sem elementos clicáveis nem endereços externos).
+
+Manual (Chrome): mensagem digitada mostra o balão na hora e a resposta em cerca de 5 s;
+"Novo diagnóstico" durante a espera volta ao início e nenhuma resposta chega depois; Enter
+repetido durante a espera não duplica a resposta; com movimento reduzido as animações param.
 
 ## 8. Responsividade (manual)
 

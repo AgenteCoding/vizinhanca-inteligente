@@ -1,4 +1,8 @@
-# Arquitetura — Vizinhança Inteligente
+# Arquitetura — SmartHood AI
+
+> O projeto se chamava **Vizinhança Inteligente** até 10/11/2026. O nome oficial agora é
+> **SmartHood AI**. Nomes técnicos (pasta, pacote npm, repositório) continuam os antigos.
+
 
 ## 1. Arquitetura geral
 
@@ -214,7 +218,28 @@ src/data/
 - Fontes de referência: Inmetro (PBE), Procel, ANEEL (horário de ponta, Tarifa Branca,
   geração distribuída — Lei 14.300/2022), EPE, INPE (Atlas Brasileiro de Energia Solar).
 
-## 6. Como os minigames utilizam as regras existentes
+## 5.1 Apresentação: identidade SmartHood AI e indicador "Pensando"
+
+O redesign de 10/11/2026 mudou só a camada de interface; rotas, hooks, lógica e dados seguem
+as mesmas fronteiras.
+
+- **Marca:** `ui/Logo.tsx` (`BRAND_NAME`, `Logo`, `LogoMark`) é o único lugar que conhece o nome
+  e o símbolo. Cabeçalho, rodapé, metadados e a conversa usam esse componente.
+- **Estilo:** `globals.css` concentra os tons derivados das três cores, o vidro (`.glass`,
+  `.glass-dark`, com alternativa sólida via `@supports`), as esferas (`.orb`) e as animações,
+  todas dentro de `prefers-reduced-motion: no-preference`.
+- **Cena da página inicial:** `home/EnergyScene.tsx` gera no build um SVG isométrico (casas de
+  vidro, núcleo luminoso, linhas de energia). Sem JavaScript no navegador e sem dependência.
+- **Indicador "Pensando":** separação em três partes, para valer com qualquer provedor:
+  1. `lib/assistant/thinking-time.ts` (pura): `withMinimumDelay(trabalho, mínimo, sleep)` espera
+     os dois em paralelo, então a espera visual é o máximo entre o mínimo e o tempo real;
+     falha do provedor sai na hora.
+  2. `hooks/use-assistant.ts`: fornece o `sleep` cancelável, bloqueia envio duplicado
+     (`busyRef`), descarta respostas de uma conversa já reiniciada (`generationRef`) e limpa os
+     timers ao reiniciar e ao desmontar.
+  3. `ui/ThinkingIndicator.tsx`: só desenha os três pontos e o texto.
+
+
 
 Rotas: `/jogos` (apresenta os três) e `/jogos/escolha-inteligente`, `/jogos/detetive`,
 `/jogos/casa-eficiente`. Tipos em `src/types/games.ts`; dados em `src/data/games/` (JSON

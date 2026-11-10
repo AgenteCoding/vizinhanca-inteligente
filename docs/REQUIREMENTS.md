@@ -1,4 +1,8 @@
-# Requisitos — Vizinhança Inteligente
+# Requisitos — SmartHood AI
+
+> O projeto se chamava **Vizinhança Inteligente** até 10/11/2026. O nome oficial agora é
+> **SmartHood AI**. Nomes técnicos (pasta, pacote npm, repositório) continuam os antigos.
+
 
 Prioridade: **M** = obrigatório para a feira (MVP); **D** = desejável, entra se houver tempo.
 

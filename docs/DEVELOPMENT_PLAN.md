@@ -36,6 +36,7 @@ de ilustração interativa).
 | Seis situações na página inicial (sugestões perto do campo de conversa) ✅ | P0 |
 | Reformulação chat-first, nova paleta e preparação para IA no servidor (sem integrar) ✅ | P0 |
 | Minigame Escolha Inteligente ✅ | P0 |
+| Redesign SmartHood AI: novo nome, vidro fosco, cena animada e indicador "Pensando" ✅ | P0 |
 | Conteúdo científico preenchido com fontes oficiais | P0 |
 | Revisão de código da etapa | P1 |
 

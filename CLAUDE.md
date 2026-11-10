@@ -1,4 +1,8 @@
-# CLAUDE.md — Referência de desenvolvimento da Vizinhança Inteligente
+# CLAUDE.md — Referência de desenvolvimento do SmartHood AI
+
+> O projeto se chamava **Vizinhança Inteligente** até 10/11/2026. O nome oficial agora é
+> **SmartHood AI**. Nomes técnicos (pasta, pacote npm, repositório) continuam os antigos.
+
 
 Leia este arquivo inteiro antes de qualquer tarefa no projeto. Ele prevalece sobre hábitos
 gerais. Em conflito com uma instrução explícita do responsável pelo projeto, siga o responsável
@@ -137,7 +141,8 @@ public/images/      ilustrações (criada quando houver a primeira imagem)
 
 ## 9. Acessibilidade e responsividade
 
-Mobile-first (testar em 360px, tablet e notebook); fonte base de 18px; alvos de toque ≥ 48px;
+Mobile-first (testar em 360px, tablet e notebook); fonte base de 17px (era 18px; reduzida no
+redesign SmartHood AI a pedido do responsável); alvos de toque ≥ 48px;
 contraste WCAG AA; acerto/erro com ícone **e** texto, nunca só cor; feedback anunciado com
 `aria-live`; foco visível; navegação completa por teclado; `lang="pt-BR"`; respeitar
 `prefers-reduced-motion`; botão "Recomeçar" sempre visível nas telas do fluxo.
@@ -149,6 +154,23 @@ Signal Lime `#D9FA57` (destaque, com moderação); demais tons derivados, em `sr
 (`wrong`) só para erro, com ícone e texto. Ícones só de `src/components/ui/Icon.tsx` (SVG próprio,
 sem emoji). Animação só na chegada de uma resposta e no "analisando", nunca escondendo conteúdo.
 Estilos base ficam em `@layer base` para as classes do Tailwind poderem sobrescrevê-los.
+
+### Identidade visual SmartHood AI (redesign de 10/11/2026)
+
+- **Nome:** a constante `BRAND_NAME` e o componente `Logo` (`src/components/ui/Logo.tsx`) são o
+  ponto único da marca. O símbolo atual (`BrandMark`) é provisório: a logo oficial entra trocando
+  só o conteúdo de `LogoMark` (espaço quadrado de tamanho fixo).
+- **Vidro fosco:** classes `.glass` (sobre fundo Ice) e `.glass-dark` (sobre fundo Petrol) em
+  `globals.css`, com alternativa quase sólida quando o navegador não tem `backdrop-filter`.
+  Use em painéis flutuantes (cabeçalho, campo de conversa, sugestões, painéis dos jogos). Texto
+  longo de leitura continua em superfície sólida.
+- **3D e movimento:** só CSS e SVG (`.orb`, `EnergyScene.tsx`). Continua proibido instalar
+  biblioteca de animação ou 3D. Todo elemento decorativo é `aria-hidden` e
+  `pointer-events-none`, e para com `prefers-reduced-motion`.
+- **Indicador "Pensando":** `ThinkingIndicator` (só apresentação) + `src/lib/assistant/thinking-time.ts`
+  (regra pura: espera visual = máximo entre o mínimo e o tempo real do provedor). Mensagem
+  digitada: mínimo de 5 s (`MIN_THINKING_MS`); botões da conversa: `MIN_STEP_THINKING_MS`. O hook
+  `use-assistant` cancela as esperas ao reiniciar a conversa e ao desmontar.
 
 ## 10. Testes (obrigatórios)
 

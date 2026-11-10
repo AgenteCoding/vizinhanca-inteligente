@@ -1,8 +1,12 @@
-# Visão do projeto — Vizinhança Inteligente
+# Visão do projeto — SmartHood AI
+
+> O projeto se chamava **Vizinhança Inteligente** até 10/11/2026. O nome oficial agora é
+> **SmartHood AI**. Nomes técnicos (pasta, pacote npm, repositório) continuam os antigos.
+
 
 ## Visão geral
 
-A Vizinhança Inteligente é uma aplicação web que simula uma inteligência artificial voltada à
+O SmartHood AI é uma aplicação web que simula uma inteligência artificial voltada à
 eficiência energética. Em uma vizinhança fictícia, o visitante relata ou escolhe uma situação de
 desperdício de energia, e o assistente conduz um atendimento em etapas: diagnóstico, causas,
 alternativas, desafio, avaliação e explicação final. Três minigames reforçam o aprendizado.
