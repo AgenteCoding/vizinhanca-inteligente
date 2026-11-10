@@ -42,7 +42,7 @@ mais fácil de explicar aos avaliadores.
 |---|---|---|
 | `src/app/` | Definir rotas e montar a página com componentes. | Conter regra de negócio. |
 | `src/components/` | Exibir estado, capturar ações, acessibilidade. Subpastas por área: `ui/` (botão, cartão, feedback genéricos), `home/`, `assistant/` (fluxo), `challenges/`, `results/`, `minigames/`. | Decidir diagnóstico, avaliar respostas, conter textos científicos fixos. |
-| `src/hooks/` | Hooks finos que conectam o React à lógica: `use-diagnostico.ts` (`useReducer` + `flow-engine`) e `use-game-session.ts` (rodada, acertos, reinício dos jogos). | Tomar decisões: só repassam eventos para `src/lib/` e devolvem o estado. |
+| `src/hooks/` | Hooks finos que conectam o React à lógica: `use-assistant.ts` (conversa) e `use-games.ts` (`useReducer` de cada minigame). | Tomar decisões: só repassam eventos para `src/lib/` e devolvem o estado. |
 | `src/lib/` | `normalize.ts` (texto), `classifier.ts` (categoria + confiança), `flow-engine.ts` (máquina de estados do fluxo), `games/*.ts` (regras dos minigames). | Importar React, acessar `window`, ter efeitos colaterais. |
 | `src/data/` | Conteúdo das categorias, fontes e dados dos jogos; `schema.ts` valida; `index.ts` exporta dados tipados. | Conter lógica de decisão. |
 | `src/types/` | Interfaces e tipos compartilhados (`knowledge.ts`). | Depender de qualquer outra camada. |
@@ -190,7 +190,7 @@ src/data/
   problems.json      seis categorias (ProblemCategory)
   sources.json       fontes oficiais (Source)
   games/detetive.json
-  games/casa.json
+  games/casa-eficiente.json, games/escolha-inteligente.json
   schema.ts          esquemas Zod equivalentes aos tipos de src/types/
   index.ts           carrega, valida e exporta dados tipados
 ```
@@ -216,14 +216,24 @@ src/data/
 
 ## 6. Como os minigames utilizam as regras existentes
 
+Rotas: `/jogos` (apresenta os três) e `/jogos/escolha-inteligente`, `/jogos/detetive`,
+`/jogos/casa-eficiente`. Tipos em `src/types/games.ts`; dados em `src/data/games/` (JSON
+validado por Zod em `schema.ts`, com as mesmas regras de fonte da base: explicação `verified`
+aponta para fontes existentes e verificadas). Cada jogo tem um reducer puro em `src/lib/games/`,
+um hook fino em `src/hooks/use-games.ts` e uma tela em `src/components/minigames/` que recebe
+estado e ações (testável sem navegador). Telas comuns (introdução, barra com progresso, pontos e
+"Recomeçar", resultado com "Jogar novamente" e "Voltar aos minigames") ficam em `GameShell.tsx`.
+
 | Minigame | Dados | Lógica | Reuso |
 |---|---|---|---|
-| Escolha Inteligente | `problems.json` (campo `challenge`) | avaliação de resposta do motor | Reaproveita 100% dos desafios do fluxo principal. |
-| Detetive do Desperdício | `games/detetive.json`: pontos da casa, cada um ligado a um `ProblemCategoryId` | `lib/games/detetive.ts`: marcar achados, verificar fim | Explicações vêm da categoria ligada a cada ponto. |
-| Construa uma Casa Eficiente | `games/casa.json`: tecnologias, cada uma ligada às categorias que resolve | `lib/games/casa.ts`: calcular quais categorias foram resolvidas | Resultado expresso em categorias resolvidas, nunca em kWh. |
+| Escolha Inteligente | desafios de `problems.json` + `games/escolha-inteligente.json` (uma rodada extra por categoria) | `lib/games/escolha-inteligente.ts`: sorteia uma rodada por categoria (semente injetada, `random.ts`), avalia e resume | Feedback de cada opção, solução recomendada e explicação final vêm da categoria da base. |
+| Detetive do Desperdício | `games/detetive.json`: casa com quatro cômodos; cada situação tem veredito (desperdício, normal, depende), explicação com fonte/status e dica | `lib/games/detetive.ts`: classificar uma vez cada situação, pontuar com tolerância, resumir | Situações ligadas a um `ProblemCategoryId`; fontes da base. |
+| Construa uma Casa Eficiente | `games/casa-eficiente.json`: seis problemas (um por categoria) e soluções de tecnologia ou hábito, com efeito (resolve/ajuda), benefício, limitação e combinações | `lib/games/casa-eficiente.ts`: avalia o conjunto (problemas resolvidos, equilíbrio tecnologia × hábito, combinações, recomendações) | Resultado em problemas resolvidos e pontos do jogo, nunca em kWh, % ou R$. |
 
-Um hook comum de sessão de jogo (`src/hooks/use-game-session.ts`: rodada, acertos, reinício)
-evita duplicação entre os três.
+Pontuação ("pontos do jogo", sempre com o aviso de que não é economia real): Escolha 10 por
+acerto; Detetive 2 pelo veredito certo e 1 quando a resposta certa ou a escolhida é "depende";
+Casa 2 por problema resolvido, 1 por problema só ajudado e 2 pelo equilíbrio. Nada é salvo
+(sem ranking, sem `localStorage`). A semente do sorteio é o único valor gerado no hook.
 
 ## 7. Evolução sem reescrita
 

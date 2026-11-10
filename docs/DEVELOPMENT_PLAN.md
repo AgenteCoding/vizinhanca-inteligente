@@ -35,7 +35,7 @@ de ilustração interativa).
 | Telas do fluxo com acessibilidade (foco, `aria-live`, toque, contraste) ✅ | P0 |
 | Seis situações na página inicial (sugestões perto do campo de conversa) ✅ | P0 |
 | Reformulação chat-first, nova paleta e preparação para IA no servidor (sem integrar) ✅ | P0 |
-| Minigame Escolha Inteligente | P0 |
+| Minigame Escolha Inteligente ✅ | P0 |
 | Conteúdo científico preenchido com fontes oficiais | P0 |
 | Revisão de código da etapa | P1 |
 
@@ -43,8 +43,8 @@ de ilustração interativa).
 
 | Entrega | Prior. |
 |---|---|
-| Detetive do Desperdício (versão simples primeiro) | P1 |
-| Construa uma Casa Eficiente (versão simples primeiro) | P1 |
+| Detetive do Desperdício ✅ | P1 |
+| Construa uma Casa Eficiente ✅ | P1 |
 | Ilustrações interativas dos minigames | P2 |
 | Teste no equipamento real da feira e com colegas | P0 |
 | Auditoria de interface/acessibilidade e de segurança | P0 |

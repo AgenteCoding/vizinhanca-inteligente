@@ -64,12 +64,12 @@ ESLint 9, Vitest 5.1, Zod 4.6 (valida `src/data/`). Node 24.
 ## 4. Organização dos arquivos
 
 ```
-src/app/            rotas: / (conversa + seções) e /diagnostico (só a conversa); jogos/ depois
+src/app/            rotas: / (conversa + seções), /diagnostico (só a conversa), /jogos e /jogos/<jogo>
 src/components/     ui/ (Icon, Button, SiteHeader, MobileMenu, Notice...), home/ (seções), assistant/ (chat)
-src/hooks/          use-assistant.ts (conversa e serviço do assistente); use-game-session.ts depois
+src/hooks/          use-assistant.ts (conversa), use-games.ts (um hook fino por minigame), use-focus-on-change.ts
 src/lib/            normalize.ts, classifier.ts, flow-engine.ts, evaluation.ts, conversation.ts,
-                    assistant/deterministic-assistant.ts; games/*.ts depois
-src/data/           problems.json, sources.json, games/*.json, schema.ts, index.ts
+                    assistant/deterministic-assistant.ts; games/ (random, escolha-inteligente, detetive, casa-eficiente)
+src/data/           problems.json, sources.json, schema.ts, index.ts; games/ (3 JSON + schema.ts + index.ts)
 src/types/          knowledge.ts (base), engine.ts (classificador e motor), assistant.ts (serviço e conversa)
 tests/              espelha src/: tests/lib/classifier.test.ts etc.
 docs/               documentação do projeto

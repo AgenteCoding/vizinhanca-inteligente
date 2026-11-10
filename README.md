@@ -46,8 +46,10 @@ sistema especialista baseado em regras. As informações científicas vêm de fo
 **Três minigames**
 
 - **Escolha Inteligente:** escolher a melhor solução entre três alternativas.
-- **Detetive do Desperdício:** encontrar desperdícios em uma casa fictícia.
-- **Construa uma Casa Eficiente:** escolher tecnologias para tornar uma casa mais eficiente.
+- **Detetive do Desperdício:** analisar cômodo por cômodo o que é desperdício, o que é normal e o que depende do contexto.
+- **Construa uma Casa Eficiente:** combinar tecnologias e hábitos e ver quais problemas da casa foram resolvidos.
+
+Os jogos ficam em `/jogos` (link "Minigames" no menu). A pontuação é só "pontos do jogo" e nada fica salvo.
 
 ## Tecnologias
 
@@ -99,7 +101,7 @@ causas, soluções, desafio, avaliação e explicação final aparecem uma etapa
 Petrol Blue, Ice White e Signal Lime; fontes locais (o build funciona sem internet). A arquitetura
 está pronta para um futuro provedor de IA no servidor, sem nenhuma integração ativa.
 
-Depois: minigames e entrega. Veja [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md).
+Minigames prontos (`/jogos`). Depois: entrega. Veja [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md).
 
 ## Documentação
 

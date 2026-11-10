@@ -105,13 +105,20 @@ Revisão manual: linguagem acessível e revisão do professor orientador.
 
 ## 7. Minigames
 
-- **Escolha Inteligente:** cada rodada apresenta três alternativas e uma correta; feedback por
-  opção; resultado final com acertos; reiniciar zera o estado.
-- **Detetive do Desperdício:** cada ponto encontrado é marcado uma única vez; o jogo termina
-  quando todos forem encontrados; cada ponto exibe a explicação da categoria ligada.
-- **Construa uma Casa Eficiente:** cada combinação de tecnologias resulta nas categorias
-  resolvidas corretas; nenhum resultado em kWh ou reais.
-- Todos: rota própria abre direto; botão de reiniciar funciona.
+Automatizados: `tests/data/games.test.ts` (dados e esquema), `tests/lib/games/games-logic.test.ts`
+(regras puras) e `tests/integration/minigames.test.tsx` (telas reais e navegação).
+
+- **Escolha Inteligente:** uma rodada por categoria, sorteio determinístico pela semente; três
+  alternativas e uma correta; resposta única por rodada; avaliação com problema, opção mais
+  adequada e solução recomendada da base; resultado com pontos e resumo; reiniciar zera o estado.
+- **Detetive do Desperdício:** quatro cômodos e os três vereditos; cada situação analisada uma
+  vez, com explicação logo depois; só termina com tudo analisado; resultado com desperdícios
+  encontrados, não encontrados e recomendações.
+- **Construa uma Casa Eficiente:** limite de soluções; avaliação do conjunto (resolve/ajuda,
+  equilíbrio, combinações sem contradição entre positivo e melhoria); nenhum %, kWh ou R$.
+- Todos: rota própria (export estático); "Recomeçar", "Jogar novamente" e "Voltar aos minigames".
+- Manual (Chrome): celular, tablet e computador sem rolagem horizontal; partida completa de cada
+  jogo; teclado (Tab, setas, Espaço, Enter) com foco movido para o título a cada etapa.
 
 ## 8. Responsividade (manual)
 
