@@ -292,6 +292,7 @@ describe("explicação final", () => {
 
     expect(report.problem.id).toBe(categoryId); // problema identificado
     expect(report.mainCause).toEqual(problem.causes[0]); // causa principal
+    expect(report.causes).toEqual(problem.causes); // todas as causas
     expect(report.evaluation.selectedOptionId).toBe(wrong); // solução escolhida
     expect(report.evaluation.isCorrect).toBe(false); // se a escolha foi adequada
     expect(report.scientificExplanation).toEqual(problem.scientificExplanation);
@@ -311,7 +312,7 @@ describe("explicação final", () => {
       ]);
       const { report } = contentOf(state, "explicacao-final");
       const presented = [
-        report.mainCause.explanation,
+        ...report.causes.map((c) => c.explanation),
         ...report.consequences.map((c) => c.explanation),
         ...report.recommendedSolution.benefits,
         ...report.recommendedSolution.limitations,

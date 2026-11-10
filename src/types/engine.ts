@@ -139,6 +139,8 @@ export interface FinalReport {
   problem: { id: ProblemCategoryId; title: string; summary: string };
   /** Causa principal: a primeira causa cadastrada na base. */
   mainCause: Cause;
+  /** Todas as causas cadastradas, na ordem da base (a primeira é a principal). */
+  causes: Cause[];
   consequences: Consequence[];
   /** Resposta escolhida no desafio e se foi adequada. */
   evaluation: ChallengeEvaluation;

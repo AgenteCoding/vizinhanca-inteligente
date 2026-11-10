@@ -63,7 +63,7 @@ export function buildFinalReport(
   if (!mainCause || !recommendedSolution) return null;
 
   const presented: Explanation[] = [
-    mainCause.explanation,
+    ...problem.causes.map((cause) => cause.explanation),
     ...problem.consequences.map((consequence) => consequence.explanation),
     ...recommendedSolution.benefits,
     ...recommendedSolution.limitations,
@@ -74,6 +74,7 @@ export function buildFinalReport(
   return {
     problem: { id: problem.id, title: problem.title, summary: problem.summary },
     mainCause,
+    causes: problem.causes,
     consequences: problem.consequences,
     evaluation,
     recommendedSolution,
