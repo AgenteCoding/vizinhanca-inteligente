@@ -5,13 +5,13 @@
 import type { ClassificationStatus, FlowActionType, FlowRejectionReason } from "@/types/engine";
 import type { FlowStep } from "@/types/knowledge";
 
-export const WELCOME_TITLE = "Como posso ajudar sua vizinhança?";
+export const WELCOME_TITLE = "Como podemos tornar sua vizinhança mais inteligente?";
 export const WELCOME_TEXT =
-  "Conte um desperdício de energia que você viu. Eu identifico a situação, explico as causas e ajudo você a escolher a melhor solução.";
-export const CONVERSATION_TITLE = "Conversa com o assistente";
+  "Conte um desperdício de energia que você viu. O SmartHood AI identifica a situação, explica as causas e ajuda você a escolher a melhor solução.";
+export const CONVERSATION_TITLE = "Conversa com o SmartHood AI";
 
 export const COMPOSER_LABEL = "Descreva uma situação de desperdício de energia";
-export const COMPOSER_PLACEHOLDER = "Descreva uma situação de desperdício de energia...";
+export const COMPOSER_PLACEHOLDER = "Ex.: a luz da rua fica acesa o dia inteiro...";
 export const COMPOSER_LOCKED_PLACEHOLDER = "Use as opções acima.";
 export const COMPOSER_HINT = "Enter envia. Shift + Enter quebra a linha.";
 export const NO_ACCOUNT_NOTE = "Não precisa criar conta. Nada do que você escreve é guardado.";

@@ -7,7 +7,7 @@ export function SourceBadge({ status }: { status: ReviewStatus }) {
   const verified = status === "verified";
   return (
     <span
-      className={`ml-1 inline-flex items-center gap-1 whitespace-nowrap rounded-full border px-2 py-0.5 align-[0.1em] text-sm font-bold leading-tight ${
+      className={`ml-1 inline-flex items-center gap-1 whitespace-nowrap rounded-full border px-2 py-0.5 align-[0.1em] text-sm font-semibold leading-tight ${
         verified ? "border-petrol/25 bg-ice-strong text-petrol" : "border-dashed border-petrol/40 text-petrol-soft"
       }`}
     >

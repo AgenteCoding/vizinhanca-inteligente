@@ -31,22 +31,22 @@ export function SituationSuggestions({
               disabled={disabled}
               onClick={() => onSelect(option.id, option.title)}
               data-candidate={option.isCandidate ? "true" : undefined}
-              className={`group flex min-h-14 w-full items-center gap-3 rounded-2xl border px-3 py-2.5 text-left transition-colors hover:border-petrol hover:bg-surface disabled:cursor-not-allowed disabled:opacity-60 ${
-                option.isCandidate ? "border-petrol bg-surface" : "border-line bg-ice"
+              className={`lift group flex min-h-14 w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left hover:border-petrol disabled:cursor-not-allowed disabled:opacity-60 ${
+                option.isCandidate ? "border-[1.5px] border-petrol bg-surface" : "glass"
               }`}
             >
               <span
                 className={`grid size-10 shrink-0 place-items-center rounded-xl transition-colors ${
-                  option.isCandidate ? "bg-lime text-petrol" : "bg-ice-strong text-petrol group-hover:bg-lime"
+                  option.isCandidate ? "bg-lime text-petrol" : "bg-petrol text-lime group-hover:bg-lime group-hover:text-petrol"
                 }`}
               >
                 <Icon name={CATEGORY_ICONS[option.id]} className="size-5" />
               </span>
               <span className="min-w-0 leading-snug">
                 {option.isCandidate ? (
-                  <span className="block text-sm font-bold text-petrol-soft">Sugestão da IA</span>
+                  <span className="block text-sm font-semibold text-petrol-soft">Sugestão da IA</span>
                 ) : null}
-                <span className="block font-bold">{option.title}</span>
+                <span className="block text-[0.95rem] font-semibold">{option.title}</span>
               </span>
             </button>
           </li>

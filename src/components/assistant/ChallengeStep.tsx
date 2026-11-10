@@ -53,7 +53,7 @@ export function ChallengeView({
               />
               <span
                 aria-hidden="true"
-                className={`grid size-8 shrink-0 place-items-center rounded-full border-2 border-petrol text-sm font-extrabold ${
+                className={`grid size-8 shrink-0 place-items-center rounded-full border-2 border-petrol text-sm font-bold ${
                   checked ? "bg-petrol text-lime" : "bg-surface text-petrol"
                 }`}
               >

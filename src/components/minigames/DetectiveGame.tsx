@@ -45,8 +45,8 @@ function ItemCard({
   const labelId = `situacao-${item.id}`;
   if (answer === undefined) {
     return (
-      <li className="rounded-2xl border-2 border-line bg-ice p-3">
-        <p id={labelId} className="font-bold leading-snug">
+      <li className="rounded-2xl border border-line bg-surface/75 p-3.5">
+        <p id={labelId} className="font-semibold leading-snug">
           {item.label}
         </p>
         <div role="group" aria-labelledby={labelId} className="mt-3 grid gap-2 sm:grid-cols-3">
@@ -69,10 +69,10 @@ function ItemCard({
     <li
       id={`analise-${item.id}`}
       tabIndex={-1}
-      className="grid gap-2 rounded-2xl border-2 border-line bg-surface p-3"
+      className="message-enter grid gap-2 rounded-2xl border border-line bg-surface p-3.5"
       data-item-id={item.id}
     >
-      <p className="font-bold leading-snug">{item.label}</p>
+      <p className="font-semibold leading-snug">{item.label}</p>
       <p className="flex flex-wrap items-center gap-2">
         <VerdictBadge tone={tone}>{TONE_TEXT[tone]}</VerdictBadge>
         <span className="text-sm">
@@ -133,7 +133,7 @@ export function DetectiveGameView({
             <ul className="grid gap-3">
               {summary.missed.map((item) => (
                 <li key={item.id} className="border-l-4 border-petrol pl-3">
-                  <p className="font-bold">{item.label}</p>
+                  <p className="font-semibold">{item.label}</p>
                   <ExplanationText explanation={item.explanation} className="mt-1" />
                 </li>
               ))}
@@ -172,7 +172,7 @@ export function DetectiveGameView({
         onRestart={actions.restart}
       />
       <div>
-        <h1 ref={headingRef} tabIndex={-1} className="text-2xl font-extrabold tracking-tight">
+        <h1 ref={headingRef} tabIndex={-1} className="text-[1.5rem] font-semibold tracking-tight">
           {data.house}
         </h1>
         <p className="mt-1 text-petrol-soft">Analise cada situação. A explicação aparece logo depois.</p>
@@ -188,9 +188,9 @@ export function DetectiveGameView({
           <section
             key={room.id}
             aria-labelledby={`comodo-${room.id}`}
-            className="rounded-3xl border-2 border-petrol/20 bg-surface p-4"
+            className="glass rounded-[2rem] p-4 sm:p-5"
           >
-            <h2 id={`comodo-${room.id}`} className="flex items-center gap-2 text-lg font-bold">
+            <h2 id={`comodo-${room.id}`} className="flex items-center gap-2 text-lg font-semibold">
               <span className="grid size-9 place-items-center rounded-xl bg-petrol text-lime">
                 <Icon name={room.id === "area-externa" ? "leaf" : "home"} className="size-5" />
               </span>

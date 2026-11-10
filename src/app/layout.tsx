@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { BRAND_NAME } from "@/components/ui/Logo";
 import "./globals.css";
 
 // Fontes salvas no próprio projeto (src/app/fonts, licença SIL OFL 1.1): o build e o site
@@ -19,19 +20,29 @@ const atkinsonMono = localFont({
   display: "swap",
 });
 
+const DESCRIPTION =
+  "SmartHood AI: simulação educacional de uma inteligência artificial que ajuda a identificar e resolver desperdícios de energia em uma vizinhança.";
+
 export const metadata: Metadata = {
   title: {
-    default: "Vizinhança Inteligente",
-    template: "%s | Vizinhança Inteligente",
+    default: BRAND_NAME,
+    template: `%s | ${BRAND_NAME}`,
   },
-  description:
-    "Simulação educacional de uma inteligência artificial que ajuda a identificar e resolver desperdícios de energia em uma vizinhança.",
+  applicationName: BRAND_NAME,
+  description: DESCRIPTION,
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: BRAND_NAME,
+    title: BRAND_NAME,
+    description: DESCRIPTION,
+  },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0f3d2e",
+  themeColor: "#102d35",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

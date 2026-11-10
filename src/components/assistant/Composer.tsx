@@ -53,9 +53,9 @@ export function Composer({
   return (
     <form onSubmit={handleSubmit} aria-busy={pending}>
       <div
-        className={`flex items-end gap-2 rounded-[1.75rem] border bg-surface p-2 pl-5 transition-colors focus-within:border-petrol focus-within:ring-2 focus-within:ring-petrol ${
-          error ? "border-wrong" : "border-line"
-        } ${blocked ? "opacity-80" : ""}`}
+        className={`glass flex items-end gap-2 rounded-[1.75rem] p-2 pl-5 transition-shadow focus-within:ring-2 focus-within:ring-petrol ${
+          error ? "ring-2 ring-wrong" : ""
+        } ${blocked ? "opacity-85" : ""}`}
       >
         <label htmlFor="relato" className="sr-only">
           {COMPOSER_LABEL}
@@ -72,12 +72,12 @@ export function Composer({
           placeholder={placeholder}
           aria-describedby="relato-ajuda relato-erro"
           aria-invalid={error ? true : undefined}
-          className={`max-h-48 flex-1 resize-none bg-transparent py-3 text-lg leading-snug text-petrol placeholder:text-petrol-soft focus-visible:outline-none read-only:cursor-not-allowed ${locked ? "min-h-12 text-base" : "min-h-14"}`}
+          className={`max-h-48 flex-1 resize-none bg-transparent py-3 text-[1.05rem] leading-snug text-petrol placeholder:text-petrol-soft focus-visible:outline-none read-only:cursor-not-allowed ${locked ? "min-h-12 text-base" : "min-h-14"}`}
         />
         <button
           type="submit"
           disabled={!canSend}
-          className="mb-1 grid size-12 shrink-0 place-items-center rounded-full border-2 border-petrol bg-lime text-petrol transition-colors hover:bg-lime-strong disabled:border-line disabled:bg-ice-strong disabled:text-petrol-soft"
+          className="mb-1 grid size-12 shrink-0 place-items-center rounded-full border-[1.5px] border-petrol bg-lime text-petrol shadow-[0_10px_22px_-12px_rgb(120_150_30/0.9)] transition duration-150 hover:bg-lime-strong active:scale-95 disabled:border-line disabled:bg-ice-strong disabled:text-petrol-soft disabled:shadow-none"
         >
           <Icon name="send" />
           <span className="sr-only">Enviar</span>
@@ -91,7 +91,7 @@ export function Composer({
       </p>
       <div id="relato-erro" aria-live="polite" className="px-4">
         {error ? (
-          <p className="mt-1 flex items-start gap-2 text-sm font-bold text-wrong">
+          <p className="mt-1 flex items-start gap-2 text-sm font-semibold text-wrong">
             <Icon name="x-circle" className="mt-0.5 size-4" />
             {error}
           </p>

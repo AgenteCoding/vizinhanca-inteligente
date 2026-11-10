@@ -1,19 +1,25 @@
 @import "tailwindcss";
 
 /*
- * Identidade visual chat-first (etapa 3).
- * Paleta obrigatória: Petrol Blue #102D35 (marca), Ice White #E8F7F5 (fundos e leitura) e
- * Signal Lime #D9FA57 (destaque, com moderação). Os demais tons são derivados dessas três cores.
- * O vermelho existe só para indicar erro, sempre acompanhado de ícone e texto.
+ * Identidade visual do SmartHood AI: chat-first, vidro fosco e profundidade.
+ * Paleta obrigatória: Petrol Blue #102D35 (marca, fundos escuros), Ice White #E8F7F5 (superfícies
+ * claras e leitura) e Signal Lime #D9FA57 (ação principal, seleção e pontos de luz). Os demais
+ * tons são derivados dessas três cores. O vermelho existe só para indicar erro, sempre com ícone
+ * e texto.
  * Contrastes conferidos (WCAG AA): petrol/ice 13:1, petrol-soft/ice 6,5:1, petrol/lime 12:1,
- * ice/petrol-700 9,3:1, petrol/ice-strong 11,8:1, wrong/ice 6:1.
+ * ice/petrol-700 9,3:1, petrol/ice-strong 11,8:1, wrong/ice 6:1, ice-dim/petrol 9:1.
+ * O vidro claro fica sobre fundo Ice e o vidro escuro sobre fundo Petrol, então o contraste do
+ * texto é o mesmo das superfícies sólidas.
  */
 @theme {
   --color-petrol: #102d35;
+  --color-petrol-900: #0a2026;
   --color-petrol-700: #1c4652;
+  --color-petrol-500: #2f6472;
   --color-petrol-soft: #3f5c63;
   --color-ice: #e8f7f5;
   --color-ice-strong: #d5ede9;
+  --color-ice-dim: #b9d3cf;
   --color-surface: #f7fcfb;
   --color-line: #bcd7d2;
   --color-lime: #d9fa57;
@@ -30,8 +36,8 @@
 /* Estilos base dentro de @layer base: as classes utilitárias do Tailwind podem sobrescrevê-los. */
 @layer base {
   html {
-    /* Base de 18px: leitura confortável em telas de quiosque. */
-    font-size: 112.5%;
+    /* Base de 17px: mais equilibrada que os 18px anteriores, ainda confortável no quiosque. */
+    font-size: 106.25%;
     color-scheme: light;
     scroll-behavior: smooth;
   }
@@ -40,8 +46,21 @@
     background: var(--color-ice);
     color: var(--color-petrol);
     font-family: var(--font-sans);
-    line-height: 1.6;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
+  }
+
+  /* Luz ambiente fixa atrás de tudo: dá ao vidro fosco algo para desfocar. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(42rem 28rem at 88% -6%, rgb(217 250 87 / 0.3), transparent 62%),
+      radial-gradient(36rem 26rem at -8% 22%, rgb(47 100 114 / 0.2), transparent 64%),
+      radial-gradient(40rem 30rem at 55% 108%, rgb(188 215 210 / 0.55), transparent 60%);
   }
 
   h1,
@@ -49,6 +68,7 @@
   h3,
   h4 {
     line-height: 1.2;
+    letter-spacing: -0.01em;
     text-wrap: balance;
   }
 
@@ -79,30 +99,168 @@
   outline: none;
 }
 
-/* Movimento só para quem não pediu redução: a chegada de uma resposta e o "analisando". */
+/* ------------------------------------------------------------------------------------------- */
+/* Vidro fosco                                                                                 */
+/* ------------------------------------------------------------------------------------------- */
+
+@layer components {
+  /* Vidro claro: painéis flutuantes sobre o fundo Ice (cabeçalho, campo de conversa, cartões). */
+  .glass {
+    background: linear-gradient(140deg, rgb(255 255 255 / 0.72), rgb(247 252 251 / 0.5));
+    border: 1px solid rgb(255 255 255 / 0.85);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.9),
+      0 0 0 1px rgb(16 45 53 / 0.07),
+      0 18px 40px -22px rgb(16 45 53 / 0.35);
+    backdrop-filter: blur(18px) saturate(1.5);
+    -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  }
+
+  /* Vidro escuro: painéis sobre o fundo Petrol (parte inferior da página inicial, resultados). */
+  .glass-dark {
+    background: linear-gradient(150deg, rgb(232 247 245 / 0.13), rgb(232 247 245 / 0.05));
+    border: 1px solid rgb(232 247 245 / 0.2);
+    box-shadow:
+      inset 0 1px 0 rgb(232 247 245 / 0.22),
+      0 24px 48px -28px rgb(0 0 0 / 0.6);
+    backdrop-filter: blur(16px) saturate(1.3);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  }
+
+  /* Sem suporte a desfoque: superfícies quase sólidas, para a leitura não depender do efeito. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass {
+      background: rgb(247 252 251 / 0.97);
+    }
+
+    .glass-dark {
+      background: rgb(28 70 82 / 0.96);
+    }
+  }
+
+  /* Elevação discreta ao passar o mouse (microinteração de cartões clicáveis). */
+  .lift {
+    transition:
+      transform 180ms ease-out,
+      box-shadow 180ms ease-out,
+      border-color 180ms ease-out,
+      background-color 180ms ease-out;
+  }
+
+  /* Esferas translúcidas: um degradê com ponto de luz dá o volume, sem imagem nem biblioteca. */
+  .orb {
+    position: absolute;
+    border-radius: 9999px;
+    pointer-events: none;
+    background: radial-gradient(
+      circle at 32% 28%,
+      rgb(255 255 255 / 0.95) 0%,
+      rgb(232 247 245 / 0.65) 18%,
+      rgb(188 215 210 / 0.38) 48%,
+      rgb(47 100 114 / 0.28) 100%
+    );
+    box-shadow:
+      inset -10px -14px 28px rgb(16 45 53 / 0.2),
+      inset 6px 8px 18px rgb(255 255 255 / 0.55),
+      0 26px 40px -22px rgb(16 45 53 / 0.4);
+  }
+
+  .orb-lime {
+    background: radial-gradient(
+      circle at 32% 28%,
+      rgb(255 255 255 / 0.95) 0%,
+      rgb(236 253 160 / 0.9) 20%,
+      rgb(217 250 87 / 0.75) 55%,
+      rgb(140 170 40 / 0.55) 100%
+    );
+    box-shadow:
+      inset -10px -14px 26px rgb(16 45 53 / 0.22),
+      inset 6px 8px 16px rgb(255 255 255 / 0.6),
+      0 0 46px -6px rgb(217 250 87 / 0.55);
+  }
+
+  .orb-petrol {
+    background: radial-gradient(
+      circle at 32% 28%,
+      rgb(232 247 245 / 0.75) 0%,
+      rgb(47 100 114 / 0.85) 30%,
+      rgb(16 45 53 / 0.95) 100%
+    );
+    box-shadow:
+      inset -10px -14px 26px rgb(0 0 0 / 0.35),
+      inset 6px 8px 16px rgb(232 247 245 / 0.25),
+      0 26px 40px -22px rgb(16 45 53 / 0.6);
+  }
+}
+
+/* ------------------------------------------------------------------------------------------- */
+/* Movimento (só para quem não pediu redução)                                                  */
+/* ------------------------------------------------------------------------------------------- */
+
 @media (prefers-reduced-motion: no-preference) {
   .message-enter {
     /* Sem "fill-mode": se a animação não rodar, o conteúdo continua visível. */
-    animation: message-enter 240ms ease-out;
+    animation: message-enter 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
 
-  .typing-dot {
-    animation: typing 1.2s ease-in-out infinite;
+  /* Três pontos do "Pensando": cada um aparece e some suavemente, em sequência. */
+  .thinking-dot {
+    animation: thinking 1.4s ease-in-out infinite;
   }
 
-  .typing-dot:nth-child(2) {
-    animation-delay: 0.15s;
+  .thinking-dot:nth-child(2) {
+    animation-delay: 0.18s;
   }
 
-  .typing-dot:nth-child(3) {
-    animation-delay: 0.3s;
+  .thinking-dot:nth-child(3) {
+    animation-delay: 0.36s;
+  }
+
+  .float-a {
+    animation: float-a 9s ease-in-out infinite;
+  }
+
+  .float-b {
+    animation: float-b 12s ease-in-out infinite;
+  }
+
+  .float-c {
+    animation: float-a 15s ease-in-out -4s infinite;
+  }
+
+  .scene-spin {
+    transform-origin: 0 0;
+    animation: scene-spin 16s linear infinite;
+  }
+
+  .scene-spin-rev {
+    transform-origin: 0 0;
+    animation: scene-spin 24s linear infinite reverse;
+  }
+
+  .scene-flow {
+    animation: scene-flow 2.6s linear infinite;
+  }
+
+  .scene-glow {
+    animation: scene-glow 4s ease-in-out infinite;
+  }
+
+  .scene-glow-late {
+    animation: scene-glow 4s ease-in-out -2s infinite;
+  }
+
+  @media (hover: hover) {
+    .lift:hover {
+      transform: translateY(-2px);
+    }
   }
 }
 
 @keyframes message-enter {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -110,13 +268,57 @@
   }
 }
 
-@keyframes typing {
+@keyframes thinking {
   0%,
-  80%,
+  70%,
   100% {
-    opacity: 0.25;
+    opacity: 0.2;
+    transform: scale(0.7);
   }
-  40% {
+  35% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+@keyframes float-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(8px, 12px, 0);
+  }
+}
+
+@keyframes scene-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scene-flow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+@keyframes scene-glow {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
     opacity: 1;
   }
 }

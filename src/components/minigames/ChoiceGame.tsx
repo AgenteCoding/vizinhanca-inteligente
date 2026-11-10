@@ -70,7 +70,7 @@ export function ChoiceGameView({
               <li key={item.categoryId} className="flex items-start gap-3">
                 <Icon name={CATEGORY_ICONS[item.categoryId]} className="mt-0.5 size-6 shrink-0" />
                 <div className="grid gap-1">
-                  <p className="font-bold">{item.title}</p>
+                  <p className="font-semibold">{item.title}</p>
                   <p>Solução recomendada: {item.recommended}</p>
                   <p>
                     <VerdictBadge tone={item.correct ? "right" : "wrong"}>
@@ -106,8 +106,8 @@ export function ChoiceGameView({
         score={score}
         onRestart={actions.restart}
       />
-      <section aria-labelledby="rodada-pergunta" className="rounded-3xl border border-line bg-surface p-5 sm:p-6">
-        <p className="flex items-center gap-2 font-bold text-petrol-soft">
+      <section aria-labelledby="rodada-pergunta" className="glass message-enter rounded-[2rem] p-5 sm:p-6">
+        <p className="flex items-center gap-2 font-semibold text-petrol-soft">
           <Icon name={CATEGORY_ICONS[round.categoryId]} className="size-5" />
           {knowledgeBase.problems.find((p) => p.id === round.categoryId)?.title}
         </p>
@@ -115,7 +115,7 @@ export function ChoiceGameView({
           id="rodada-pergunta"
           ref={headingRef}
           tabIndex={-1}
-          className="mt-2 text-2xl font-extrabold leading-snug tracking-tight"
+          className="mt-2 text-[1.35rem] font-semibold leading-snug tracking-tight"
         >
           {round.challenge.question}
         </h1>
@@ -129,7 +129,7 @@ export function ChoiceGameView({
                   <label
                     key={option.id}
                     className={`flex min-h-14 cursor-pointer items-start gap-3 rounded-2xl border-2 p-3 transition-colors has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-petrol ${
-                      checked ? "border-petrol bg-lime/40" : "border-line bg-ice hover:border-petrol"
+                      checked ? "border-petrol bg-lime/45" : "border-line bg-surface/70 hover:border-petrol"
                     }`}
                   >
                     <input
@@ -142,7 +142,7 @@ export function ChoiceGameView({
                     />
                     <span
                       aria-hidden="true"
-                      className={`grid size-8 shrink-0 place-items-center rounded-full border-2 border-petrol text-sm font-extrabold ${
+                      className={`grid size-8 shrink-0 place-items-center rounded-full border-2 border-petrol text-sm font-bold ${
                         checked ? "bg-petrol text-lime" : "bg-surface text-petrol"
                       }`}
                     >
@@ -173,14 +173,14 @@ export function ChoiceGameView({
                     option.isCorrect ? "border-petrol bg-lime/30" : chosen ? "border-wrong/50 bg-wrong-soft" : "border-line bg-ice"
                   }`}
                 >
-                  <span aria-hidden="true" className="grid size-8 shrink-0 place-items-center rounded-full border-2 border-petrol bg-surface text-sm font-extrabold">
+                  <span aria-hidden="true" className="grid size-8 shrink-0 place-items-center rounded-full border-2 border-petrol bg-surface text-sm font-bold">
                     {LETTERS[index]}
                   </span>
                   <span className="grid gap-1 pt-0.5">
                     <span className="leading-snug">{option.text}</span>
                     <span className="flex flex-wrap gap-2 text-sm">
-                      {chosen ? <span className="font-bold">Sua escolha</span> : null}
-                      {option.isCorrect ? <span className="font-bold">Mais adequada</span> : null}
+                      {chosen ? <span className="font-semibold">Sua escolha</span> : null}
+                      {option.isCorrect ? <span className="font-semibold">Mais adequada</span> : null}
                     </span>
                   </span>
                 </li>
@@ -192,32 +192,32 @@ export function ChoiceGameView({
 
       <div aria-live="polite">
         {feedback ? (
-          <section aria-label="Avaliação da escolha" className="grid gap-4 rounded-3xl border border-line bg-surface p-5 sm:p-6">
+          <section aria-label="Avaliação da escolha" className="message-enter grid gap-4 rounded-[2rem] border border-white/80 bg-surface/90 p-5 shadow-[0_18px_36px_-28px_rgb(16_45_53/0.6)] sm:p-6">
             <p>
               <VerdictBadge tone={feedback.correct ? "right" : "wrong"}>
                 {feedback.correct ? "Escolha adequada" : "Essa não é a mais adequada"}
               </VerdictBadge>
             </p>
             <div>
-              <h2 className="font-bold">Por quê</h2>
+              <h2 className="font-semibold">Por quê</h2>
               <p className="mt-1">{feedback.chosen.feedback}</p>
               {!feedback.correct ? (
                 <p className="mt-2">
-                  <span className="font-bold">Mais adequada: </span>
+                  <span className="font-semibold">Mais adequada: </span>
                   {feedback.best.text} {feedback.best.feedback}
                 </p>
               ) : null}
             </div>
             <div>
-              <h2 className="font-bold">O problema</h2>
+              <h2 className="font-semibold">O problema</h2>
               <p className="mt-1">{feedback.problem.summary}</p>
             </div>
             <div>
-              <h2 className="font-bold">Solução recomendada: {feedback.recommended.title}</h2>
+              <h2 className="font-semibold">Solução recomendada: {feedback.recommended.title}</h2>
               <p className="mt-1">{feedback.recommended.description}</p>
             </div>
             <div>
-              <h2 className="font-bold">Como contribui para a eficiência</h2>
+              <h2 className="font-semibold">Como contribui para a eficiência</h2>
               <ExplanationText explanation={feedback.finalExplanation} className="mt-1" />
             </div>
             <SourceLegend />

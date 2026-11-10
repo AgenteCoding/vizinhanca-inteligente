@@ -35,7 +35,7 @@ const OUTCOME = {
 function OutcomeRow({ outcome }: { outcome: ProblemOutcome }) {
   const look = OUTCOME[outcome.level ?? "none"];
   return (
-    <li className="flex items-start gap-3 rounded-2xl border border-line bg-ice p-3">
+    <li className="flex items-start gap-3 rounded-2xl border border-line bg-surface/75 p-3">
       <Icon name={CATEGORY_ICONS[outcome.problem.categoryId]} className="mt-0.5 size-6 shrink-0" />
       <div className="grid gap-1">
         <p>{outcome.problem.description}</p>
@@ -98,12 +98,12 @@ export function HouseGameView({
           <ul className="grid gap-4">
             {report.selected.map((solution) => (
               <li key={solution.id} className="grid gap-1 border-l-4 border-petrol pl-3">
-                <p className="font-bold">
+                <p className="font-semibold">
                   {solution.name} <span className="text-sm font-normal text-petrol-soft">({KIND_LABELS[solution.kind]})</span>
                 </p>
-                <p className="mt-1 text-sm font-bold uppercase tracking-wide text-petrol-soft">Benefício</p>
+                <p className="mt-1 text-sm font-semibold uppercase tracking-wide text-petrol-soft">Benefício</p>
                 <ExplanationText explanation={solution.benefit} />
-                <p className="mt-1 text-sm font-bold uppercase tracking-wide text-petrol-soft">Limitação</p>
+                <p className="mt-1 text-sm font-semibold uppercase tracking-wide text-petrol-soft">Limitação</p>
                 <ExplanationText explanation={solution.limitation} />
               </li>
             ))}
@@ -132,7 +132,7 @@ export function HouseGameView({
             <ul className="grid gap-2">
               {report.recommendations.map((item) => (
                 <li key={item.problem.categoryId}>
-                  <span className="font-bold">{item.problem.description}</span> Considere: {item.solutions.join(" ou ")}.
+                  <span className="font-semibold">{item.problem.description}</span> Considere: {item.solutions.join(" ou ")}.
                 </li>
               ))}
             </ul>
@@ -155,11 +155,11 @@ export function HouseGameView({
         score={preview.score}
         onRestart={actions.restart}
       />
-      <section aria-labelledby="casa-titulo" className="rounded-3xl border-2 border-petrol/20 bg-surface p-4 sm:p-5">
-        <h1 id="casa-titulo" ref={headingRef} tabIndex={-1} className="text-2xl font-extrabold tracking-tight">
+      <section aria-labelledby="casa-titulo" className="glass rounded-[2rem] p-4 sm:p-5">
+        <h1 id="casa-titulo" ref={headingRef} tabIndex={-1} className="text-[1.5rem] font-semibold tracking-tight">
           {house.house}
         </h1>
-        <h2 className="mt-3 font-bold">Problemas da casa</h2>
+        <h2 className="mt-3 font-semibold">Problemas da casa</h2>
         <ul className="mt-2 grid gap-2">
           {preview.outcomes.map((outcome) => (
             <OutcomeRow key={outcome.problem.categoryId} outcome={outcome} />
@@ -167,7 +167,7 @@ export function HouseGameView({
         </ul>
       </section>
       <section aria-labelledby="solucoes-titulo" className="grid gap-3">
-        <h2 id="solucoes-titulo" className="text-xl font-bold">
+        <h2 id="solucoes-titulo" className="text-xl font-semibold">
           Soluções disponíveis
         </h2>
         <p className="text-petrol-soft" aria-live="polite">
@@ -185,8 +185,8 @@ export function HouseGameView({
                   aria-pressed={pressed}
                   disabled={full && !pressed}
                   onClick={() => actions.toggle(solution.id)}
-                  className={`flex h-full min-h-14 w-full items-start gap-3 rounded-2xl border-2 p-3 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${
-                    pressed ? "border-petrol bg-lime/40" : "border-line bg-ice hover:border-petrol"
+                  className={`lift flex h-full min-h-14 w-full items-start gap-3 rounded-2xl p-3 text-left disabled:cursor-not-allowed disabled:opacity-60 ${
+                    pressed ? "border-[1.5px] border-petrol bg-lime/45" : "glass hover:border-petrol"
                   }`}
                 >
                   <span
@@ -198,8 +198,8 @@ export function HouseGameView({
                     {pressed ? <Icon name="check" className="size-4" /> : null}
                   </span>
                   <span className="grid gap-1">
-                    <span className="font-bold leading-snug">{solution.name}</span>
-                    <span className="text-sm font-bold text-petrol-soft">{KIND_LABELS[solution.kind]}</span>
+                    <span className="font-semibold leading-snug">{solution.name}</span>
+                    <span className="text-sm font-semibold text-petrol-soft">{KIND_LABELS[solution.kind]}</span>
                     <span className="leading-snug">{solution.description}</span>
                   </span>
                 </button>

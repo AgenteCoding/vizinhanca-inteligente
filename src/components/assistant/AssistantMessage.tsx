@@ -4,7 +4,7 @@ import { KEYWORD_WEIGHT_MAX, KEYWORD_WEIGHT_MIN } from "@/data/schema";
 import type { AssistantActions } from "@/hooks/use-assistant";
 import type { ClassificationResult, StepContent } from "@/types/engine";
 import { FLOW_STEPS, type Explanation, type ProblemCategoryId } from "@/types/knowledge";
-import { BrandMark } from "../ui/BrandMark";
+import { LogoMark } from "../ui/Logo";
 import { Button, buttonClasses } from "../ui/Button";
 import { CATEGORY_ICONS } from "../ui/category-icons";
 import { Icon, type IconName } from "../ui/Icon";
@@ -66,8 +66,8 @@ function Reasoning({
 }) {
   const topScore = classification.scores[0]?.score ?? 1;
   return (
-    <details open={open} className="group rounded-2xl border border-line bg-ice">
-      <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 rounded-2xl px-4 py-2 font-bold [&::-webkit-details-marker]:hidden">
+    <details open={open} className="glass group rounded-2xl">
+      <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 rounded-2xl px-4 py-2 font-semibold [&::-webkit-details-marker]:hidden">
         <span className="flex items-center gap-2">
           <Icon name="scan" className="size-5" />
           {summary}
@@ -95,7 +95,7 @@ function Reasoning({
         <ul className="grid gap-2">
           {classification.scores.map((score) => (
             <li key={score.categoryId}>
-              <div className="flex justify-between gap-3 text-sm font-bold">
+              <div className="flex justify-between gap-3 text-sm font-semibold">
                 <span>{titles.get(score.categoryId) ?? score.categoryId}</span>
                 <span className="whitespace-nowrap">{score.score} pontos</span>
               </div>
@@ -126,7 +126,7 @@ export function DiagnosisBody({ content, active, actions, situations }: BodyProp
     const status = classification.status === "identified" ? "low-confidence" : classification.status;
     return (
       <div className="grid gap-4" data-diagnosis="needs-clarification">
-        <p className="font-bold">{CLARIFICATION_MESSAGES[status]}</p>
+        <p className="font-semibold">{CLARIFICATION_MESSAGES[status]}</p>
         {classification.matchedTerms.length > 0 ? (
           <Reasoning classification={classification} titles={titles} summary="O que encontrei no seu relato" />
         ) : null}
@@ -153,12 +153,12 @@ export function DiagnosisBody({ content, active, actions, situations }: BodyProp
   return (
     <div className="grid gap-4" data-diagnosis="confirmed" data-category={problem.id}>
       <p>{diagnosis.method === "text" ? ASSISTANT_INTROS.identified : ASSISTANT_INTROS.chosen}</p>
-      <div className="flex items-start gap-3 rounded-2xl border-2 border-petrol bg-surface p-4">
+      <div className="flex items-start gap-3 rounded-2xl border-[1.5px] border-petrol bg-surface p-4 shadow-[0_16px_32px_-24px_rgb(16_45_53/0.7)]">
         <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-lime">
           <Icon name={CATEGORY_ICONS[problem.id]} />
         </span>
         <div className="min-w-0">
-          <p className="text-lg font-extrabold leading-snug">{problem.title}</p>
+          <p className="text-lg font-bold leading-snug">{problem.title}</p>
           <p className="mt-1 text-petrol-soft">{problem.summary}</p>
         </div>
       </div>
@@ -174,8 +174,8 @@ export function DiagnosisBody({ content, active, actions, situations }: BodyProp
           <div>
             <Button onClick={() => void actions.advance(VISITOR_LABELS.toCauses)}>Ver as causas</Button>
           </div>
-          <details className="group rounded-2xl border border-line">
-            <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 rounded-2xl px-4 py-2 font-bold [&::-webkit-details-marker]:hidden">
+          <details className="glass group rounded-2xl">
+            <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 rounded-2xl px-4 py-2 font-semibold [&::-webkit-details-marker]:hidden">
               Não é isso? Escolher outra situação
               <Icon name="chevron" className="size-5 transition-transform group-open:rotate-180" />
             </summary>
@@ -200,18 +200,18 @@ export function CausesBody({ content, active, actions }: BodyProps<"causas">) {
       <p>{ASSISTANT_INTROS.causes}</p>
       {mainCause ? (
         <div className="rounded-2xl border-2 border-petrol bg-surface p-4">
-          <p className="text-sm font-bold text-petrol-soft">Causa principal</p>
-          <p className="font-extrabold">{mainCause.title}</p>
+          <p className="text-sm font-semibold text-petrol-soft">Causa principal</p>
+          <p className="font-bold">{mainCause.title}</p>
           <ExplanationText explanation={mainCause.explanation} className="mt-1" />
         </div>
       ) : null}
       {otherCauses.length > 0 ? (
         <div>
-          <h4 className="font-bold">Outras causas</h4>
+          <h4 className="font-semibold">Outras causas</h4>
           <ul className="mt-2 grid gap-3">
             {otherCauses.map((cause) => (
               <li key={cause.id}>
-                <p className="font-bold">{cause.title}</p>
+                <p className="font-semibold">{cause.title}</p>
                 <ExplanationText explanation={cause.explanation} />
               </li>
             ))}
@@ -219,11 +219,11 @@ export function CausesBody({ content, active, actions }: BodyProps<"causas">) {
         </div>
       ) : null}
       <div>
-        <h4 className="font-bold">O que esse desperdício provoca</h4>
+        <h4 className="font-semibold">O que esse desperdício provoca</h4>
         <ul className="mt-2 grid gap-3">
           {content.consequences.map((consequence) => (
             <li key={consequence.id}>
-              <p className="font-bold">{consequence.title}</p>
+              <p className="font-semibold">{consequence.title}</p>
               <ExplanationText explanation={consequence.explanation} />
             </li>
           ))}
@@ -254,12 +254,12 @@ export function AlternativesBody({ content, active, actions }: BodyProps<"altern
               <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 rounded-2xl px-4 py-3 [&::-webkit-details-marker]:hidden">
                 <span className="min-w-0">
                   {alternative.isRecommended ? (
-                    <span className="mb-1 inline-flex items-center gap-1 rounded-full bg-lime px-2.5 py-0.5 text-sm font-bold">
+                    <span className="mb-1 inline-flex items-center gap-1 rounded-full bg-lime px-2.5 py-0.5 text-sm font-semibold">
                       <Icon name="star" className="size-4" />
                       Solução recomendada
                     </span>
                   ) : null}
-                  <span className="block font-extrabold leading-snug">{alternative.title}</span>
+                  <span className="block font-bold leading-snug">{alternative.title}</span>
                 </span>
                 <Icon name="chevron" className="size-5 transition-transform group-open:rotate-180" />
               </summary>
@@ -267,11 +267,11 @@ export function AlternativesBody({ content, active, actions }: BodyProps<"altern
                 <p className="text-petrol-soft">{alternative.description}</p>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <h4 className="mb-2 font-bold">Vantagens</h4>
+                    <h4 className="mb-2 font-semibold">Vantagens</h4>
                     <ExplanationList items={alternative.benefits} icon="check-circle" keyPrefix={`${alternative.id}-v`} />
                   </div>
                   <div>
-                    <h4 className="mb-2 font-bold">Limitações</h4>
+                    <h4 className="mb-2 font-semibold">Limitações</h4>
                     <ExplanationList items={alternative.limitations} icon="minus-circle" keyPrefix={`${alternative.id}-l`} />
                   </div>
                 </div>
@@ -295,7 +295,7 @@ export function ChallengeBody({ content, active, actions, idPrefix }: BodyProps<
   return (
     <div className="grid gap-3">
       <p>{ASSISTANT_INTROS.challenge}</p>
-      <p id={questionId} className="rounded-2xl bg-petrol p-4 text-lg font-bold leading-snug text-ice">
+      <p id={questionId} className="rounded-2xl bg-petrol p-4 text-lg font-semibold leading-snug text-ice">
         {content.question}
       </p>
       {active ? (
@@ -330,26 +330,26 @@ export function EvaluationBody({ content, active, actions }: BodyProps<"avaliaca
           className={`size-8 ${correct ? "text-petrol" : "text-wrong"}`}
         />
         <div>
-          <p className="text-xl font-extrabold leading-tight">
+          <p className="text-xl font-bold leading-tight">
             {correct ? EVALUATION_MESSAGES.correctTitle : EVALUATION_MESSAGES.incorrectTitle}
           </p>
           <p className="mt-1">{correct ? EVALUATION_MESSAGES.correctText : EVALUATION_MESSAGES.incorrectText}</p>
         </div>
       </div>
       <div className="rounded-2xl border border-line bg-surface p-4">
-        <p className="flex items-center gap-2 text-sm font-bold text-petrol-soft">
+        <p className="flex items-center gap-2 text-sm font-semibold text-petrol-soft">
           <Icon name="user" className="size-4" />
           Sua escolha
         </p>
-        <p className="mt-1 font-bold leading-snug">{evaluation.selectedOptionText}</p>
+        <p className="mt-1 font-semibold leading-snug">{evaluation.selectedOptionText}</p>
         <p className="mt-1">{evaluation.selectedFeedback}</p>
       </div>
       {correct ? null : (
         <div className="rounded-2xl border-2 border-petrol bg-surface p-4">
-          <p className="flex items-center gap-2 text-sm font-bold text-petrol-soft">
+          <p className="flex items-center gap-2 text-sm font-semibold text-petrol-soft">
             <Icon name="star" className="size-4" />A opção mais adequada
           </p>
-          <p className="mt-1 font-bold leading-snug">{evaluation.correctOptionText}</p>
+          <p className="mt-1 font-semibold leading-snug">{evaluation.correctOptionText}</p>
           <p className="mt-1">{evaluation.correctFeedback}</p>
         </div>
       )}
@@ -373,24 +373,24 @@ export function FinalBody({ content, active, actions }: BodyProps<"explicacao-fi
             <Icon name={CATEGORY_ICONS[problem.id]} />
           </span>
           <div className="min-w-0">
-            <p className="text-sm font-bold text-lime">Problema identificado</p>
-            <p className="text-xl font-extrabold leading-snug">{problem.title}</p>
+            <p className="text-sm font-semibold text-lime">Problema identificado</p>
+            <p className="text-xl font-bold leading-snug">{problem.title}</p>
           </div>
         </div>
         <dl className="mt-4 grid gap-3 sm:grid-cols-3">
           <div className="rounded-xl border border-ice/20 p-3">
-            <dt className="text-sm font-bold text-lime">Sua escolha</dt>
+            <dt className="text-sm font-semibold text-lime">Sua escolha</dt>
             <dd className="mt-1 text-sm">{evaluation.selectedOptionText}</dd>
           </div>
           <div className="rounded-xl border border-ice/20 p-3">
-            <dt className="text-sm font-bold text-lime">Resultado</dt>
-            <dd className="mt-1 flex items-start gap-1.5 text-sm font-bold">
+            <dt className="text-sm font-semibold text-lime">Resultado</dt>
+            <dd className="mt-1 flex items-start gap-1.5 text-sm font-semibold">
               <Icon name={evaluation.isCorrect ? "check-circle" : "x-circle"} className="mt-0.5 size-4" />
               {evaluation.isCorrect ? "Escolha adequada" : "Não era a escolha mais adequada"}
             </dd>
           </div>
           <div className="rounded-xl border border-ice/20 p-3">
-            <dt className="text-sm font-bold text-lime">Solução recomendada</dt>
+            <dt className="text-sm font-semibold text-lime">Solução recomendada</dt>
             <dd className="mt-1 text-sm">{recommendedSolution.title}</dd>
           </div>
         </dl>
@@ -400,7 +400,7 @@ export function FinalBody({ content, active, actions }: BodyProps<"explicacao-fi
         <ul className="grid gap-2">
           {report.causes.map((cause, index) => (
             <li key={cause.id}>
-              <p className="font-bold">
+              <p className="font-semibold">
                 {index === 0 ? "Causa principal: " : ""}
                 {cause.title}
               </p>
@@ -413,7 +413,7 @@ export function FinalBody({ content, active, actions }: BodyProps<"explicacao-fi
         <ExplanationText explanation={report.scientificExplanation} />
       </FinalSection>
       <FinalSection icon="leaf" title="Como a solução ajuda na eficiência energética">
-        <p className="font-bold">{recommendedSolution.title}</p>
+        <p className="font-semibold">{recommendedSolution.title}</p>
         <p className="mb-2 text-petrol-soft">{recommendedSolution.description}</p>
         <ExplanationText explanation={report.finalExplanation} />
       </FinalSection>
@@ -430,7 +430,7 @@ export function FinalBody({ content, active, actions }: BodyProps<"explicacao-fi
         <ul className="grid gap-3">
           {report.sources.verified.map((source) => (
             <li key={source.id} data-source-id={source.id} className="border-l-2 border-petrol pl-3 text-sm">
-              <p className="font-bold">{source.organization}</p>
+              <p className="font-semibold">{source.organization}</p>
               <p>
                 <cite className="not-italic">{source.title}</cite>
               </p>
@@ -443,7 +443,7 @@ export function FinalBody({ content, active, actions }: BodyProps<"explicacao-fi
         </ul>
         {report.sources.pending.length > 0 ? (
           <div className="mt-3">
-            <h5 className="font-bold">Fontes ainda não conferidas</h5>
+            <h5 className="font-semibold">Fontes ainda não conferidas</h5>
             <ul className="mt-1 grid gap-2">
               {report.sources.pending.map((source) => (
                 <li key={source.id} data-source-id={source.id} className="border-l-2 border-dashed border-petrol pl-3 text-sm">
@@ -474,7 +474,7 @@ export function FinalBody({ content, active, actions }: BodyProps<"explicacao-fi
 function FinalSection({ icon, title, children }: { icon: IconName; title: string; children: ReactNode }) {
   return (
     <section className="rounded-2xl border border-line bg-surface p-4">
-      <h4 className="mb-2 flex items-center gap-2 font-bold">
+      <h4 className="mb-2 flex items-center gap-2 font-semibold">
         <Icon name={icon} className="size-5" />
         {title}
       </h4>
@@ -507,12 +507,20 @@ export function AssistantMessage({
   const final = content.step === "explicacao-final";
   return (
     <article aria-labelledby={`${id}-titulo`} className="message-enter flex scroll-mt-28 gap-3" data-step={content.step}>
-      <BrandMark className="mt-1 hidden size-8 shrink-0 sm:block" />
-      <div className={`min-w-0 flex-1 rounded-3xl rounded-tl-md border bg-surface p-4 sm:p-5 ${final ? "border-petrol" : "border-line"}`}>
-        <h3 id={`${id}-titulo`} ref={headingRef} tabIndex={-1} className="mb-3 text-sm font-bold text-petrol-soft">
-          <span className="sr-only">Resposta do assistente. </span>
-          Etapa {stepNumber} de {FLOW_STEPS.length}: {STEP_LABELS[content.step]}
-        </h3>
+      <LogoMark size="sm" className="mt-0.5 hidden sm:grid" />
+      <div className="min-w-0 flex-1">
+        <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1">
+          <h3 id={`${id}-titulo`} ref={headingRef} tabIndex={-1} className="text-sm font-semibold text-petrol-soft">
+            <span className="sr-only">Resposta do assistente. </span>
+            Etapa {stepNumber} de {FLOW_STEPS.length}: {STEP_LABELS[content.step]}
+          </h3>
+          {/* Progresso do diagnóstico em segmentos (reforço visual do texto ao lado). */}
+          <span aria-hidden="true" className="flex gap-1">
+            {FLOW_STEPS.map((step, index) => (
+              <span key={step} className={`h-1.5 w-4 rounded-full ${index < stepNumber ? "bg-petrol" : "bg-petrol/15"}`} />
+            ))}
+          </span>
+        </div>
         {content.step === "diagnostico" ? (
           <DiagnosisBody content={content} active={active} actions={actions} situations={situations} idPrefix={id} />
         ) : null}

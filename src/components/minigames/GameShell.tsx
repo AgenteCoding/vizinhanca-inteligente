@@ -9,10 +9,16 @@ export const SCORE_NOTE = "Pontos do jogo servem só para acompanhar o seu desem
 /** Moldura comum a todos os minigames: título da página e link de volta. */
 export function GameFrame({ children }: { children: ReactNode }) {
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6 sm:py-10">
+    <div className="relative mx-auto w-full max-w-3xl px-4 py-8 sm:px-6 sm:py-10">
+      {/* Esferas de vidro ao fundo: a mesma atmosfera da página inicial. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 -left-40 -right-40 -z-10 hidden overflow-hidden lg:block">
+        <span className="orb float-a left-6 top-28 size-32 opacity-70" />
+        <span className="orb orb-lime float-b right-10 top-64 size-20 opacity-80" />
+        <span className="orb orb-petrol float-c bottom-24 left-24 size-14 opacity-60" />
+      </div>
       <Link
         href="/jogos"
-        className="mb-5 inline-flex min-h-12 items-center gap-2 rounded-full pr-3 font-bold text-petrol-soft hover:text-petrol"
+        className="mb-5 inline-flex min-h-12 items-center gap-2 rounded-full pr-3 font-semibold text-petrol-soft hover:text-petrol"
       >
         <Icon name="chevron" className="size-5 rotate-90" />
         Voltar aos minigames
@@ -39,21 +45,21 @@ export function GameIntro({
   headingRef?: Ref<HTMLHeadingElement>;
 }) {
   return (
-    <section aria-labelledby="jogo-titulo" className="rounded-3xl border border-line bg-surface p-5 sm:p-8">
-      <span className="grid size-14 place-items-center rounded-2xl bg-petrol text-lime">
+    <section aria-labelledby="jogo-titulo" className="glass message-enter rounded-[2rem] p-5 sm:p-8">
+      <span className="grid size-14 place-items-center rounded-2xl bg-petrol text-lime shadow-[0_14px_28px_-14px_rgb(16_45_53/0.9)]">
         <Icon name={icon} className="size-7" />
       </span>
-      <h1 id="jogo-titulo" ref={headingRef} tabIndex={-1} className="mt-4 text-3xl font-extrabold tracking-tight">
+      <h1 id="jogo-titulo" ref={headingRef} tabIndex={-1} className="mt-4 text-[1.7rem] font-semibold tracking-tight">
         {title}
       </h1>
-      <p className="mt-2 text-lg text-petrol-soft">{description}</p>
-      <h2 className="mt-6 font-bold">Como jogar</h2>
+      <p className="mt-2 text-petrol-soft">{description}</p>
+      <h2 className="mt-6 font-semibold">Como jogar</h2>
       <ol className="mt-2 grid gap-2">
         {instructions.map((text, index) => (
           <li key={text} className="flex gap-3">
             <span
               aria-hidden="true"
-              className="grid size-7 shrink-0 place-items-center rounded-full bg-ice-strong text-sm font-extrabold"
+              className="grid size-7 shrink-0 place-items-center rounded-full bg-petrol text-sm font-bold text-lime"
             >
               {index + 1}
             </span>
@@ -75,16 +81,16 @@ export function GameProgress({ current, total, label }: { current: number; total
   const percent = total > 0 ? Math.round((current / total) * 100) : 0;
   return (
     <div className="grid gap-1.5">
-      <p className="text-sm font-bold text-petrol-soft">{label}</p>
+      <p className="text-sm font-semibold text-petrol-soft">{label}</p>
       <div
         role="progressbar"
         aria-label={label}
         aria-valuemin={0}
         aria-valuemax={total}
         aria-valuenow={current}
-        className="h-2.5 overflow-hidden rounded-full bg-ice-strong"
+        className="h-2 overflow-hidden rounded-full bg-petrol/12"
       >
-        <div className="h-full rounded-full bg-petrol transition-[width]" style={{ width: `${percent}%` }} />
+        <div className="h-full rounded-full bg-petrol transition-[width] duration-500" style={{ width: `${percent}%` }} />
       </div>
     </div>
   );
@@ -105,12 +111,12 @@ export function GameToolbar({
   onRestart: () => void;
 }) {
   return (
-    <div className="flex flex-wrap items-end gap-4 rounded-2xl border border-line bg-surface p-4">
+    <div className="glass flex flex-wrap items-end gap-4 rounded-3xl p-4">
       <div className="min-w-48 flex-1">
         <GameProgress current={current} total={total} label={progressLabel} />
       </div>
-      <p className="font-bold" aria-live="polite">
-        {score} pontos do jogo
+      <p className="rounded-full bg-petrol px-3.5 py-1.5 text-sm font-semibold text-ice" aria-live="polite">
+        <span className="text-lime">{score}</span> pontos do jogo
       </p>
       <Button variant="secondary" className="min-h-12 px-4" onClick={onRestart}>
         <Icon name="restart" className="size-5" />
@@ -140,16 +146,18 @@ export function GameResult({
 }) {
   return (
     <section aria-labelledby="resultado-titulo" className="grid gap-5">
-      <div className="on-dark rounded-3xl bg-petrol p-5 text-ice sm:p-8">
-        <p className="font-bold text-lime">Resultado</p>
-        <h1 id="resultado-titulo" ref={headingRef} tabIndex={-1} className="mt-1 text-3xl font-extrabold tracking-tight">
+      <div className="on-dark message-enter relative overflow-hidden rounded-[2rem] bg-petrol p-5 text-ice sm:p-8">
+        <span aria-hidden="true" className="orb orb-lime float-a -right-6 -top-8 size-28 opacity-90" />
+        <span aria-hidden="true" className="orb float-b bottom-4 right-24 hidden size-12 opacity-50 sm:block" />
+        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-lime">Resultado</p>
+        <h1 id="resultado-titulo" ref={headingRef} tabIndex={-1} className="relative mt-1 text-[1.7rem] font-semibold tracking-tight">
           {title}
         </h1>
-        <p className="mt-3 text-4xl font-extrabold">
-          {score} <span className="text-xl font-bold">de {maxScore} pontos do jogo</span>
+        <p className="relative mt-3 text-5xl font-bold text-lime">
+          {score} <span className="text-lg font-semibold text-ice">de {maxScore} pontos do jogo</span>
         </p>
-        <p className="mt-2 text-lg">{headline}</p>
-        <p className="mt-3 text-sm text-ice/80">{SCORE_NOTE}</p>
+        <p className="relative mt-2 max-w-xl">{headline}</p>
+        <p className="relative mt-3 max-w-xl text-sm text-ice-dim">{SCORE_NOTE}</p>
       </div>
       {children}
       <div className="flex flex-wrap gap-3">
@@ -169,8 +177,8 @@ export function GameResult({
 /** Bloco de conteúdo do resultado. */
 export function ResultSection({ icon, title, children }: { icon: IconName; title: string; children: ReactNode }) {
   return (
-    <section className="rounded-2xl border border-line bg-surface p-4 sm:p-5">
-      <h2 className="mb-2 flex items-center gap-2 text-lg font-bold">
+    <section className="message-enter rounded-3xl border border-white/80 bg-surface/90 p-4 shadow-[0_18px_36px_-28px_rgb(16_45_53/0.6)] sm:p-5">
+      <h2 className="mb-2 flex items-center gap-2 text-lg font-semibold">
         <Icon name={icon} className="size-5" />
         {title}
       </h2>
@@ -187,7 +195,7 @@ export function VerdictBadge({ tone, children }: { tone: "right" | "partial" | "
     wrong: { box: "border-wrong/40 bg-wrong-soft text-wrong", icon: "x-circle" as const },
   }[tone];
   return (
-    <span className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-bold ${look.box}`}>
+    <span className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-semibold ${look.box}`}>
       <Icon name={look.icon} className="size-5" />
       {children}
     </span>
