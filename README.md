@@ -109,8 +109,8 @@ está pronta para um futuro provedor de IA no servidor, sem nenhuma integração
 Ao enviar uma mensagem, o indicador "Pensando" fica visível por pelo menos 5 segundos (ou pelo
 tempo real da resposta, o que for maior). Minigames prontos (`/jogos`). Depois: entrega.
 
-**Logo:** o símbolo atual é provisório. Para trocar, edite só `LogoMark` em
-`src/components/ui/Logo.tsx` (e `src/app/icon.svg` para o ícone da aba). Veja [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md).
+**Logo:** a logo oficial (cérebro em rede com a casa no centro) está em SVG em
+`src/components/ui/BrandMark.tsx` e em `src/app/icon.svg` (ícone da aba), nas cores do projeto. Veja [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md).
 
 ## Documentação
 

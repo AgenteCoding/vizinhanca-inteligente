@@ -41,7 +41,7 @@ describe("identidade SmartHood AI", () => {
   it("a logo tem um espaço único e de tamanho fixo, pronto para a troca", () => {
     const markup = renderToStaticMarkup(<Logo />);
     expect(markup.match(/data-logo-slot/g)).toHaveLength(1);
-    expect(markup).toMatch(/data-logo-slot=""[^>]*|class="[^"]*size-9[^"]*"[^>]*data-logo-slot/);
+    expect(markup).toMatch(/data-logo-slot=""[^>]*|class="[^"]*size-10[^"]*"[^>]*data-logo-slot/);
   });
 });
 

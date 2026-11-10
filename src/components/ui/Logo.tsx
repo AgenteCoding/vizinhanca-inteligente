@@ -3,14 +3,17 @@ import { BrandMark } from "./BrandMark";
 /** Nome oficial do projeto (cabeçalho, rodapé e metadados usam esta constante). */
 export const BRAND_NAME = "SmartHood AI";
 
-const SLOT = { sm: "size-7", md: "size-9" } as const;
+const SLOT = { sm: "size-8", md: "size-10" } as const;
 
 /**
  * Ponto único da marca: símbolo + nome.
  *
- * O símbolo atual (`BrandMark`) é PROVISÓRIO. Quando a logo oficial chegar, basta trocar o
- * conteúdo de `LogoMark` (por exemplo, por uma imagem em `public/images/`): o espaço é um
- * quadrado de tamanho fixo, então cabeçalho, rodapé e conversa não mudam de layout.
+ * O símbolo (`BrandMark`) é a logo oficial, redesenhada em SVG nas cores do projeto. O espaço
+ * é um quadrado de tamanho fixo: se a marca mudar, basta trocar o conteúdo de `LogoMark`, e
+ * cabeçalho, rodapé e conversa não mudam de layout.
+ *
+ * No texto, "AI" vai em Signal Lime como na logo. Sobre fundo claro o verde-limão não teria
+ * contraste suficiente, então ali ele aparece dentro de um selo Petrol Blue.
  */
 export function LogoMark({ size = "md", className = "" }: { size?: keyof typeof SLOT; className?: string }) {
   return (
@@ -29,9 +32,7 @@ export function Logo({ size = "md", tone = "light" }: { size?: keyof typeof SLOT
       <span className="flex items-center gap-1.5 leading-none">
         SmartHood
         <span
-          className={`rounded-md px-1.5 py-0.5 text-[0.7em] font-bold tracking-wide ${
-            dark ? "bg-lime text-petrol" : "bg-petrol text-lime"
-          }`}
+          className={dark ? "font-bold text-lime" : "rounded-md bg-petrol px-1.5 py-0.5 text-[0.7em] font-bold tracking-wide text-lime"}
         >
           AI
         </span>

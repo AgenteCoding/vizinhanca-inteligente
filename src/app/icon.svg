@@ -1,6 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="9" fill="#102d35"/>
-  <path d="M7.5 15.5L16 8.5l8.5 7" fill="none" stroke="#d9fa57" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M10.5 14.5V23.5h11v-9" fill="none" stroke="#e8f7f5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="16" cy="19" r="2.4" fill="#d9fa57"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+  <rect width="640" height="640" rx="150" fill="#102d35"/>
+  <g transform="translate(17 61) scale(1.25)">
+    <g fill="none" stroke-width="12" stroke-linecap="round">
+      <path d="M182 33L90 75M90 75L33 152M33 152L55 232M55 232L133 250M133 250L177 298M177 298L250 290M182 33L213 98M90 75L213 98M90 75L127 155M33 152L127 155M55 232L127 155M182 33L127 155M213 98L127 155M127 155L183 212M127 155L133 250M183 212L250 290M133 250L183 212M182 33L228 31M250 290L253 193M250 290L295 335" stroke="#e8f7f5" />
+      <path d="M275 30L390 67M390 67L443 150M443 150L453 225M453 225L395 295M395 295L320 318M320 318L340 380M275 30L320 95M320 95L390 67M320 95L377 152M390 67L377 152M377 152L443 150M377 152L330 230M443 150L330 230M453 225L330 230M330 230L395 295M330 230L320 318M228 31L275 30M250 290L330 230M295 335L340 380" stroke="#d9fa57" />
+    </g>
+    <g>
+      <circle cx="182" cy="33" r="13" fill="#e8f7f5" />
+      <circle cx="90" cy="75" r="13" fill="#e8f7f5" />
+      <circle cx="33" cy="152" r="13" fill="#e8f7f5" />
+      <circle cx="55" cy="232" r="13" fill="#e8f7f5" />
+      <circle cx="133" cy="250" r="13" fill="#e8f7f5" />
+      <circle cx="177" cy="298" r="13" fill="#e8f7f5" />
+      <circle cx="250" cy="290" r="13" fill="#e8f7f5" />
+      <circle cx="213" cy="98" r="13" fill="#e8f7f5" />
+      <circle cx="127" cy="155" r="19" fill="#e8f7f5" />
+      <circle cx="183" cy="212" r="13" fill="#e8f7f5" />
+      <circle cx="275" cy="30" r="13" fill="#d9fa57" />
+      <circle cx="390" cy="67" r="13" fill="#d9fa57" />
+      <circle cx="443" cy="150" r="13" fill="#d9fa57" />
+      <circle cx="453" cy="225" r="13" fill="#d9fa57" />
+      <circle cx="395" cy="295" r="13" fill="#d9fa57" />
+      <circle cx="320" cy="318" r="13" fill="#d9fa57" />
+      <circle cx="340" cy="380" r="13" fill="#d9fa57" />
+      <circle cx="320" cy="95" r="13" fill="#d9fa57" />
+      <circle cx="377" cy="152" r="13" fill="#d9fa57" />
+      <circle cx="330" cy="230" r="19" fill="#d9fa57" />
+    </g>
+    <path d="M195 142L255 96L270 108V96H290V123L320 146L308 160L255 119L207 157ZM212 160L255 127L298 160V208H268V175H246V208H212Z" fill="#e8f7f5" fill-rule="evenodd" />
+  </g>
 </svg>

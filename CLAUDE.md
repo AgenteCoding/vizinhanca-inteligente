@@ -158,8 +158,8 @@ Estilos base ficam em `@layer base` para as classes do Tailwind poderem sobrescr
 ### Identidade visual SmartHood AI (redesign de 10/11/2026)
 
 - **Nome:** a constante `BRAND_NAME` e o componente `Logo` (`src/components/ui/Logo.tsx`) são o
-  ponto único da marca. O símbolo atual (`BrandMark`) é provisório: a logo oficial entra trocando
-  só o conteúdo de `LogoMark` (espaço quadrado de tamanho fixo).
+  ponto único da marca. O símbolo (`BrandMark`, cérebro em rede com a casa no centro) é a logo
+  oficial, redesenhada em SVG nas cores do projeto; `src/app/icon.svg` usa a mesma geometria.
 - **Vidro fosco:** classes `.glass` (sobre fundo Ice) e `.glass-dark` (sobre fundo Petrol) em
   `globals.css`, com alternativa quase sólida quando o navegador não tem `backdrop-filter`.
   Use em painéis flutuantes (cabeçalho, campo de conversa, sugestões, painéis dos jogos). Texto
