@@ -113,6 +113,11 @@ tempo real da resposta, o que for maior). Minigames prontos (`/jogos`). Depois: 
 **Logo:** a logo oficial (cérebro em rede com a casa no centro) está em SVG em
 `src/components/ui/BrandMark.tsx` e em `src/app/icon.svg` (ícone da aba), nas cores do projeto. Veja [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md).
 
+## Executar na feira
+
+Veja o **[guia da feira](docs/FEIRA.md)**: instalação no notebook Windows, `iniciar-feira.bat`,
+dependências de internet, roteiro de demonstração e como recuperar a versão estável.
+
 ## Documentação
 
 - [Visão do projeto](docs/PROJECT_BRIEF.md)

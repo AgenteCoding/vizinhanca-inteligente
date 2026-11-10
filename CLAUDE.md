@@ -221,6 +221,7 @@ npm run lint       # ESLint
 npm test           # Vitest
 npm run build      # export estático em out/
 npm run validate   # tudo acima, em sequência
+npm run servir     # serve a pasta out/ em http://localhost:3000 (sem dependências)
 ```
 
 ## 12. Git e commits
