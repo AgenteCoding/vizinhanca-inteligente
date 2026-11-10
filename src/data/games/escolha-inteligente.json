@@ -1,0 +1,164 @@
+[
+  {
+    "categoryId": "iluminacao-publica-dia",
+    "challenge": {
+      "id": "praca-acende-cedo",
+      "question": "Na praça do bairro, as luminárias acendem no meio da tarde, ainda com o sol forte. O que a vizinhança deve fazer?",
+      "options": [
+        {
+          "id": "pintar-postes",
+          "text": "Pintar os postes de uma cor clara para refletir melhor a luz do sol.",
+          "isCorrect": false,
+          "feedback": "A cor do poste não muda a hora em que a lâmpada acende. Quem decide isso é o relé fotocontrolador."
+        },
+        {
+          "id": "pedir-verificacao-reles",
+          "text": "Pedir à prefeitura que verifique os relés fotocontroladores das luminárias.",
+          "isCorrect": true,
+          "feedback": "O relé mede a luz do ambiente e liga as lâmpadas quando escurece. Se ele acende cedo, está com defeito ou fora da norma."
+        },
+        {
+          "id": "luminarias-sempre-acesas",
+          "text": "Trocar as luminárias por modelos que fiquem acesos o tempo todo, por segurança.",
+          "isCorrect": false,
+          "feedback": "Deixar tudo aceso o tempo todo aumenta o desperdício. Segurança à noite não exige luz durante o dia."
+        }
+      ]
+    }
+  },
+  {
+    "categoryId": "luzes-ambientes-vazios",
+    "challenge": {
+      "id": "banheiro-escola-recreio",
+      "question": "No banheiro da escola, a luz fica acesa durante todo o recreio, mesmo quando não há ninguém lá dentro. Qual é a melhor decisão?",
+      "options": [
+        {
+          "id": "sensor-ajustado",
+          "text": "Instalar um sensor de presença bem posicionado e com tempo de desligamento ajustado.",
+          "isCorrect": true,
+          "feedback": "No banheiro as pessoas ficam pouco tempo. O sensor acende a luz quando alguém entra e apaga depois que o ambiente fica vazio."
+        },
+        {
+          "id": "lampada-fraca-acesa",
+          "text": "Colocar uma lâmpada mais fraca e deixar a luz acesa o dia todo, como antes.",
+          "isCorrect": false,
+          "feedback": "Uma lâmpada mais fraca ainda gasta energia sem ninguém no banheiro. O problema principal é a luz acesa sem uso."
+        },
+        {
+          "id": "tirar-interruptor",
+          "text": "Retirar o interruptor e deixar a luz acesa direto para ninguém esquecer de ligar.",
+          "isCorrect": false,
+          "feedback": "Sem interruptor, a luz ficaria acesa o tempo todo. Isso aumenta o desperdício em vez de resolvê-lo."
+        }
+      ]
+    }
+  },
+  {
+    "categoryId": "consumo-horario-pico",
+    "challenge": {
+      "id": "predio-horario-ponta",
+      "question": "Em um prédio, muitos moradores usam a máquina de lavar e o ferro de passar no horário de ponta da distribuidora. O que ajuda mais?",
+      "options": [
+        {
+          "id": "usar-tudo-junto",
+          "text": "Combinar que todos usem esses aparelhos ao mesmo tempo, para terminar mais rápido.",
+          "isCorrect": false,
+          "feedback": "Usar tudo junto concentra ainda mais a demanda no horário de ponta, que é justamente o que se quer evitar."
+        },
+        {
+          "id": "parar-de-lavar",
+          "text": "Combinar que ninguém lave nem passe roupa durante a semana inteira.",
+          "isCorrect": false,
+          "feedback": "Lavar e passar roupa são necessidades. A ideia é mudar o horário das tarefas flexíveis, não deixar de fazê-las."
+        },
+        {
+          "id": "combinar-fora-da-ponta",
+          "text": "Combinar que essas tarefas flexíveis sejam feitas fora do horário de ponta.",
+          "isCorrect": true,
+          "feedback": "Mudar o horário das tarefas flexíveis diminui a demanda na ponta. O total de energia usada continua parecido; o que muda é quando ela é usada."
+        }
+      ]
+    }
+  },
+  {
+    "categoryId": "eletrodomesticos-ineficientes",
+    "challenge": {
+      "id": "escolher-geladeira-nova",
+      "question": "Uma família vai comprar uma geladeira nova e está em dúvida entre dois modelos parecidos. Como decidir?",
+      "options": [
+        {
+          "id": "escolher-pela-cor",
+          "text": "Escolher o modelo pela cor e pelo desenho, que combinam mais com a cozinha.",
+          "isCorrect": false,
+          "feedback": "Cor e desenho não informam o consumo. Dois modelos parecidos podem ter eficiências diferentes."
+        },
+        {
+          "id": "comparar-etiqueta-ence",
+          "text": "Comparar o consumo e a classificação na etiqueta do Inmetro dos dois modelos.",
+          "isCorrect": true,
+          "feedback": "A etiqueta do Inmetro informa o nível de eficiência e ajuda a comparar modelos que fazem o mesmo serviço."
+        },
+        {
+          "id": "maior-possivel",
+          "text": "Comprar o maior modelo da loja, para nunca faltar espaço no futuro.",
+          "isCorrect": false,
+          "feedback": "Um aparelho maior do que a família precisa pode gastar mais energia. O tamanho deve combinar com o uso."
+        }
+      ]
+    }
+  },
+  {
+    "categoryId": "ar-condicionado-aberto",
+    "challenge": {
+      "id": "escritorio-porta-aberta",
+      "question": "No escritório, o ar-condicionado fica ligado e a porta da sala fica aberta para o corredor. Qual é a melhor decisão?",
+      "options": [
+        {
+          "id": "baixar-temperatura",
+          "text": "Baixar a temperatura do ar-condicionado para compensar a porta aberta.",
+          "isCorrect": false,
+          "feedback": "O aparelho trabalharia ainda mais, enquanto o ar quente continua entrando pela porta."
+        },
+        {
+          "id": "ventilador-junto",
+          "text": "Ligar também um ventilador perto da porta e deixar tudo como está.",
+          "isCorrect": false,
+          "feedback": "Ligar outro aparelho não fecha a passagem do ar. O ar resfriado continua escapando pela porta."
+        },
+        {
+          "id": "fechar-e-vedar",
+          "text": "Manter a porta fechada enquanto o ar estiver ligado e cuidar da vedação.",
+          "isCorrect": true,
+          "feedback": "Com a porta fechada e bem vedada, o ar resfriado fica na sala e o aparelho não precisa compensar o ar quente que entraria."
+        }
+      ]
+    }
+  },
+  {
+    "categoryId": "solar-sem-geracao",
+    "challenge": {
+      "id": "escola-telhado-solar",
+      "question": "Uma escola tem um telhado grande e ensolarado e quer gerar a própria energia. Qual é o primeiro passo?",
+      "options": [
+        {
+          "id": "avaliacao-tecnica-escola",
+          "text": "Fazer uma avaliação técnica do telhado, das sombras, do consumo e do investimento.",
+          "isCorrect": true,
+          "feedback": "A instalação depende da incidência solar no local, das condições do telhado, do consumo e do investimento. Avaliar antes evita erros."
+        },
+        {
+          "id": "paineis-sem-projeto",
+          "text": "Comprar os painéis mais baratos que encontrar e instalar sem nenhum projeto.",
+          "isCorrect": false,
+          "feedback": "Sem projeto, o sistema pode ficar mal dimensionado, com sombra ou sem atender às regras de conexão à rede."
+        },
+        {
+          "id": "desistir-chuva",
+          "text": "Desistir da ideia, porque em alguns dias do ano chove na cidade.",
+          "isCorrect": false,
+          "feedback": "A produção varia com o clima e a época do ano, mas isso se avalia com dados do local, e não é motivo para desistir de antemão."
+        }
+      ]
+    }
+  }
+]

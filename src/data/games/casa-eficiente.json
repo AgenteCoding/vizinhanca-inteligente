@@ -1,0 +1,206 @@
+{
+  "house": "Casa da família Lima",
+  "maxSelections": 6,
+  "problems": [
+    {
+      "categoryId": "luzes-ambientes-vazios",
+      "description": "As luzes do corredor e dos quartos ficam acesas sem ninguém."
+    },
+    {
+      "categoryId": "iluminacao-publica-dia",
+      "description": "A luz da garagem continua acesa depois que amanhece."
+    },
+    {
+      "categoryId": "eletrodomesticos-ineficientes",
+      "description": "A geladeira é antiga e ninguém sabe quanto ela consome."
+    },
+    {
+      "categoryId": "ar-condicionado-aberto",
+      "description": "O ar-condicionado da sala é usado com a janela aberta."
+    },
+    {
+      "categoryId": "consumo-horario-pico",
+      "description": "Chuveiro, forno e ferro de passar costumam ser usados juntos no horário de ponta."
+    },
+    {
+      "categoryId": "solar-sem-geracao",
+      "description": "O telhado recebe sol durante boa parte do dia."
+    }
+  ],
+  "solutions": [
+    {
+      "id": "lampadas-led",
+      "name": "Lâmpadas LED",
+      "kind": "tecnologia",
+      "description": "Trocar as lâmpadas antigas por lâmpadas LED.",
+      "effects": [{ "categoryId": "luzes-ambientes-vazios", "level": "ajuda" }],
+      "benefit": {
+        "text": "Iluminam usando menos energia que lâmpadas de tecnologias mais antigas.",
+        "sourceIds": [],
+        "status": "pending"
+      },
+      "limitation": {
+        "text": "Uma lâmpada eficiente acesa sem ninguém continua sendo desperdício: a troca não substitui apagar a luz.",
+        "sourceIds": [],
+        "status": "pending"
+      },
+      "worksBestWith": ["sensores-presenca", "habito-apagar-luzes"],
+      "pairingNote": "LED gasta menos quando a luz está acesa; sensores e o hábito de apagar a luz evitam que ela fique acesa sem necessidade."
+    },
+    {
+      "id": "sensores-presenca",
+      "name": "Sensores de presença",
+      "kind": "tecnologia",
+      "description": "Sensores que acendem a luz quando alguém passa e apagam depois de um tempo sem movimento.",
+      "effects": [{ "categoryId": "luzes-ambientes-vazios", "level": "resolve" }],
+      "benefit": {
+        "text": "Desligam a luz automaticamente quando o ambiente fica vazio, sem depender da memória das pessoas.",
+        "sourceIds": [],
+        "status": "pending"
+      },
+      "limitation": {
+        "text": "Precisam ser instalados e ajustados para cada ambiente; mal posicionados, podem apagar a luz com gente dentro.",
+        "sourceIds": [],
+        "status": "pending"
+      },
+      "worksBestWith": ["lampadas-led"],
+      "pairingNote": "Sensores evitam a luz acesa sem ninguém, e as lâmpadas LED gastam menos quando a luz precisa ficar acesa."
+    },
+    {
+      "id": "iluminacao-automatizada",
+      "name": "Iluminação externa automatizada",
+      "kind": "tecnologia",
+      "description": "Relé fotocontrolador (sensor de luminosidade) que acende a luz da garagem ao escurecer e apaga ao amanhecer.",
+      "effects": [{ "categoryId": "iluminacao-publica-dia", "level": "resolve" }],
+      "benefit": {
+        "text": "O relé fotocontrolador liga e desliga a iluminação de acordo com a luz do ambiente, acendendo ao entardecer e apagando ao amanhecer.",
+        "sourceIds": ["inmetro-air-reles-fotocontroladores-2017"],
+        "status": "verified"
+      },
+      "limitation": {
+        "text": "O sensor precisa ser de boa qualidade, adequado à norma e instalado onde receba a luz do dia, senão pode errar o horário.",
+        "sourceIds": [],
+        "status": "pending"
+      },
+      "worksBestWith": [],
+      "pairingNote": ""
+    },
+    {
+      "id": "paineis-solares",
+      "name": "Painéis solares fotovoltaicos",
+      "kind": "tecnologia",
+      "description": "Gerar eletricidade com a luz do sol no próprio telhado.",
+      "effects": [{ "categoryId": "solar-sem-geracao", "level": "resolve" }],
+      "benefit": {
+        "text": "A geração própria é regulamentada no Brasil pela Lei nº 14.300/2022, que criou o marco legal da micro e minigeração distribuída.",
+        "sourceIds": ["lei-14300-2022"],
+        "status": "verified"
+      },
+      "limitation": {
+        "text": "Depende de avaliação técnica do telhado, da incidência solar no local, do consumo da casa e do investimento.",
+        "sourceIds": ["aneel-mmgd", "inpe-atlas-solar-2017"],
+        "status": "pending"
+      },
+      "worksBestWith": ["eletrodomesticos-eficientes", "sensores-presenca", "uso-consciente-ar"],
+      "pairingNote": "Reduzir o desperdício antes de dimensionar o sistema solar faz a casa precisar de um sistema menor."
+    },
+    {
+      "id": "eletrodomesticos-eficientes",
+      "name": "Eletrodomésticos eficientes",
+      "kind": "tecnologia",
+      "description": "Comparar consumo e classificação na etiqueta do Inmetro antes de trocar um aparelho.",
+      "effects": [{ "categoryId": "eletrodomesticos-ineficientes", "level": "resolve" }],
+      "benefit": {
+        "text": "A etiqueta do Inmetro ajuda a comparar modelos, e o Selo Procel é concedido aos produtos com classificação A.",
+        "sourceIds": ["mme-selo-procel"],
+        "status": "verified"
+      },
+      "limitation": {
+        "text": "A idade sozinha não prova ineficiência; trocar um aparelho que ainda funciona bem exige investimento e gera descarte.",
+        "sourceIds": [],
+        "status": "pending"
+      },
+      "worksBestWith": ["monitoramento-consumo"],
+      "pairingNote": "Acompanhar o consumo ajuda a descobrir se a geladeira antiga realmente precisa ser trocada."
+    },
+    {
+      "id": "uso-consciente-ar",
+      "name": "Uso consciente do ar-condicionado",
+      "kind": "habito",
+      "description": "Fechar portas e janelas com o ar ligado, cuidar da vedação e manter os filtros limpos.",
+      "effects": [{ "categoryId": "ar-condicionado-aberto", "level": "resolve" }],
+      "benefit": {
+        "text": "Não deixar portas e janelas abertas com o ar-condicionado ligado e manter os filtros limpos são dicas de consumo consciente da ANEEL.",
+        "sourceIds": ["aneel-consumo-consciente"],
+        "status": "verified"
+      },
+      "limitation": {
+        "text": "Depende de todos na casa seguirem o combinado.",
+        "sourceIds": [],
+        "status": "pending"
+      },
+      "worksBestWith": [],
+      "pairingNote": ""
+    },
+    {
+      "id": "monitoramento-consumo",
+      "name": "Monitoramento do consumo",
+      "kind": "tecnologia",
+      "description": "Acompanhar o consumo de energia da casa ao longo dos dias.",
+      "effects": [
+        { "categoryId": "eletrodomesticos-ineficientes", "level": "ajuda" },
+        { "categoryId": "consumo-horario-pico", "level": "ajuda" }
+      ],
+      "benefit": {
+        "text": "Ajuda a perceber quais aparelhos e horários concentram o consumo, para decidir o que mudar.",
+        "sourceIds": [],
+        "status": "pending"
+      },
+      "limitation": {
+        "text": "Medir não economiza sozinho: só ajuda se a família usar as informações para mudar hábitos ou aparelhos.",
+        "sourceIds": [],
+        "status": "pending"
+      },
+      "worksBestWith": ["organizar-horarios"],
+      "pairingNote": "Com o consumo à vista, fica mais fácil escolher quais tarefas tirar do horário de ponta."
+    },
+    {
+      "id": "organizar-horarios",
+      "name": "Organizar os horários de uso",
+      "kind": "habito",
+      "description": "Deixar tarefas flexíveis, como lavar e passar roupa, para fora do horário de ponta.",
+      "effects": [{ "categoryId": "consumo-horario-pico", "level": "resolve" }],
+      "benefit": {
+        "text": "Diminui a quantidade de aparelhos ligados ao mesmo tempo no horário de maior demanda.",
+        "sourceIds": [],
+        "status": "pending"
+      },
+      "limitation": {
+        "text": "Muda o horário do consumo, mas não reduz necessariamente o total de energia; e nem toda tarefa pode mudar de horário.",
+        "sourceIds": [],
+        "status": "pending"
+      },
+      "worksBestWith": [],
+      "pairingNote": ""
+    },
+    {
+      "id": "habito-apagar-luzes",
+      "name": "Hábito de apagar as luzes",
+      "kind": "habito",
+      "description": "Combinar que a última pessoa a sair do cômodo apaga a luz.",
+      "effects": [{ "categoryId": "luzes-ambientes-vazios", "level": "ajuda" }],
+      "benefit": {
+        "text": "Apagar a luz ao sair é uma das dicas de consumo consciente da ANEEL e não exige comprar nada.",
+        "sourceIds": ["aneel-consumo-consciente"],
+        "status": "pending"
+      },
+      "limitation": {
+        "text": "Depende da memória e da colaboração de todos.",
+        "sourceIds": [],
+        "status": "pending"
+      },
+      "worksBestWith": ["sensores-presenca"],
+      "pairingNote": "O hábito vale para toda a casa, e os sensores cobrem os lugares onde as pessoas mais esquecem a luz acesa."
+    }
+  ]
+}

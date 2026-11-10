@@ -1,0 +1,196 @@
+{
+  "house": "Casa da família Ribeiro, num sábado à tarde",
+  "rooms": [
+    {
+      "id": "sala",
+      "name": "Sala",
+      "items": [
+        {
+          "id": "luz-sala-vazia",
+          "label": "Luz da sala acesa, sem ninguém no cômodo",
+          "verdict": "desperdicio",
+          "categoryId": "luzes-ambientes-vazios",
+          "explanation": {
+            "text": "Luz acesa em cômodo vazio gasta energia sem benefício. Apagar a luz ao sair é uma das dicas de consumo consciente da ANEEL.",
+            "sourceIds": [
+              "aneel-consumo-consciente"
+            ],
+            "status": "pending"
+          },
+          "tip": "Apagar a luz ao sair dos cômodos e avaliar sensores de presença nos corredores."
+        },
+        {
+          "id": "tv-sem-ninguem",
+          "label": "Televisão ligada, sem ninguém assistindo",
+          "verdict": "desperdicio",
+          "categoryId": null,
+          "explanation": {
+            "text": "Um aparelho ligado sem ninguém usando consome energia sem trazer nenhum benefício.",
+            "sourceIds": [],
+            "status": "pending"
+          },
+          "tip": "Desligar a televisão quando ninguém estiver assistindo."
+        },
+        {
+          "id": "abajur-leitura",
+          "label": "Abajur aceso enquanto a avó lê um livro",
+          "verdict": "normal",
+          "categoryId": null,
+          "explanation": {
+            "text": "Aqui a luz está sendo usada por alguém. Usar energia com propósito não é desperdício.",
+            "sourceIds": [],
+            "status": "pending"
+          },
+          "tip": "Continuar apagando o abajur quando a leitura terminar."
+        }
+      ]
+    },
+    {
+      "id": "cozinha",
+      "name": "Cozinha e área de serviço",
+      "items": [
+        {
+          "id": "geladeira-porta-aberta",
+          "label": "Porta da geladeira aberta enquanto alguém decide o que pegar",
+          "verdict": "desperdicio",
+          "categoryId": "eletrodomesticos-ineficientes",
+          "explanation": {
+            "text": "Não deixar a porta da geladeira aberta além do necessário é uma das dicas de consumo consciente da ANEEL.",
+            "sourceIds": [
+              "aneel-consumo-consciente"
+            ],
+            "status": "verified"
+          },
+          "tip": "Decidir o que pegar antes de abrir a geladeira e verificar a borracha de vedação."
+        },
+        {
+          "id": "geladeira-antiga",
+          "label": "Geladeira antiga funcionando normalmente",
+          "verdict": "depende",
+          "categoryId": "eletrodomesticos-ineficientes",
+          "explanation": {
+            "text": "A idade, sozinha, não prova que um aparelho é ineficiente. É preciso comparar o consumo e a classificação na etiqueta do Inmetro com os de modelos novos.",
+            "sourceIds": [
+              "mme-selo-procel"
+            ],
+            "status": "pending"
+          },
+          "tip": "Comparar o consumo e a classificação da geladeira com os de modelos novos antes de decidir trocar."
+        },
+        {
+          "id": "ferro-maquina-ponta",
+          "label": "Ferro de passar e máquina de lavar ligados juntos no horário de ponta",
+          "verdict": "depende",
+          "categoryId": "consumo-horario-pico",
+          "explanation": {
+            "text": "Não é necessariamente desperdício de energia, mas concentra a demanda no horário de ponta. Se a tarefa pode esperar, vale mudar o horário.",
+            "sourceIds": [],
+            "status": "pending"
+          },
+          "tip": "Deixar tarefas flexíveis, como lavar e passar roupa, para fora do horário de ponta da distribuidora."
+        },
+        {
+          "id": "forno-almoco",
+          "label": "Forno elétrico assando o almoço da família",
+          "verdict": "normal",
+          "categoryId": null,
+          "explanation": {
+            "text": "O forno está sendo usado para preparar uma refeição. É uso com propósito, não desperdício.",
+            "sourceIds": [],
+            "status": "pending"
+          },
+          "tip": "Evitar abrir a porta do forno sem necessidade enquanto ele assa."
+        }
+      ]
+    },
+    {
+      "id": "quarto",
+      "name": "Quarto",
+      "items": [
+        {
+          "id": "ar-janela-aberta",
+          "label": "Ar-condicionado ligado com a janela aberta",
+          "verdict": "desperdicio",
+          "categoryId": "ar-condicionado-aberto",
+          "explanation": {
+            "text": "Não deixar portas e janelas abertas em ambientes com ar-condicionado é uma das dicas de consumo consciente da ANEEL.",
+            "sourceIds": [
+              "aneel-consumo-consciente"
+            ],
+            "status": "verified"
+          },
+          "tip": "Fechar portas e janelas com o ar ligado e ventilar o quarto com o aparelho desligado."
+        },
+        {
+          "id": "computador-ligado",
+          "label": "Computador e monitor ligados desde a noite passada, sem uso",
+          "verdict": "desperdicio",
+          "categoryId": null,
+          "explanation": {
+            "text": "Equipamentos ligados sem uso por horas gastam energia à toa.",
+            "sourceIds": [],
+            "status": "pending"
+          },
+          "tip": "Desligar o computador e o monitor quando ninguém estiver usando."
+        },
+        {
+          "id": "celular-carregando",
+          "label": "Celular carregando para ser usado mais tarde",
+          "verdict": "normal",
+          "categoryId": null,
+          "explanation": {
+            "text": "Carregar o celular é um uso necessário. Vale só tirar o carregador da tomada quando a carga terminar.",
+            "sourceIds": [],
+            "status": "pending"
+          },
+          "tip": "Tirar o carregador da tomada quando a carga terminar."
+        }
+      ]
+    },
+    {
+      "id": "area-externa",
+      "name": "Área externa",
+      "items": [
+        {
+          "id": "luz-quintal-dia",
+          "label": "Luz do quintal acesa ao meio-dia",
+          "verdict": "desperdicio",
+          "categoryId": "iluminacao-publica-dia",
+          "explanation": {
+            "text": "De dia, a luz do sol já ilumina o quintal. Uma lâmpada acesa nesse horário gasta energia sem necessidade.",
+            "sourceIds": [],
+            "status": "pending"
+          },
+          "tip": "Apagar a luz externa de dia ou usar um sensor de luminosidade bem instalado."
+        },
+        {
+          "id": "telhado-sem-placas",
+          "label": "Telhado que recebe sol a tarde inteira, sem placas solares",
+          "verdict": "depende",
+          "categoryId": "solar-sem-geracao",
+          "explanation": {
+            "text": "Não é desperdício por si só, mas pode ser uma oportunidade. Gerar energia depende de avaliação técnica, da incidência solar no local e do investimento.",
+            "sourceIds": [
+              "aneel-mmgd",
+              "inpe-atlas-solar-2017"
+            ],
+            "status": "pending"
+          },
+          "tip": "Pedir uma avaliação técnica antes de pensar em placas solares."
+        },
+        {
+          "id": "varanda-a-noite",
+          "label": "Luz da varanda acesa à noite, com a família conversando ali",
+          "verdict": "normal",
+          "categoryId": null,
+          "explanation": {
+            "text": "À noite, com pessoas usando a varanda, a luz cumpre sua função. Não é desperdício.",
+            "sourceIds": [],
+            "status": "pending"
+          },
+          "tip": "Apagar a luz da varanda quando todos entrarem."
+        }
+      ]
+    }
+  ]
+}
