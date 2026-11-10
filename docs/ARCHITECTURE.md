@@ -241,6 +241,32 @@ as mesmas fronteiras.
 
 
 
+## 5.2 Digitação progressiva das respostas
+
+As respostas não são Markdown nem texto corrido: cada etapa é uma árvore de componentes React
+montada a partir de `StepContent`. Por isso a digitação é uma camada por cima da renderização,
+e não uma nova forma de renderizar.
+
+| Parte | Arquivo | Papel |
+|---|---|---|
+| Regra de velocidade (pura) | `lib/typing/typing-speed.ts` | Duração e intervalo por caractere: ritmo natural nas curtas, aceleração nas longas, teto de 4,2 s. |
+| Sequência (pura) | `lib/typing/reveal-sequence.ts` | Dada a lista ordenada de elementos e textos, diz o que aparece a cada avanço e onde fica o cursor. |
+| Aplicação na página | `components/assistant/typed-reveal.ts` | Esconde elementos com `data-typed="wait"`, devolve os textos caractere por caractere a partir do valor original e marca o cursor com `data-typed-caret`. Não cria nós nem usa `innerHTML`. |
+| Componente | `components/assistant/TypedContent.tsx` | Monta o motor `typewriter-effect` (componente React, `parseHTML: false`), liga os dois lados e cuida do ciclo de vida. |
+
+Fluxo: mensagem enviada → "Pensando" (máximo entre o mínimo e o tempo real) → a resposta entra
+na conversa já completa no React → `TypedContent` esconde e revela → ao fim, a página volta
+exatamente ao que o React renderizou (o HTML final é idêntico ao da versão sem animação).
+
+Garantias: uma animação por resposta (só a mais recente, na montagem); opções da biblioteca
+fixas (se mudassem, ela recomeçaria); resposta que perde a vez termina na hora e não anima de
+novo; desmontar ou reiniciar para o motor e limpa o temporizador; um "cão de guarda" mostra a
+resposta se a animação travar (aba em segundo plano); com movimento reduzido não há animação.
+O componente não conhece o provedor: recebe `children` prontos, venham do motor determinístico
+ou de um futuro modelo de linguagem.
+
+## 6. Como os minigames utilizam as regras existentes
+
 Rotas: `/jogos` (apresenta os três) e `/jogos/escolha-inteligente`, `/jogos/detetive`,
 `/jogos/casa-eficiente`. Tipos em `src/types/games.ts`; dados em `src/data/games/` (JSON
 validado por Zod em `schema.ts`, com as mesmas regras de fonte da base: explicação `verified`

@@ -135,6 +135,24 @@ Manual (Chrome): mensagem digitada mostra o balão na hora e a resposta em cerca
 "Novo diagnóstico" durante a espera volta ao início e nenhuma resposta chega depois; Enter
 repetido durante a espera não duplica a resposta; com movimento reduzido as animações param.
 
+## 7.2 Respostas sem cards e digitação progressiva
+
+Automatizados: `tests/lib/typing/typing.test.ts` (velocidade e sequência: nenhum caractere
+perdido ou repetido em qualquer ritmo, pular, resposta sem texto) e
+`tests/integration/digitacao.test.tsx` (todo o texto da base aparece inteiro em cada resposta
+das seis categorias; resposta da vez e resposta antiga têm o mesmo texto; `TypedContent` não
+esconde nada no HTML; texto com sinais de HTML continua texto; sem `innerHTML`; moldura e
+blocos de texto sem classes de caixa).
+
+Manual (Chrome, build estático): o HTML final das seis respostas é **idêntico** com e sem
+animação; o texto cresce progressivamente; "Pensando" some antes da digitação; cursor some no
+fim; "Mostrar resposta completa" termina na hora e devolve o foco ao título; "Novo diagnóstico"
+durante a digitação não deixa resíduos; mensagem nova durante a digitação encerra a anterior;
+respostas antigas não voltam a animar; movimento reduzido mostra tudo de imediato.
+
+A aplicação na página (`typed-reveal.ts`) depende de um navegador de verdade e não tem teste
+automatizado: o projeto não tem ambiente de DOM nos testes.
+
 ## 8. Responsividade (manual)
 
 - Larguras: 360 px, 768 px, 1366 px e a tela real da feira.

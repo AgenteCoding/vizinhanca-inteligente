@@ -50,7 +50,7 @@ Detalhes: `docs/ARCHITECTURE.md`.
 ## 3. Tecnologias (versões fixadas)
 
 Next.js 16.4.5 (App Router), React 19.3, TypeScript 5.9 (strict), Tailwind CSS 4.3,
-ESLint 9, Vitest 5.1, Zod 4.6 (valida `src/data/`). Node 24.
+ESLint 9, Vitest 5.1, Zod 4.6 (valida `src/data/`), typewriter-effect 3.3.0. Node 24.
 
 - `.npmrc` usa `save-exact=true`. **Não atualize dependências antes da feira.**
 - Fontes: Atkinson Hyperlegible Next e Mono, salvas em `src/app/fonts/` (licença SIL OFL 1.1) e
@@ -61,6 +61,9 @@ ESLint 9, Vitest 5.1, Zod 4.6 (valida `src/data/`). Node 24.
 - `npm audit` acusa 8 alertas moderados vindos de `minimatch` dentro do ESLint (só
   desenvolvimento, não chega ao site). **Risco aceito em 07/11/2026**: o `audit fix --force`
   rebaixaria o `eslint-config-next` para a v15 e quebraria o lint. Não rode `audit fix --force`.
+- **Exceção aprovada em 10/11/2026:** `typewriter-effect` 3.3.0 (digitação progressiva das
+  respostas), pedida pelo responsável. Sem dependências próprias; o `puppeteer` que ela cita é
+  opcional e não é instalado. Usar sempre com `parseHTML: false`.
 - Proibido adicionar: bibliotecas de animação, banco de dados, autenticação, analytics,
   gerenciadores de estado, SDKs de IA generativa. Qualquer nova dependência exige justificativa
   escrita na resposta ao responsável e aprovação.
@@ -171,6 +174,21 @@ Estilos base ficam em `@layer base` para as classes do Tailwind poderem sobrescr
   (regra pura: espera visual = máximo entre o mínimo e o tempo real do provedor). Mensagem
   digitada: mínimo de 5 s (`MIN_THINKING_MS`); botões da conversa: `MIN_STEP_THINKING_MS`. O hook
   `use-assistant` cancela as esperas ao reiniciar a conversa e ao desmontar.
+
+### Respostas do assistente: sem cards e com digitação progressiva (10/11/2026)
+
+- **Sem cards:** a resposta é conteúdo de conversa (sem fundo, borda ou sombra em volta do
+  texto). Continuam como componentes: sanfonas das soluções e do raciocínio, formulário do
+  desafio, aviso de acerto/erro, painel de resumo da explicação final e botões.
+- **Digitação:** `TypedContent` (`src/components/assistant/`) recebe a resposta já renderizada
+  como `children`. O React renderiza tudo; a `typewriter-effect` é só o motor (recebe o texto
+  puro e avisa cada caractere por `onCreateTextNode`); `typed-reveal.ts` revela esse caractere
+  no texto que o React já pôs na página. **Nunca** passe HTML para a biblioteca nem troque o
+  conteúdo por uma cópia: o texto das respostas não pode mudar.
+- Anima uma vez por resposta (só a mais recente, ao nascer). `prefers-reduced-motion` mostra
+  tudo na hora. Durante a digitação o conteúdo fica `inert` e há o botão "Mostrar resposta
+  completa". Velocidade em `src/lib/typing/typing-speed.ts` (máximo de 4,2 s por resposta).
+- O "Pensando" termina antes de a digitação começar; os dois nunca aparecem juntos.
 
 ## 10. Testes (obrigatórios)
 

@@ -64,6 +64,7 @@ Os jogos ficam em `/jogos` (link "Minigames" no menu). A pontuação é só "pon
 | Tailwind CSS 4 | Estilização rápida e consistente |
 | JSON + Zod | Base de conhecimento editável e validada |
 | Vitest | Testes automatizados da lógica de decisão |
+| typewriter-effect 3.3.0 | Motor da digitação progressiva das respostas (só o tempo; o conteúdo é renderizado pelo React) |
 | ESLint | Padrões de código e regras de segurança |
 | Git + Vercel | Controle de versões e publicação |
 
