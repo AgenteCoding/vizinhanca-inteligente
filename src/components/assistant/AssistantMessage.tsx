@@ -10,6 +10,7 @@ import { CATEGORY_ICONS } from "../ui/category-icons";
 import { Icon, type IconName } from "../ui/Icon";
 import { Notice } from "../ui/Notice";
 import { ChallengeStep } from "./ChallengeStep";
+import { TypedContent } from "./TypedContent";
 import { ExplanationText, SourceLegend } from "./ExplanationText";
 import {
   ASSISTANT_INTROS,
@@ -153,7 +154,7 @@ export function DiagnosisBody({ content, active, actions, situations }: BodyProp
   return (
     <div className="grid gap-4" data-diagnosis="confirmed" data-category={problem.id}>
       <p>{diagnosis.method === "text" ? ASSISTANT_INTROS.identified : ASSISTANT_INTROS.chosen}</p>
-      <div className="flex items-start gap-3 rounded-2xl border-[1.5px] border-petrol bg-surface p-4 shadow-[0_16px_32px_-24px_rgb(16_45_53/0.7)]">
+      <div className="flex items-start gap-3">
         <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-lime">
           <Icon name={CATEGORY_ICONS[problem.id]} />
         </span>
@@ -199,7 +200,7 @@ export function CausesBody({ content, active, actions }: BodyProps<"causas">) {
     <div className="grid gap-4">
       <p>{ASSISTANT_INTROS.causes}</p>
       {mainCause ? (
-        <div className="rounded-2xl border-2 border-petrol bg-surface p-4">
+        <div>
           <p className="text-sm font-semibold text-petrol-soft">Causa principal</p>
           <p className="font-bold">{mainCause.title}</p>
           <ExplanationText explanation={mainCause.explanation} className="mt-1" />
@@ -295,7 +296,7 @@ export function ChallengeBody({ content, active, actions, idPrefix }: BodyProps<
   return (
     <div className="grid gap-3">
       <p>{ASSISTANT_INTROS.challenge}</p>
-      <p id={questionId} className="rounded-2xl bg-petrol p-4 text-lg font-semibold leading-snug text-ice">
+      <p id={questionId} className="text-lg font-semibold leading-snug">
         {content.question}
       </p>
       {active ? (
@@ -336,7 +337,7 @@ export function EvaluationBody({ content, active, actions }: BodyProps<"avaliaca
           <p className="mt-1">{correct ? EVALUATION_MESSAGES.correctText : EVALUATION_MESSAGES.incorrectText}</p>
         </div>
       </div>
-      <div className="rounded-2xl border border-line bg-surface p-4">
+      <div>
         <p className="flex items-center gap-2 text-sm font-semibold text-petrol-soft">
           <Icon name="user" className="size-4" />
           Sua escolha
@@ -345,7 +346,7 @@ export function EvaluationBody({ content, active, actions }: BodyProps<"avaliaca
         <p className="mt-1">{evaluation.selectedFeedback}</p>
       </div>
       {correct ? null : (
-        <div className="rounded-2xl border-2 border-petrol bg-surface p-4">
+        <div>
           <p className="flex items-center gap-2 text-sm font-semibold text-petrol-soft">
             <Icon name="star" className="size-4" />A opção mais adequada
           </p>
@@ -473,7 +474,7 @@ export function FinalBody({ content, active, actions }: BodyProps<"explicacao-fi
 
 function FinalSection({ icon, title, children }: { icon: IconName; title: string; children: ReactNode }) {
   return (
-    <section className="rounded-2xl border border-line bg-surface p-4">
+    <section className="border-t border-line/70 pt-4">
       <h4 className="mb-2 flex items-center gap-2 font-semibold">
         <Icon name={icon} className="size-5" />
         {title}
@@ -521,6 +522,8 @@ export function AssistantMessage({
             ))}
           </span>
         </div>
+        {/* Só o conteúdo é digitado; o título da etapa aparece de imediato e recebe o foco. */}
+        <TypedContent animate={active} className="leading-relaxed">
         {content.step === "diagnostico" ? (
           <DiagnosisBody content={content} active={active} actions={actions} situations={situations} idPrefix={id} />
         ) : null}
@@ -539,6 +542,7 @@ export function AssistantMessage({
         {final ? (
           <FinalBody content={content} active={active} actions={actions} situations={situations} idPrefix={id} />
         ) : null}
+        </TypedContent>
       </div>
     </article>
   );

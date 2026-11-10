@@ -194,6 +194,28 @@
 }
 
 /* ------------------------------------------------------------------------------------------- */
+/* Digitação progressiva das respostas (ver components/assistant/TypedContent.tsx)             */
+/* ------------------------------------------------------------------------------------------- */
+
+/* Parte da resposta que ainda não foi "digitada". O atributo é posto e tirado pelo script. */
+[data-typed="wait"] {
+  display: none !important;
+}
+
+/* Cursor: fica logo depois do último caractere digitado e some quando a resposta termina. */
+[data-typed-caret]::after {
+  content: "";
+  display: inline-block;
+  width: 0.45em;
+  height: 1em;
+  margin-left: 0.12em;
+  vertical-align: -0.14em;
+  border-radius: 0.14em;
+  background: currentColor;
+  opacity: 0.85;
+}
+
+/* ------------------------------------------------------------------------------------------- */
 /* Movimento (só para quem não pediu redução)                                                  */
 /* ------------------------------------------------------------------------------------------- */
 
