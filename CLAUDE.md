@@ -64,12 +64,13 @@ ESLint 9, Vitest 5.1, Zod 4.6 (valida `src/data/`). Node 24.
 ## 4. Organização dos arquivos
 
 ```
-src/app/            rotas (layout.tsx, page.tsx e, nas próximas etapas, diagnostico/ e jogos/)
-src/components/     ui/ (Icon, Button, SiteHeader, Notice...), home/, assistant/ (fluxo); minigames/ depois
-src/hooks/          use-diagnostico.ts, use-game-session.ts (ligam o React ao motor de src/lib/)
-src/lib/            normalize.ts, classifier.ts, flow-engine.ts, games/*.ts
+src/app/            rotas: / (conversa + seções) e /diagnostico (só a conversa); jogos/ depois
+src/components/     ui/ (Icon, Button, SiteHeader, MobileMenu, Notice...), home/ (seções), assistant/ (chat)
+src/hooks/          use-assistant.ts (conversa e serviço do assistente); use-game-session.ts depois
+src/lib/            normalize.ts, classifier.ts, flow-engine.ts, evaluation.ts, conversation.ts,
+                    assistant/deterministic-assistant.ts; games/*.ts depois
 src/data/           problems.json, sources.json, games/*.json, schema.ts, index.ts
-src/types/          knowledge.ts (contratos da base), engine.ts (classificador e motor)
+src/types/          knowledge.ts (base), engine.ts (classificador e motor), assistant.ts (serviço e conversa)
 tests/              espelha src/: tests/lib/classifier.test.ts etc.
 docs/               documentação do projeto
 public/images/      ilustrações (criada quando houver a primeira imagem)
@@ -84,9 +85,15 @@ public/images/      ilustrações (criada quando houver a primeira imagem)
   sem acesso a `window`, `Date.now()` ou `Math.random()` sem injeção explícita.
 - Componentes pequenos, com uma responsabilidade. Server Components por padrão; `"use client"`
   só quando houver interatividade.
-- Estado do fluxo com `useReducer` chamando o motor de `src/lib/`, encapsulado em um hook de
-  `src/hooks/`. O hook só conecta; quem decide é `src/lib/`. Nada de lógica de decisão em
-  `onClick` nem dentro de hooks.
+- A interface fala só com o hook `useAssistant` (`src/hooks/use-assistant.ts`), que usa um
+  `AssistantService` (`src/types/assistant.ts`) vindo de um contexto. Hoje o serviço é o motor
+  determinístico (`createDeterministicAssistant`). O estado da conversa é `conversationReducer`
+  (`src/lib/conversation.ts`, puro). Componentes não importam o motor, o classificador nem o
+  serviço; quem decide é `src/lib/`. Nada de lógica de decisão em `onClick` nem dentro de hooks.
+- **IA generativa (futuro, não implementada):** só no servidor, com a chave em `ANTHROPIC_API_KEY`
+  (nunca `NEXT_PUBLIC_`), como outro `AssistantService`, mantendo o motor determinístico como
+  reserva. Exige sair do export puramente estático e aprovação do responsável. Detalhes em
+  `docs/ARCHITECTURE.md`.
 - Sem duplicação: conteúdo vem sempre de `src/data/`, nunca escrito direto no JSX.
 - Importações com o alias `@/` (ex.: `@/lib/classifier`).
 - Textos da interface em português do Brasil, linguagem acessível para estudantes.
@@ -135,11 +142,13 @@ contraste WCAG AA; acerto/erro com ícone **e** texto, nunca só cor; feedback a
 `aria-live`; foco visível; navegação completa por teclado; `lang="pt-BR"`; respeitar
 `prefers-reduced-motion`; botão "Recomeçar" sempre visível nas telas do fluxo.
 
-**Identidade visual (etapa 3):** tema claro fixo; tokens em `src/app/globals.css` (`paper`, `ink`,
-`ink-soft`, `lime`, `ai`, `review`, `wrong`...). Verde-limão só como preenchimento com texto
-`ink`; azul (`ai`) para o raciocínio da IA, links e foco. Ícones só de
-`src/components/ui/Icon.tsx` (SVG próprio, sem emoji), sempre acompanhados de texto. Animação só na
-troca de etapa e no mapa, e nunca escondendo conteúdo se não rodar.
+**Identidade visual (etapa 3, chat-first):** a página inicial é uma conversa com o assistente.
+Paleta obrigatória: Petrol Blue `#102D35` (marca), Ice White `#E8F7F5` (fundos e leitura) e
+Signal Lime `#D9FA57` (destaque, com moderação); demais tons derivados, em `src/app/globals.css`
+(`petrol`, `petrol-700`, `petrol-soft`, `ice`, `ice-strong`, `surface`, `line`, `lime`). Vermelho
+(`wrong`) só para erro, com ícone e texto. Ícones só de `src/components/ui/Icon.tsx` (SVG próprio,
+sem emoji). Animação só na chegada de uma resposta e no "analisando", nunca escondendo conteúdo.
+Estilos base ficam em `@layer base` para as classes do Tailwind poderem sobrescrevê-los.
 
 ## 10. Testes (obrigatórios)
 

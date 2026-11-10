@@ -48,17 +48,50 @@ mais fácil de explicar aos avaliadores.
 | `src/types/` | Interfaces e tipos compartilhados (`knowledge.ts`). | Depender de qualquer outra camada. |
 | `tests/` | Testes automatizados espelhando `src/`. | — |
 
-**Estado atual (etapa 3, evolução visual):** existem `src/app/` (rotas `/` e `/diagnostico`,
-fontes locais e `icon.svg`), `src/components/` (`ui/`, `home/` e `assistant/`), `src/hooks/`
-(`use-diagnostico.ts`), `src/data/`, `src/lib/` e `src/types/`. As demais pastas serão criadas na etapa em que receberem
-o primeiro arquivo, para evitar diretórios vazios.
+**Estado atual (etapa 3, chat-first):** existem `src/app/` (rotas `/` e `/diagnostico`, fontes
+locais e `icon.svg`), `src/components/` (`ui/`, `home/` e `assistant/`), `src/hooks/`
+(`use-assistant.ts`), `src/data/`, `src/lib/` (incluindo `conversation.ts` e `assistant/`) e
+`src/types/` (incluindo `assistant.ts`). As demais pastas serão criadas na etapa em que receberem o
+primeiro arquivo, para evitar diretórios vazios.
 
-**Integração (bloco D):** `useDiagnostico` usa `useReducer` com `diagnosticoReducer`, que só
-chama `flowEngine.transition` e guarda o motivo da última recusa. `DiagnosticoFlow` (único
-componente com `"use client"`) liga o hook a `DiagnosticoView`, que escolhe a visão da etapa em
-`StepViews.tsx`. Os componentes só exibem `content` e chamam as ações; rótulos e avisos da
-interface ficam em `components/assistant/messages.ts`. O foco vai para o título a cada troca de
-etapa, e o botão "Recomeçar" fica sempre visível.
+**Conversa (etapa 3):** a página inicial é um chat. `ChatExperience` (cliente) usa o hook
+`useAssistant` e entrega o estado a `ChatView` (só exibe): boas-vindas com o campo de conversa e as
+seis sugestões; depois, as falas do visitante e as respostas do assistente, uma etapa por resposta
+(`AssistantMessage`). Só a última resposta tem botões. O campo de conversa fica no rodapé da
+conversa e só aceita texto quando a etapa permite um relato. "Novo diagnóstico" volta ao início
+sem recarregar a página. `/diagnostico` mostra a mesma conversa (links antigos continuam válidos).
+
+```
+Componentes -> useAssistant (hooks/) -> AssistantService (types/assistant.ts)
+                    |                          | hoje
+                    v                          v
+            conversationReducer        createDeterministicAssistant (lib/assistant/)
+            (lib/conversation.ts)              |
+                                               v
+                                     createFlowEngine -> classificador, avaliação, dados
+```
+
+## 2.1 Assistente como serviço e futura IA generativa
+
+- **Contrato:** `AssistantService` tem `initialState`, `respond(estado, ação)` (assíncrono),
+  `content` e `allowedActions`. Os componentes não sabem quem responde.
+- **Hoje:** `createDeterministicAssistant` embrulha o motor; funciona sem internet. O hook segura
+  o "analisando" por um tempo mínimo (`MIN_PENDING_MS`, de 250 a 700 ms) só para o visitante
+  perceber a resposta chegando; o motor em si responde em menos de 1 ms.
+- **Erros:** se o serviço falhar, a conversa mostra uma mensagem com "Tentar de novo" e
+  "Novo diagnóstico" (estado `error` em `conversationReducer`).
+- **Futuro (não implementado, sem dependências nem chamadas fictícias):** um provedor com Claude
+  Sonnet seria outro `AssistantService`, escolhido no contexto `AssistantServiceContext`.
+  1. A chamada à API fica numa rota do servidor (Route Handler do Next ou função da Vercel); a
+     chave fica em `ANTHROPIC_API_KEY`, variável de ambiente do servidor, nunca `NEXT_PUBLIC_`.
+  2. Isso exige deixar o export 100% estático (`output: "export"`) ou publicar a rota à parte;
+     é uma decisão do responsável, com o impacto registrado aqui e no `CLAUDE.md`.
+  3. O motor determinístico continua decidindo etapas, respostas certas e fontes; o modelo só
+     poderia redigir textos de forma mais natural ou ajudar a classificar, sempre conferido contra
+     a base e sem inventar números.
+  4. Em erro, demora ou ausência de internet, o provedor devolve a resposta do motor determinístico
+     (reserva).
+  5. Testes usariam um serviço falso no contexto, sem custo nem rede.
 
 ## 3. Fluxo de informações
 
@@ -231,4 +264,7 @@ evita duplicação entre os três.
 | `FinalReport.causes` (etapa 3) | A explicação final passou a mostrar todas as causas; a lista de fontes inclui as fontes delas. |
 | Desafio com "marcar e confirmar" | Evita respostas por toque acidental na tela da feira; a avaliação continua no motor. |
 | Página inicial abre `/diagnostico#<situação>` | O cartão da situação leva direto ao diagnóstico; o motor valida a categoria. |
+| Página inicial chat-first (etapa 3) | O visitante começa a conversar na hora, sem cadastro; as etapas aparecem uma por resposta. |
+| `AssistantService` + `useAssistant` | Interface desacoplada do motor; permite trocar o provedor no futuro com o motor como reserva. |
+| Paleta Petrol / Ice / Lime | Identidade definida pelo responsável; contraste conferido. |
 | Licença MIT | Código aberto e reutilizável, adequado a projeto educacional público. |

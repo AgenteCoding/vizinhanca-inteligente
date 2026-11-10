@@ -93,10 +93,11 @@ fontes oficiais conferidas e validação automática (bloco A) e classificador d
 tratamento de ambiguidade (bloco B), motor do fluxo de sete etapas (bloco C) e uma versão
 navegável mínima em `/diagnostico` (bloco D).
 
-**Etapa 3 — Interface (em andamento):** identidade visual "mapa vivo da vizinhança", página
-inicial com as seis situações e diagnóstico com indicador de etapas, raciocínio da IA visível,
-desafio com confirmação e explicação final com fontes. Fontes tipográficas locais: o build
-funciona sem internet.
+**Etapa 3 — Interface (em andamento):** experiência chat-first. A página inicial pergunta "Como
+posso ajudar sua vizinhança?" e o visitante conversa com o assistente, sem cadastro: diagnóstico,
+causas, soluções, desafio, avaliação e explicação final aparecem uma etapa por resposta. Paleta
+Petrol Blue, Ice White e Signal Lime; fontes locais (o build funciona sem internet). A arquitetura
+está pronta para um futuro provedor de IA no servidor, sem nenhuma integração ativa.
 
 Depois: minigames e entrega. Veja [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md).
 

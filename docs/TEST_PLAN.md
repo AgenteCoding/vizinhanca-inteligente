@@ -66,14 +66,18 @@ palavras-chave). Exemplos:
 - A explicação final preserva `status` e `sourceIds` de cada explicação e separa fontes
   verificadas de pendentes (`tests/lib/flow-engine.test.ts`).
 
-## 5.1 Integração do fluxo navegável
+## 5.1 Integração da conversa
 
-`tests/integration/diagnostico.test.tsx` conduz o estado pelo mesmo reducer do hook e renderiza
-cada etapa com os componentes reais (`react-dom/server`), sem dependências novas. Cobre: fluxo
-completo para as seis categorias (guiado e digitado), relato vazio, baixa confiança, ambiguidade,
-negação, texto sem relação, HTML no relato, respostas corretas e incorretas, ligação dos botões
-às ações, reinício e fontes na explicação final. Cliques reais e foco foram conferidos
-manualmente no navegador (`npm run dev` → `/diagnostico`).
+`tests/integration/assistente.test.tsx` conduz a conversa pelo mesmo `conversationReducer` e
+serviço que o hook usa e renderiza os componentes reais (`react-dom/server`), sem dependências
+novas. Cobre: boas-vindas (pergunta, campo, aviso de conta, sugestões), conversa completa para as
+seis categorias (sugestão e relato digitado), só a última resposta com botões, relato vazio, baixa
+confiança, ambiguidade, negação, texto sem relação, HTML no relato, campo travado nas etapas
+guiadas, "analisando", erro do provedor com "Tentar de novo", respostas corretas e incorretas,
+ligação dos botões às ações, recomeço e fontes na explicação final. Também confere que os
+componentes não importam o motor e que nenhum código chama APIs externas ou lê chaves.
+`tests/lib/conversation.test.ts` e `tests/lib/assistant/` testam o estado da conversa e o serviço.
+Cliques reais, teclado e movimento reduzido foram conferidos no Chrome (sem janela) sobre o site gerado.
 
 Etapa 3: o desafio usa "marcar e confirmar" (botão desativado até marcar uma opção); os testes
 conferem o indicador de progresso (`aria-current="step"`), a solução recomendada marcada, o

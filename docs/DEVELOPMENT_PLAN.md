@@ -33,7 +33,8 @@ de ilustração interativa).
 |---|---|
 | Direção visual (cores, tipografia, componentes `ui/`) ✅ | P0 |
 | Telas do fluxo com acessibilidade (foco, `aria-live`, toque, contraste) ✅ | P0 |
-| Seis situações na página inicial (mapa ilustrado + cartões com ícone) ✅ | P0 |
+| Seis situações na página inicial (sugestões perto do campo de conversa) ✅ | P0 |
+| Reformulação chat-first, nova paleta e preparação para IA no servidor (sem integrar) ✅ | P0 |
 | Minigame Escolha Inteligente | P0 |
 | Conteúdo científico preenchido com fontes oficiais | P0 |
 | Revisão de código da etapa | P1 |
