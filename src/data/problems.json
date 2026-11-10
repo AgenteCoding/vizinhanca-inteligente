@@ -144,20 +144,20 @@
       "question": "Os postes de uma rua continuam acesos até o meio da manhã. Qual é a decisão mais adequada?",
       "options": [
         {
-          "id": "verificar-rele",
-          "text": "Pedir a verificação do relé fotocontrolador e trocá-lo por um que atenda à norma.",
-          "isCorrect": true,
-          "feedback": "Isso mesmo! O relé é o componente que decide quando a lâmpada acende e apaga. Corrigir a causa resolve o problema."
-        },
-        {
           "id": "lampadas-mais-fortes",
-          "text": "Trocar as lâmpadas da rua por lâmpadas mais fortes.",
+          "text": "Trocar as lâmpadas da rua por modelos mais fortes, que iluminem melhor a calçada.",
           "isCorrect": false,
           "feedback": "Lâmpadas mais fortes não resolvem o problema: elas continuariam acesas de dia, porque quem controla o horário é o relé."
         },
         {
+          "id": "verificar-rele",
+          "text": "Pedir a verificação do relé fotocontrolador e trocá-lo por um que atenda à norma.",
+          "isCorrect": true,
+          "feedback": "O relé é o componente que decide quando a lâmpada acende e apaga. Corrigir a causa resolve o problema."
+        },
+        {
           "id": "desligar-tudo",
-          "text": "Desligar de vez a iluminação da rua para economizar.",
+          "text": "Desligar de vez a iluminação da rua, inclusive à noite, para economizar energia.",
           "isCorrect": false,
           "feedback": "A iluminação pública é importante para a segurança à noite. O objetivo é evitar o desperdício, não deixar a rua no escuro."
         }
@@ -333,14 +333,8 @@
       "question": "Na escola, as luzes do corredor e dos banheiros ficam acesas o dia todo, mesmo quando ninguém está passando. Qual decisão faz mais sentido?",
       "options": [
         {
-          "id": "sensor-nos-corredores",
-          "text": "Instalar sensores de presença bem posicionados no corredor e nos banheiros.",
-          "isCorrect": true,
-          "feedback": "Ótima escolha! Em ambientes de passagem as pessoas ficam pouco tempo, então o sensor acende a luz só quando há alguém e apaga depois."
-        },
-        {
           "id": "trocar-lampadas-e-manter",
-          "text": "Trocar as lâmpadas e continuar deixando tudo aceso.",
+          "text": "Trocar todas as lâmpadas por modelos novos e continuar deixando tudo aceso.",
           "isCorrect": false,
           "feedback": "Trocar a lâmpada não resolve o problema principal: a luz continuaria acesa sem ninguém no ambiente."
         },
@@ -349,6 +343,12 @@
           "text": "Instalar sensores de presença em todas as salas de aula, sem nenhum ajuste.",
           "isCorrect": false,
           "feedback": "Na sala de aula os alunos ficam sentados e se mexem pouco. Um sensor mal ajustado pode apagar a luz durante a aula. Sensores precisam ser adequados ao uso de cada ambiente."
+        },
+        {
+          "id": "sensor-nos-corredores",
+          "text": "Instalar sensores de presença bem posicionados no corredor e nos banheiros.",
+          "isCorrect": true,
+          "feedback": "Em ambientes de passagem as pessoas ficam pouco tempo, então o sensor acende a luz só quando há alguém e apaga depois."
         }
       ]
     },
@@ -523,7 +523,7 @@
           "id": "lavar-e-passar-fora-da-ponta",
           "text": "Deixar para lavar e passar a roupa fora do horário de ponta.",
           "isCorrect": true,
-          "feedback": "Correto! Lavar e passar roupa são atividades flexíveis. Mudá-las de horário diminui a demanda na ponta. O consumo total dessas tarefas continua parecido: o que muda é quando ele acontece."
+          "feedback": "Lavar e passar roupa são atividades flexíveis. Mudá-las de horário diminui a demanda na ponta. O consumo total dessas tarefas continua parecido: o que muda é quando ele acontece."
         },
         {
           "id": "ligar-tudo-junto",
@@ -533,7 +533,7 @@
         },
         {
           "id": "deixar-de-tomar-banho",
-          "text": "Deixar de tomar banho.",
+          "text": "Deixar de tomar banho para não gastar energia com o chuveiro.",
           "isCorrect": false,
           "feedback": "O banho é uma necessidade. A ideia é reorganizar as atividades que podem mudar de horário, e não abrir mão do essencial."
         }
@@ -692,22 +692,22 @@
       "question": "A geladeira da Dona Ana é bem antiga, e ela quer saber se deve trocá-la. Qual é a forma mais adequada de decidir?",
       "options": [
         {
-          "id": "comparar-etiquetas",
-          "text": "Comparar o consumo e a classificação na etiqueta da geladeira atual com os de modelos novos, e verificar o estado da borracha de vedação.",
-          "isCorrect": true,
-          "feedback": "Isso! A idade sozinha não prova que um aparelho é ineficiente. Comparar consumo e classificação energética, e conferir a conservação, leva a uma decisão fundamentada."
-        },
-        {
           "id": "trocar-pela-idade",
-          "text": "Trocar imediatamente, porque todo aparelho antigo é ineficiente.",
+          "text": "Trocar imediatamente por uma nova, porque todo aparelho antigo é ineficiente.",
           "isCorrect": false,
           "feedback": "Nem sempre. A idade, isoladamente, não comprova a ineficiência. É preciso comparar consumo e classificação energética."
         },
         {
           "id": "comprar-o-mais-barato",
-          "text": "Comprar o modelo mais barato da loja, sem olhar a etiqueta.",
+          "text": "Comprar a geladeira mais barata da loja, sem olhar a etiqueta de eficiência.",
           "isCorrect": false,
           "feedback": "O preço não informa o consumo. Sem olhar a etiqueta, é possível levar para casa um aparelho que gasta mais energia."
+        },
+        {
+          "id": "comparar-etiquetas",
+          "text": "Comparar o consumo e a classificação energética dela com os de modelos novos.",
+          "isCorrect": true,
+          "feedback": "A idade sozinha não prova que um aparelho é ineficiente. Comparar o consumo e a classificação energética leva a uma decisão fundamentada; também vale conferir a conservação, como a borracha da porta."
         }
       ]
     },
@@ -869,20 +869,20 @@
       "question": "Numa sala, o ar-condicionado está ligado e a janela está aberta porque alguém quer ventilar o ambiente. Qual é a melhor decisão?",
       "options": [
         {
-          "id": "fechar-e-ventilar-depois",
-          "text": "Fechar a janela enquanto o ar estiver ligado e ventilar a sala com o aparelho desligado.",
-          "isCorrect": true,
-          "feedback": "Correto! Com a janela fechada, o aparelho não precisa resfriar o ar que entra de fora. A ventilação pode ser feita em outro momento."
-        },
-        {
           "id": "baixar-a-temperatura",
           "text": "Baixar ao máximo a temperatura do aparelho para compensar a janela aberta.",
           "isCorrect": false,
           "feedback": "Isso só faz o aparelho trabalhar ainda mais, enquanto o calor continua entrando pela janela."
         },
         {
+          "id": "fechar-e-ventilar-depois",
+          "text": "Fechar a janela enquanto o ar estiver ligado e ventilar com o aparelho desligado.",
+          "isCorrect": true,
+          "feedback": "Com a janela fechada, o aparelho não precisa resfriar o ar que entra de fora. A ventilação pode ser feita em outro momento."
+        },
+        {
           "id": "nao-faz-diferenca",
-          "text": "Manter a janela aberta e o ar ligado, porque não faz diferença.",
+          "text": "Manter a janela aberta e o ar ligado, porque isso não faz diferença no consumo.",
           "isCorrect": false,
           "feedback": "Faz diferença, sim: o ar resfriado escapa, o ar quente entra e o aparelho gasta energia tentando compensar."
         }
@@ -1061,19 +1061,19 @@
       "options": [
         {
           "id": "avaliacao-tecnica",
-          "text": "Fazer uma avaliação técnica da incidência solar no local, do telhado, do consumo da casa e do investimento.",
+          "text": "Fazer uma avaliação técnica do telhado, da incidência solar, do consumo e do custo.",
           "isCorrect": true,
-          "feedback": "Isso! A instalação depende de condições técnicas, da incidência solar, das características da instalação e do investimento. Avaliar antes evita surpresas."
+          "feedback": "A instalação depende de condições técnicas, da incidência solar, das características da instalação e do investimento. Avaliar antes evita surpresas."
         },
         {
           "id": "comprar-sem-avaliar",
-          "text": "Comprar o maior número de painéis possível, sem avaliação.",
+          "text": "Comprar o maior número de painéis que couber no telhado, sem nenhuma avaliação.",
           "isCorrect": false,
           "feedback": "Sem avaliação, o sistema pode ficar maior ou menor que o necessário, ou nem caber no telhado. O dimensionamento é essencial."
         },
         {
           "id": "desistir",
-          "text": "Desistir, porque energia solar só funciona em lugares sem nuvens.",
+          "text": "Desistir da ideia, porque energia solar só funciona em lugares sem nenhuma nuvem.",
           "isCorrect": false,
           "feedback": "Não é bem assim. A produção varia com o clima e a região, e isso deve ser avaliado caso a caso, com dados de irradiação solar do local."
         }

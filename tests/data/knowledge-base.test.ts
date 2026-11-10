@@ -64,6 +64,33 @@ describe("integridade da base real", () => {
     });
   });
 
+  describe("desafios", () => {
+    const correctOf = (problem: (typeof problems)[number]) =>
+      problem.challenge.options.find((option) => option.isCorrect);
+
+    it("a opção correta não fica sempre na mesma posição", () => {
+      const positions = new Set(
+        problems.map((problem) => problem.challenge.options.findIndex((option) => option.isCorrect)),
+      );
+      expect(positions.size).toBeGreaterThan(1);
+    });
+
+    it.each(problems.map((problem) => [problem.id, problem] as const))(
+      "%s: a opção correta não se destaca pelo tamanho do texto",
+      (_, problem) => {
+        const shortest = Math.min(...problem.challenge.options.map((option) => option.text.length));
+        expect((correctOf(problem)?.text.length ?? 0) / shortest).toBeLessThanOrEqual(1.3);
+      },
+    );
+
+    it.each(problems.map((problem) => [problem.id, problem] as const))(
+      "%s: o feedback da opção correta não começa com elogio (a tela já informa o acerto)",
+      (_, problem) => {
+        expect(correctOf(problem)?.feedback).not.toMatch(/^(isso|correto|ótim[ao]|muito bem|parabéns)/i);
+      },
+    );
+  });
+
   describe("fontes", () => {
     it.each(sources.map((source) => [source.id, source] as const))(
       "%s é institucional e registra o que sustenta",
