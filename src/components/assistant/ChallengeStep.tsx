@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import type { DiagnosticoActions } from "@/hooks/use-diagnostico";
 import type { StepContent } from "@/types/engine";
 import { Button } from "../ui/Button";
 import { Icon } from "../ui/Icon";
@@ -11,7 +10,7 @@ type ChallengeContent = Extract<StepContent, { step: "desafio" }>;
 const LETTERS = ["A", "B", "C", "D", "E"];
 
 /**
- * Visão do desafio (sem estado): o visitante marca uma opção e confirma.
+ * Opções do desafio (sem estado): o visitante marca uma opção e confirma.
  * Confirmar evita respostas por toque acidental na tela da feira.
  */
 export function ChallengeView({
@@ -19,29 +18,29 @@ export function ChallengeView({
   selectedId,
   onSelect,
   onConfirm,
+  questionId,
 }: {
   content: ChallengeContent;
   selectedId: string | null;
   onSelect: (optionId: string) => void;
   onConfirm: () => void;
+  /** Id do elemento que contém a pergunta (rótulo do grupo de opções). */
+  questionId: string;
 }) {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onConfirm();
   };
   return (
-    <form onSubmit={handleSubmit} className="grid gap-5">
-      <p id="pergunta-desafio" className="rounded-3xl bg-ink p-5 text-lg font-bold leading-snug text-paper sm:p-6 sm:text-2xl">
-        {content.question}
-      </p>
-      <div role="radiogroup" aria-labelledby="pergunta-desafio" className="grid gap-3">
+    <form onSubmit={handleSubmit} className="grid gap-3">
+      <div role="radiogroup" aria-labelledby={questionId} className="grid gap-2">
         {content.options.map((option, index) => {
           const checked = option.id === selectedId;
           return (
             <label
               key={option.id}
-              className={`flex min-h-16 cursor-pointer items-start gap-4 rounded-2xl border-2 p-4 transition-colors has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ai ${
-                checked ? "border-ink bg-lime/35" : "border-line bg-surface hover:border-ink"
+              className={`flex min-h-14 cursor-pointer items-start gap-3 rounded-2xl border-2 p-3 transition-colors has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-petrol ${
+                checked ? "border-petrol bg-lime/40" : "border-line bg-ice hover:border-petrol"
               }`}
             >
               <input
@@ -54,45 +53,49 @@ export function ChallengeView({
               />
               <span
                 aria-hidden="true"
-                className={`grid size-9 shrink-0 place-items-center rounded-full border-2 border-ink font-extrabold ${
-                  checked ? "bg-ink text-lime" : "bg-surface text-ink"
+                className={`grid size-8 shrink-0 place-items-center rounded-full border-2 border-petrol text-sm font-extrabold ${
+                  checked ? "bg-petrol text-lime" : "bg-surface text-petrol"
                 }`}
               >
-                {checked ? <Icon name="check" className="size-5" /> : LETTERS[index]}
+                {checked ? <Icon name="check" className="size-4" /> : LETTERS[index]}
               </span>
-              <span className="pt-1 text-lg leading-snug">{option.text}</span>
+              <span className="pt-0.5 leading-snug">{option.text}</span>
             </label>
           );
         })}
       </div>
-      <div>
+      <div className="flex flex-wrap items-center gap-3">
         <Button type="submit" disabled={selectedId === null}>
           Confirmar resposta
         </Button>
         {selectedId === null ? (
-          <p className="mt-2 text-sm text-ink-soft">Marque uma das opções para confirmar.</p>
+          <span className="text-sm text-petrol-soft">Marque uma das opções para confirmar.</span>
         ) : null}
       </div>
     </form>
   );
 }
 
-/** Guarda só a opção marcada (estado de tela); a avaliação é feita pelo motor. */
+/** Guarda só a opção marcada (estado de tela); quem avalia a resposta é o assistente. */
 export function ChallengeStep({
   content,
-  actions,
+  questionId,
+  onAnswer,
 }: {
   content: ChallengeContent;
-  actions: DiagnosticoActions;
+  questionId: string;
+  onAnswer: (optionId: string, optionText: string) => void;
 }) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   return (
     <ChallengeView
       content={content}
+      questionId={questionId}
       selectedId={selectedId}
       onSelect={setSelectedId}
       onConfirm={() => {
-        if (selectedId !== null) actions.answer(selectedId);
+        const option = content.options.find((candidate) => candidate.id === selectedId);
+        if (option) onAnswer(option.id, option.text);
       }}
     />
   );

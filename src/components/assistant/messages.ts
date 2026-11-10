@@ -1,49 +1,63 @@
 /**
  * Textos da interface do assistente (rótulos e avisos). Não há conteúdo científico aqui:
- * causas, soluções, explicações e fontes vêm sempre de `src/data/` por meio do motor.
+ * causas, soluções, explicações e fontes vêm sempre de `src/data/` por meio do serviço.
  */
-import type { ClassificationStatus, FlowRejectionReason } from "@/types/engine";
+import type { ClassificationStatus, FlowActionType, FlowRejectionReason } from "@/types/engine";
 import type { FlowStep } from "@/types/knowledge";
 
-/** Título de cada etapa (o número aparece no indicador de progresso). */
-export const STEP_TITLES: Record<FlowStep, string> = {
-  relato: "Conte o que está acontecendo",
-  diagnostico: "Diagnóstico",
-  causas: "Por que isso acontece",
-  alternativas: "Alternativas de solução",
-  desafio: "Desafio",
-  avaliacao: "Avaliação da sua escolha",
-  "explicacao-final": "Explicação final",
+export const WELCOME_TITLE = "Como posso ajudar sua vizinhança?";
+export const WELCOME_TEXT =
+  "Conte um desperdício de energia que você viu. Eu identifico a situação, explico as causas e ajudo você a escolher a melhor solução.";
+export const CONVERSATION_TITLE = "Conversa com o assistente";
+
+export const COMPOSER_LABEL = "Descreva uma situação de desperdício de energia";
+export const COMPOSER_PLACEHOLDER = "Descreva uma situação de desperdício de energia...";
+export const COMPOSER_LOCKED_PLACEHOLDER = "Use as opções acima.";
+export const COMPOSER_HINT = "Enter envia. Shift + Enter quebra a linha.";
+export const NO_ACCOUNT_NOTE = "Não precisa criar conta. Nada do que você escreve é guardado.";
+export const SUGGESTIONS_LABEL = "Ou escolha uma situação para começar";
+
+/** O que aparece no balão do visitante quando ele escolhe uma opção da conversa. */
+export const VISITOR_LABELS = {
+  select: (title: string) => `Quero estudar: ${title}.`,
+  reselect: (title: string) => `Na verdade, a situação é: ${title}.`,
+  toCauses: "Por que isso acontece?",
+  toAlternatives: "Quais são as soluções?",
+  toChallenge: "Quero tentar o desafio.",
+  answer: (option: string) => `Minha escolha: ${option}`,
+  toFinal: "Quero ver a explicação final.",
 };
 
-/** Nome curto de cada etapa no indicador de progresso. */
+/** Nome curto de cada etapa (indicação "Etapa X de 7"). */
 export const STEP_LABELS: Record<FlowStep, string> = {
   relato: "Relato",
   diagnostico: "Diagnóstico",
   causas: "Causas",
-  alternativas: "Alternativas",
+  alternativas: "Soluções",
   desafio: "Desafio",
   avaliacao: "Avaliação",
-  "explicacao-final": "Resultado",
+  "explicacao-final": "Explicação final",
 };
 
-/** O que acontece em cada etapa, em uma frase. */
-export const STEP_HINTS: Record<FlowStep, string> = {
-  relato: "Descreva o desperdício com suas palavras ou escolha uma das seis situações.",
-  diagnostico: "Veja qual situação a IA identificou e como ela chegou a essa conclusão.",
-  causas: "Entenda por que esse desperdício acontece e o que ele provoca.",
-  alternativas: "Compare as soluções possíveis: cada uma tem vantagens e limitações.",
-  desafio: "Escolha a decisão que você tomaria nesta situação e confirme.",
-  avaliacao: "Veja se a sua escolha foi a mais adequada e entenda o porquê.",
-  "explicacao-final": "Um resumo do que você aprendeu nesta situação, com as fontes.",
+/** Frase de abertura de cada resposta do assistente. */
+export const ASSISTANT_INTROS = {
+  identified: "Pelo que você contou, a situação é esta:",
+  chosen: "Certo! Vamos estudar esta situação:",
+  causes: "Veja por que isso acontece e o que esse desperdício provoca.",
+  alternatives:
+    "Estas são as soluções possíveis. Toque em cada uma para ver as vantagens e as limitações.",
+  challenge: "Agora é a sua vez de decidir.",
+  final: "Resumo do que você aprendeu nesta situação.",
 };
 
-/** Exemplos de relato para quem não sabe o que escrever. */
-export const REPORT_EXAMPLES: string[] = [
-  "Os postes da minha rua ficam acesos durante o dia.",
-  "Deixo o ar ligado com a janela aberta.",
-  "Minha geladeira é muito antiga e consome bastante energia.",
-];
+export const PENDING_MESSAGES: Partial<Record<FlowActionType, string>> = {
+  SUBMIT_REPORT: "Analisando o seu relato...",
+  ANSWER_CHALLENGE: "Avaliando a sua escolha...",
+};
+export const DEFAULT_PENDING_MESSAGE = "Preparando a resposta...";
+
+export const PROVIDER_ERROR =
+  "Não consegui responder agora. Tente de novo ou comece um novo diagnóstico.";
 
 /** O que dizer quando o relato não bastou para um diagnóstico. */
 export const CLARIFICATION_MESSAGES: Record<Exclude<ClassificationStatus, "identified">, string> = {

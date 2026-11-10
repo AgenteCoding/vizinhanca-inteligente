@@ -7,8 +7,8 @@ export function SourceBadge({ status }: { status: ReviewStatus }) {
   const verified = status === "verified";
   return (
     <span
-      className={`ml-1 inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-0.5 align-[0.1em] text-sm font-bold leading-tight ${
-        verified ? "bg-ai-soft text-ai" : "bg-review-soft text-review"
+      className={`ml-1 inline-flex items-center gap-1 whitespace-nowrap rounded-full border px-2 py-0.5 align-[0.1em] text-sm font-bold leading-tight ${
+        verified ? "border-petrol/25 bg-ice-strong text-petrol" : "border-dashed border-petrol/40 text-petrol-soft"
       }`}
     >
       <Icon name={verified ? "check" : "review"} className="size-3.5" />
@@ -36,7 +36,7 @@ export function ExplanationText({
   );
 }
 
-/** Legenda única dos selos, no fim das telas com explicações. */
+/** Legenda única dos selos. */
 export function SourceLegend() {
-  return <p className="text-sm text-ink-soft">{SOURCE_LEGEND}</p>;
+  return <p className="text-sm text-petrol-soft">{SOURCE_LEGEND}</p>;
 }

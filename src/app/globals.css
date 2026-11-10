@@ -1,30 +1,25 @@
 @import "tailwindcss";
 
 /*
- * Identidade visual "Mapa vivo da vizinhança" (etapa 3).
- * Fundo claro e fixo (igual em qualquer aparelho e legível sob a luz da feira).
- * - ink: verde-escuro, cor principal de textos e traços.
- * - lime: verde-limão, só como preenchimento de ações e destaques, sempre com texto ink.
- * - ai: azul, tudo o que é raciocínio da IA, links e foco.
- * Contrastes conferidos (WCAG AA): ink/paper 11:1, ink-soft/paper 6,9:1, ai/paper 5,4:1,
- * ink/lime 9,5:1, review/review-soft 5,9:1, ink/wrong-soft 12:1.
+ * Identidade visual chat-first (etapa 3).
+ * Paleta obrigatória: Petrol Blue #102D35 (marca), Ice White #E8F7F5 (fundos e leitura) e
+ * Signal Lime #D9FA57 (destaque, com moderação). Os demais tons são derivados dessas três cores.
+ * O vermelho existe só para indicar erro, sempre acompanhado de ícone e texto.
+ * Contrastes conferidos (WCAG AA): petrol/ice 13:1, petrol-soft/ice 6,5:1, petrol/lime 12:1,
+ * ice/petrol-700 9,3:1, petrol/ice-strong 11,8:1, wrong/ice 6:1.
  */
 @theme {
-  --color-paper: #f2f6f1;
-  --color-surface: #ffffff;
-  --color-ink: #0f3d2e;
-  --color-ink-soft: #3d5a4f;
-  --color-line: #c9d6ce;
-  --color-lime: #c6f432;
-  --color-lime-strong: #b2e01c;
-  --color-ai: #1f5bd8;
-  --color-ai-soft: #e6eefc;
-  --color-review: #9a4508;
-  --color-review-soft: #fdf3e7;
+  --color-petrol: #102d35;
+  --color-petrol-700: #1c4652;
+  --color-petrol-soft: #3f5c63;
+  --color-ice: #e8f7f5;
+  --color-ice-strong: #d5ede9;
+  --color-surface: #f7fcfb;
+  --color-line: #bcd7d2;
+  --color-lime: #d9fa57;
+  --color-lime-strong: #cbef42;
   --color-wrong: #b42318;
-  --color-wrong-soft: #fdecea;
-  --color-map: #e3ede2;
-  --color-leaf: #cde3c6;
+  --color-wrong-soft: #fbe9e7;
 }
 
 @theme inline {
@@ -32,71 +27,82 @@
   --font-mono: var(--font-atkinson-mono), ui-monospace, "Cascadia Mono", Consolas, monospace;
 }
 
-html {
-  /* Base de 18px: leitura confortável em telas de quiosque. */
-  font-size: 112.5%;
-  color-scheme: light;
+/* Estilos base dentro de @layer base: as classes utilitárias do Tailwind podem sobrescrevê-los. */
+@layer base {
+  html {
+    /* Base de 18px: leitura confortável em telas de quiosque. */
+    font-size: 112.5%;
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-ice);
+    color: var(--color-petrol);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-lime);
+    color: var(--color-petrol);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-petrol);
+    outline-offset: 3px;
+  }
+
+  /* Em áreas escuras (Petrol), o foco fica em verde-limão para continuar visível. */
+  .on-dark :focus-visible {
+    outline-color: var(--color-lime);
+  }
 }
 
-body {
-  background: var(--color-paper);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  line-height: 1.15;
-  text-wrap: balance;
-}
-
-p,
-li,
-dd {
-  text-wrap: pretty;
-}
-
-::selection {
-  background: var(--color-lime);
-  color: var(--color-ink);
-}
-
-:focus-visible {
-  outline: 3px solid var(--color-ai);
-  outline-offset: 3px;
-}
-
-/* Títulos recebem foco por código a cada troca de etapa (leitores de tela); sem moldura. */
+/* Elementos que recebem foco por código (ex.: título da nova resposta); sem moldura. */
 [tabindex="-1"]:focus {
   outline: none;
 }
 
-/* Movimento só para quem não pediu redução: a troca de etapa e a "leitura" do mapa. */
+/* Movimento só para quem não pediu redução: a chegada de uma resposta e o "analisando". */
 @media (prefers-reduced-motion: no-preference) {
-  .step-enter {
+  .message-enter {
     /* Sem "fill-mode": se a animação não rodar, o conteúdo continua visível. */
-    animation: step-enter 220ms ease-out;
+    animation: message-enter 240ms ease-out;
   }
 
-  .map-scan {
-    animation: map-scan 1.8s ease-in-out 0.2s both;
+  .typing-dot {
+    animation: typing 1.2s ease-in-out infinite;
   }
 
-  .map-marker {
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: map-marker 360ms ease-out both;
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.3s;
   }
 }
 
-@keyframes step-enter {
+@keyframes message-enter {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
@@ -104,33 +110,22 @@ dd {
   }
 }
 
-@keyframes map-scan {
-  0% {
-    opacity: 0.9;
-    transform: translateY(0);
-  }
+@keyframes typing {
+  0%,
+  80%,
   100% {
-    opacity: 0;
-    transform: translateY(420px);
+    opacity: 0.25;
   }
-}
-
-@keyframes map-marker {
-  from {
-    opacity: 0;
-    transform: scale(0.4);
-  }
-  to {
+  40% {
     opacity: 1;
-    transform: scale(1);
   }
-}
-
-.map-scan {
-  opacity: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {

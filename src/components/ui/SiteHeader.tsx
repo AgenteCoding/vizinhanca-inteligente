@@ -1,29 +1,42 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { BrandMark } from "./BrandMark";
+import { buttonClasses } from "./Button";
+import { MobileMenu } from "./MobileMenu";
 
-/** Barra superior: a marca leva sempre ao início; à direita, ações da página. */
-export function SiteHeader({
-  children,
-  compactOnMobile = false,
-}: {
-  children?: ReactNode;
-  /** No celular, mostra só o símbolo da marca para dar espaço às ações. */
-  compactOnMobile?: boolean;
-}) {
+/** Links da navegação (os mesmos no computador e no menu do celular). */
+export const NAV_LINKS = [
+  { href: "/#como-funciona", label: "Como funciona" },
+  { href: "/#situacoes", label: "Situações" },
+  { href: "/#minigames", label: "Minigames" },
+];
+
+/** Barra superior discreta: marca, três links e o botão "Começar". Sem login nem cadastro. */
+export function SiteHeader() {
   return (
-    <header className="border-b border-line bg-surface">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+    <header className="sticky top-0 z-20 border-b border-line/70 bg-ice/90 backdrop-blur-sm">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-2.5 sm:px-6">
         <Link
           href="/"
-          className="flex min-h-12 items-center gap-3 rounded-xl pr-2 text-lg font-extrabold tracking-tight text-ink"
+          className="flex min-h-12 items-center gap-2.5 rounded-xl pr-2 font-extrabold tracking-tight text-petrol"
         >
-          <BrandMark className="size-10 shrink-0" />
-          <span className={compactOnMobile ? "sr-only leading-tight sm:not-sr-only" : "leading-tight"}>
-            Vizinhança Inteligente
-          </span>
+          <BrandMark className="size-9 shrink-0" />
+          <span className="leading-tight">Vizinhança Inteligente</span>
         </Link>
-        {children ? <div className="flex items-center gap-2">{children}</div> : null}
+        <nav aria-label="Principal" className="hidden items-center gap-1 md:flex">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="flex min-h-12 items-center rounded-full px-4 font-bold text-petrol-soft transition-colors hover:bg-ice-strong hover:text-petrol"
+            >
+              {link.label}
+            </Link>
+          ))}
+          <a href="#conversa" className={buttonClasses("primary", "ml-2 min-h-11 px-5")}>
+            Começar
+          </a>
+        </nav>
+        <MobileMenu links={NAV_LINKS} />
       </div>
     </header>
   );

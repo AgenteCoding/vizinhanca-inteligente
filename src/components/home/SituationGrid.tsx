@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { ProblemCategoryId } from "@/types/knowledge";
 import { CATEGORY_ICONS } from "../ui/category-icons";
 import { Icon } from "../ui/Icon";
@@ -9,35 +8,41 @@ interface Situation {
   summary: string;
 }
 
-/** As seis situações da base. Cada cartão abre o diagnóstico já com a situação escolhida. */
+/**
+ * As seis situações da base. Cada link (#id) volta para a conversa já com a situação escolhida.
+ */
 export function SituationGrid({ situations }: { situations: Situation[] }) {
   return (
-    <section id="situacoes" aria-labelledby="situacoes-titulo" className="mx-auto w-full max-w-6xl scroll-mt-6 px-4 py-14 sm:px-6">
-      <h2 id="situacoes-titulo" className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-        Seis situações que a IA reconhece
-      </h2>
-      <p className="mt-3 max-w-2xl text-lg text-ink-soft">
-        Escolha uma para estudar agora, ou descreva o que você viu no diagnóstico.
-      </p>
-      <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {situations.map((situation) => (
-          <li key={situation.id}>
-            <Link
-              href={`/diagnostico#${situation.id}`}
-              className="group flex h-full flex-col gap-3 rounded-3xl border-2 border-line bg-surface p-5 transition-colors hover:border-ink"
-            >
-              <span className="grid size-12 place-items-center rounded-2xl bg-paper text-ink transition-colors group-hover:bg-lime">
-                <Icon name={CATEGORY_ICONS[situation.id]} className="size-7" />
-              </span>
-              <span className="text-xl font-bold leading-snug">{situation.title}</span>
-              <span className="text-ink-soft">{situation.summary}</span>
-              <span className="mt-auto pt-2 font-bold text-ai underline-offset-4 group-hover:underline">
-                Estudar esta situação
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+    <section id="situacoes" aria-labelledby="situacoes-titulo" className="scroll-mt-20 border-t border-line/70">
+      <div className="mx-auto w-full max-w-5xl px-4 py-14 sm:px-6">
+        <h2 id="situacoes-titulo" className="text-2xl font-extrabold tracking-tight">
+          Situações que o assistente reconhece
+        </h2>
+        <p className="mt-2 max-w-2xl text-petrol-soft">
+          Escolha uma para conversar sobre ela, ou descreva com suas palavras no campo de conversa.
+        </p>
+        <ul className="mt-6 grid gap-x-10 sm:grid-cols-2">
+          {situations.map((situation) => (
+            <li key={situation.id} className="border-b border-line/70">
+              <a
+                href={`#${situation.id}`}
+                className="group flex min-h-12 items-start gap-3 rounded-xl py-4 hover:bg-ice-strong/60"
+              >
+                <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-ice-strong text-petrol group-hover:bg-lime">
+                  <Icon name={CATEGORY_ICONS[situation.id]} className="size-5" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block font-bold leading-snug">{situation.title}</span>
+                  <span className="mt-1 block text-sm text-petrol-soft">{situation.summary}</span>
+                  <span className="mt-1 block text-sm font-bold underline-offset-4 group-hover:underline">
+                    Conversar sobre esta situação
+                  </span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }

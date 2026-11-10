@@ -149,6 +149,8 @@ export const ICON_PATHS = {
     </>
   ),
   bolt: <path d="M13 2.5L5 13.5h6l-1 8 8-11h-6z" />,
+  send: <path d="M12 19.5V5M5.5 11.5L12 5l6.5 6.5" />,
+  menu: <path d="M4 7h16M4 12h16M4 17h16" />,
 } satisfies Record<string, ReactNode>;
 
 export type IconName = keyof typeof ICON_PATHS;
