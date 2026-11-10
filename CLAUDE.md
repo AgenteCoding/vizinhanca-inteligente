@@ -49,6 +49,9 @@ Next.js 16.4.5 (App Router), React 19.3, TypeScript 5.9 (strict), Tailwind CSS 4
 ESLint 9, Vitest 5.1, Zod 4.6 (valida `src/data/`). Node 24.
 
 - `.npmrc` usa `save-exact=true`. **Não atualize dependências antes da feira.**
+- Fontes: Atkinson Hyperlegible Next e Mono, salvas em `src/app/fonts/` (licença SIL OFL 1.1) e
+  carregadas com `next/font/local`. **Não use `next/font/google`**: o build precisa funcionar
+  sem internet.
 - `eslint-plugin-jsx-a11y` está declarado diretamente (já vinha com o `eslint-config-next`)
   para ativar o conjunto recomendado de regras de acessibilidade.
 - `npm audit` acusa 8 alertas moderados vindos de `minimatch` dentro do ESLint (só
@@ -62,7 +65,7 @@ ESLint 9, Vitest 5.1, Zod 4.6 (valida `src/data/`). Node 24.
 
 ```
 src/app/            rotas (layout.tsx, page.tsx e, nas próximas etapas, diagnostico/ e jogos/)
-src/components/     ui/ (genéricos), assistant/, challenges/, minigames/, results/, home/
+src/components/     ui/ (Icon, Button, SiteHeader, Notice...), home/, assistant/ (fluxo); minigames/ depois
 src/hooks/          use-diagnostico.ts, use-game-session.ts (ligam o React ao motor de src/lib/)
 src/lib/            normalize.ts, classifier.ts, flow-engine.ts, games/*.ts
 src/data/           problems.json, sources.json, games/*.json, schema.ts, index.ts
@@ -131,6 +134,12 @@ Mobile-first (testar em 360px, tablet e notebook); fonte base de 18px; alvos de 
 contraste WCAG AA; acerto/erro com ícone **e** texto, nunca só cor; feedback anunciado com
 `aria-live`; foco visível; navegação completa por teclado; `lang="pt-BR"`; respeitar
 `prefers-reduced-motion`; botão "Recomeçar" sempre visível nas telas do fluxo.
+
+**Identidade visual (etapa 3):** tema claro fixo; tokens em `src/app/globals.css` (`paper`, `ink`,
+`ink-soft`, `lime`, `ai`, `review`, `wrong`...). Verde-limão só como preenchimento com texto
+`ink`; azul (`ai`) para o raciocínio da IA, links e foco. Ícones só de
+`src/components/ui/Icon.tsx` (SVG próprio, sem emoji), sempre acompanhados de texto. Animação só na
+troca de etapa e no mapa, e nunca escondendo conteúdo se não rodar.
 
 ## 10. Testes (obrigatórios)
 

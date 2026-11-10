@@ -75,6 +75,12 @@ negação, texto sem relação, HTML no relato, respostas corretas e incorretas,
 às ações, reinício e fontes na explicação final. Cliques reais e foco foram conferidos
 manualmente no navegador (`npm run dev` → `/diagnostico`).
 
+Etapa 3: o desafio usa "marcar e confirmar" (botão desativado até marcar uma opção); os testes
+conferem o indicador de progresso (`aria-current="step"`), a solução recomendada marcada, o
+resultado da avaliação (`data-result`) e todas as causas na explicação final. Os dados têm testes
+que impedem a opção correta de ficar sempre na mesma posição, de se destacar pelo tamanho ou de ter
+feedback começando com elogio.
+
 ## 6. Explicações apresentadas
 
 Testes automatizados sobre `src/data/`:
@@ -84,78 +90,7 @@ Testes automatizados sobre `src/data/`:
 - Todo `sourceId` existe em `sources.json`.
 - Trechos sem fonte estão marcados como `pending`.
 - Nenhum texto contém números de economia (verificação por expressão regular de `%`, `kWh`,
-  `R# Plano de testes — Vizinhança Inteligente
-
-## Estratégia
-
-| Nível | Ferramenta | O que cobre |
-|---|---|---|
-| Unitário | Vitest | `src/lib/` (classificador, motor, jogos) e validação de `src/data/` |
-| Estático | TypeScript strict + ESLint | Tipos, contratos, `any` proibido, HTML bruto proibido |
-| Build | `next build` | Export estático completo sem erros |
-| Manual | Roteiro abaixo | Interface, responsividade, acessibilidade, equipamento da feira |
-
-Comando único antes de cada entrega: `npm run validate`.
-Os testes ficam em `tests/`, espelhando `src/` (ex.: `tests/lib/classifier.test.ts`).
-
-## 1. Reconhecimento dos seis problemas
-
-- Para cada categoria, **pelo menos 10 frases** representativas, escritas como um visitante
-  escreveria, devem resultar na categoria correta.
-- A entrada guiada (escolha de cena) deve levar à categoria correspondente em 100% dos casos.
-- O resultado deve listar os termos reconhecidos.
-
-Exemplos de frases a cobrir (lista completa na etapa 2):
-- C1: "os postes ficam acesos de dia", "a luz da rua não apaga de manhã"
-- C2: "deixam a luz da sala acesa sem ninguém"
-- C3: "todo mundo liga chuveiro e forno no fim da tarde, na mesma hora"
-- C4: "minha geladeira é muito velha"
-- C5: "ligam o ar com a janela aberta"
-- C6: "minha casa pega muito sol e não tem placa solar"
-
-## 2. Sinônimos e variações de escrita
-
-- Maiúsculas e minúsculas: "LUZ ACESA" = "luz acesa".
-- Acentos: "iluminacao" = "iluminação"; "lampada" = "lâmpada".
-- Pontuação e espaços extras ignorados.
-- Sinônimos: lâmpada/luz/iluminação; ar/ar-condicionado/climatizador; poste/luz da rua;
-  placa solar/painel solar/fotovoltaico; geladeira/refrigerador.
-- Plural e singular ("lâmpadas" / "lâmpada").
-
-## 3. Entradas ambíguas
-
-- Frases com termos de duas categorias (ex.: "a luz e o ar ficam ligados com a janela aberta")
-  devem gerar o pedido de confirmação "Você quis dizer A ou B?".
-- Teste do limite: pontuações próximas → confirmação; diferença clara → categoria direta.
-- Ao confirmar uma opção, o fluxo segue para a categoria escolhida.
-
-## 4. Entradas inválidas
-
-- Texto vazio ou só espaços → não envia (botão desabilitado ou mensagem).
-- Texto sem relação com energia ("gosto de futebol") → "não entendi" + oferta das cenas.
-- Texto acima do limite de tamanho → bloqueado ou truncado com aviso.
-- Caracteres especiais e HTML (`<script>`) → exibidos como texto puro, sem executar nada.
-- Negações conhecidas como limitação ("a luz não fica acesa") → documentadas; o sistema não
-  deve travar.
-
-## 5. Escolha das soluções (motor de decisão)
-
-- Transições válidas em todas as etapas: relato → diagnóstico → causas → alternativas →
-  desafio → avaliação → explicação final.
-- Eventos fora de ordem são ignorados sem quebrar o estado.
-- Resposta correta e incorreta produzem a avaliação e o feedback da opção escolhida.
-- "Recomeçar" de qualquer etapa volta ao estado inicial, sem dados do visitante anterior.
-- Determinismo: mesma sequência de eventos → mesmo estado final.
-
-## 6. Explicações apresentadas
-
-Testes automatizados sobre `src/data/`:
-- As seis categorias existem e passam no esquema.
-- Cada categoria tem ≥ 1 causa, ≥ 2 alternativas, 1 desafio e explicação final.
-- Cada desafio tem exatamente uma opção correta e feedback em todas as opções.
-- Todo `sourceId` existe em `sources.json`.
-- Trechos sem fonte estão marcados como `pending`.
-) sem fonte associada.
+  `R$`) sem fonte associada.
 - Explicação `verified` só cita fontes `verified`; fonte `verified` registra o que sustenta.
 - Toda fonte cadastrada é citada e pertence a um domínio institucional.
 - Nenhum horário fixo de ponta aparece nos textos.

@@ -27,13 +27,13 @@ de ilustração interativa).
 | Fluxo navegável sem estilo, ligado ao motor por `useReducer` | P0 |
 | Repositório no GitHub e primeiro deploy na Vercel | P1 |
 
-## Etapa 3 — Interface e conteúdo (08/11)
+## Etapa 3 — Interface e conteúdo (08–09/11, em andamento)
 
 | Entrega | Prior. |
 |---|---|
-| Direção visual (cores, tipografia, componentes `ui/`) | P0 |
-| Telas do fluxo com acessibilidade (foco, `aria-live`, toque, contraste) | P0 |
-| Seis cenas da entrada guiada | P0 |
+| Direção visual (cores, tipografia, componentes `ui/`) ✅ | P0 |
+| Telas do fluxo com acessibilidade (foco, `aria-live`, toque, contraste) ✅ | P0 |
+| Seis situações na página inicial (mapa ilustrado + cartões com ícone) ✅ | P0 |
 | Minigame Escolha Inteligente | P0 |
 | Conteúdo científico preenchido com fontes oficiais | P0 |
 | Revisão de código da etapa | P1 |

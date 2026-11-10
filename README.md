@@ -65,7 +65,7 @@ Sem banco de dados, contas, rastreamento ou IA generativa: o projeto não precis
 
 ## Como executar
 
-Pré-requisito: [Node.js](https://nodejs.org) 24 ou superior.
+Pré-requisito: [Node.js](https://nodejs.org) 24 (versão definida em `package.json`).
 
 ```bash
 npm install        # instala as dependências (versões fixadas)
@@ -88,12 +88,17 @@ notebook sem internet durante a feira.
 **Etapa 1 — Fundação (concluída):** projeto configurado, documentação, contratos de dados e
 estrutura de testes. A página inicial é provisória.
 
-**Etapa 2 — Núcleo inteligente (em andamento):** base de conhecimento das seis categorias com
+**Etapa 2 — Núcleo inteligente (concluída):** base de conhecimento das seis categorias com
 fontes oficiais conferidas e validação automática (bloco A) e classificador de texto com
 tratamento de ambiguidade (bloco B), motor do fluxo de sete etapas (bloco C) e uma versão
-navegável mínima em `/diagnostico` (bloco D), ainda sem o visual definitivo.
+navegável mínima em `/diagnostico` (bloco D).
 
-Depois: interface, minigames e entrega. Veja [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md).
+**Etapa 3 — Interface (em andamento):** identidade visual "mapa vivo da vizinhança", página
+inicial com as seis situações e diagnóstico com indicador de etapas, raciocínio da IA visível,
+desafio com confirmação e explicação final com fontes. Fontes tipográficas locais: o build
+funciona sem internet.
+
+Depois: minigames e entrega. Veja [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md).
 
 ## Documentação
 
