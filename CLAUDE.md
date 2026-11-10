@@ -182,6 +182,14 @@ Estilos base ficam em `@layer base` para as classes do Tailwind poderem sobrescr
   digitada: mínimo de 5 s (`MIN_THINKING_MS`); botões da conversa: `MIN_STEP_THINKING_MS`. O hook
   `use-assistant` cancela as esperas ao reiniciar a conversa e ao desmontar.
 
+### Conversa sem exposição das etapas (10/11/2026)
+
+O visitante não vê "Etapa X de Y", barras de progresso nem rótulos de etapa; a máquina de estados
+(`FLOW_STEPS`, motor, reducer) segue igual por baixo. A resposta tem só um título para leitores
+de tela ("Resposta do assistente"). As introduções ficam em `ASSISTANT_INTROS` e não podem mudar
+o sentido científico. Não chame o sistema de IA generativa: as sugestões dizem "do assistente",
+e o raciocínio do diagnóstico ("Como cheguei a esse diagnóstico") continua visível.
+
 ### Respostas do assistente: sem cards e com digitação progressiva (10/11/2026)
 
 - **Sem cards:** a resposta é conteúdo de conversa (sem fundo, borda ou sombra em volta do

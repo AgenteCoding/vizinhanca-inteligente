@@ -21,7 +21,7 @@ const atkinsonMono = localFont({
 });
 
 const DESCRIPTION =
-  "SmartHood AI: simulação educacional de uma inteligência artificial que ajuda a identificar e resolver desperdícios de energia em uma vizinhança.";
+  "SmartHood AI: assistente educacional, baseado em regras e fontes oficiais, que ajuda a identificar e resolver desperdícios de energia em uma vizinhança.";
 
 export const metadata: Metadata = {
   title: {

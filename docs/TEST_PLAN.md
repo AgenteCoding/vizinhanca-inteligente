@@ -176,7 +176,7 @@ visível sem rolar; fallback `@supports not` presente no CSS gerado.
 
 - Navegar todo o fluxo e os jogos **só com teclado** (Tab, Shift+Tab, Enter, Espaço).
 - Foco sempre visível.
-- Leitor de tela (NVDA no Windows ou Narrador) anuncia etapa atual e feedback.
+- Leitor de tela (NVDA no Windows ou Narrador) anuncia cada resposta ("Resposta do assistente") e o feedback.
 - Contraste conferido nas cores definitivas (AA).
 - Acerto/erro compreensível sem cor (ícone + texto).
 - Alvos de toque ≥ 48 px na tela de toque.

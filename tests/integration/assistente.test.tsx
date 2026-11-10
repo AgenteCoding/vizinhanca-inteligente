@@ -16,6 +16,7 @@ import { DiagnosisBody } from "@/components/assistant/AssistantMessage";
 import { ChallengeView } from "@/components/assistant/ChallengeStep";
 import { ChatView } from "@/components/assistant/ChatView";
 import {
+  ASSISTANT_INTROS,
   CLARIFICATION_MESSAGES,
   COMPOSER_LOCKED_PLACEHOLDER,
   COMPOSER_PLACEHOLDER,
@@ -23,7 +24,6 @@ import {
   NO_ACCOUNT_NOTE,
   PROVIDER_ERROR,
   REJECTION_MESSAGES,
-  STEP_LABELS,
   VISITOR_LABELS,
   WELCOME_TITLE,
 } from "@/components/assistant/messages";
@@ -162,9 +162,13 @@ describe("conversa completa, para cada categoria", () => {
       const html = render(state);
       const content = lastContent(state);
       visited.push(content.step);
-      // a fala do visitante e a etapa da resposta aparecem; "Novo diagnóstico" sempre visível
+      // a fala do visitante e a resposta aparecem; a sequência interna não é exposta
       expect(html).toContain(escape(text));
-      expect(html).toContain(`${escape(STEP_LABELS[content.step])}</h3>`);
+      expect(html).toContain("Resposta do assistente</h3>");
+      expect(html).not.toMatch(/Etapa d/);
+      expect(html).not.toMatch(/de 7/);
+      expect(html).not.toContain("h-1.5 w-4");
+      expect(html).not.toContain("progressbar");
       expect(html).toContain("Novo diagnóstico");
       return html;
     };
@@ -234,7 +238,7 @@ describe("conversa completa, para cada categoria", () => {
     const html = render(state);
     expect(html).toContain(escape(typed[categoryId])); // balão do visitante
     expect(html).toContain(`data-diagnosis="confirmed" data-category="${categoryId}"`);
-    expect(html).toContain("Pelo que você contou");
+    expect(html).toContain(escape(ASSISTANT_INTROS.identified));
     expect(html).toContain("Como cheguei a esse diagnóstico");
   });
 
@@ -278,7 +282,8 @@ describe("entradas inválidas e ambíguas", () => {
     const html = render(pending);
     const start = html.indexOf('data-candidate="true"');
     const suggestion = html.slice(start, html.indexOf("</button>", start));
-    expect(suggestion).toContain("Sugestão da IA");
+    expect(suggestion).toContain("Sugestão do assistente");
+    expect(html).not.toContain("Sugestão da IA");
     expect(suggestion).toContain(escape(problemOf("iluminacao-publica-dia").title));
     const confirmed = await say(pending, { type: "SELECT_CATEGORY", categoryId: "luzes-ambientes-vazios" }, "Quero estudar: luzes");
     const after = render(confirmed);

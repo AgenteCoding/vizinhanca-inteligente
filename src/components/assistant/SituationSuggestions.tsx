@@ -5,7 +5,7 @@ import { Icon } from "../ui/Icon";
 export interface SituationOption {
   id: ProblemCategoryId;
   title: string;
-  /** Sugerida pela IA (empate ou pouca evidência no relato). */
+  /** Sugerida pelo assistente (empate ou pouca evidência no relato). */
   isCandidate?: boolean;
 }
 
@@ -44,7 +44,7 @@ export function SituationSuggestions({
               </span>
               <span className="min-w-0 leading-snug">
                 {option.isCandidate ? (
-                  <span className="block text-sm font-semibold text-petrol-soft">Sugestão da IA</span>
+                  <span className="block text-sm font-semibold text-petrol-soft">Sugestão do assistente</span>
                 ) : null}
                 <span className="block text-[0.95rem] font-semibold">{option.title}</span>
               </span>

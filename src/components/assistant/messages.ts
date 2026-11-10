@@ -3,7 +3,6 @@
  * causas, soluções, explicações e fontes vêm sempre de `src/data/` por meio do serviço.
  */
 import type { ClassificationStatus, FlowActionType, FlowRejectionReason } from "@/types/engine";
-import type { FlowStep } from "@/types/knowledge";
 
 export const WELCOME_TITLE = "Como podemos tornar sua vizinhança mais inteligente?";
 export const WELCOME_TEXT =
@@ -23,31 +22,20 @@ export const VISITOR_LABELS = {
   reselect: (title: string) => `Na verdade, a situação é: ${title}.`,
   toCauses: "Por que isso acontece?",
   toAlternatives: "Quais são as soluções?",
-  toChallenge: "Quero tentar o desafio.",
+  toChallenge: "Quero testar o que aprendi.",
   answer: (option: string) => `Minha escolha: ${option}`,
-  toFinal: "Quero ver a explicação final.",
-};
-
-/** Nome curto de cada etapa (indicação "Etapa X de 7"). */
-export const STEP_LABELS: Record<FlowStep, string> = {
-  relato: "Relato",
-  diagnostico: "Diagnóstico",
-  causas: "Causas",
-  alternativas: "Soluções",
-  desafio: "Desafio",
-  avaliacao: "Avaliação",
-  "explicacao-final": "Explicação final",
+  toFinal: "Pode resumir tudo para mim?",
 };
 
 /** Frase de abertura de cada resposta do assistente. */
 export const ASSISTANT_INTROS = {
-  identified: "Pelo que você contou, a situação é esta:",
-  chosen: "Certo! Vamos estudar esta situação:",
-  causes: "Veja por que isso acontece e o que esse desperdício provoca.",
+  identified: "Entendi o que você descreveu. Parece ser este caso:",
+  chosen: "Vamos olhar esta situação com calma:",
+  causes: "Vamos entender por que isso acontece e o que esse desperdício provoca.",
   alternatives:
-    "Estas são as soluções possíveis. Toque em cada uma para ver as vantagens e as limitações.",
-  challenge: "Agora é a sua vez de decidir.",
-  final: "Resumo do que você aprendeu nesta situação.",
+    "Há algumas formas de resolver isso. Toque em cada uma para ver as vantagens e as limitações.",
+  challenge: "Que tal testar o que vimos? Qual destas decisões você tomaria?",
+  final: "Aqui está um resumo do que vimos sobre esta situação.",
 };
 
 export const PENDING_MESSAGES: Partial<Record<FlowActionType, string>> = {

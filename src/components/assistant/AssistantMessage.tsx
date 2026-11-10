@@ -3,7 +3,7 @@ import type { ReactNode, RefObject } from "react";
 import { KEYWORD_WEIGHT_MAX, KEYWORD_WEIGHT_MIN } from "@/data/schema";
 import type { AssistantActions } from "@/hooks/use-assistant";
 import type { ClassificationResult, StepContent } from "@/types/engine";
-import { FLOW_STEPS, type Explanation, type ProblemCategoryId } from "@/types/knowledge";
+import type { Explanation, ProblemCategoryId } from "@/types/knowledge";
 import { LogoMark } from "../ui/Logo";
 import { Button, buttonClasses } from "../ui/Button";
 import { CATEGORY_ICONS } from "../ui/category-icons";
@@ -17,7 +17,6 @@ import {
   CLARIFICATION_MESSAGES,
   EVALUATION_MESSAGES,
   PENDING_NOTICE,
-  STEP_LABELS,
   VISITOR_LABELS,
 } from "./messages";
 import { SituationSuggestions, type SituationOption } from "./SituationSuggestions";
@@ -488,7 +487,10 @@ function FinalSection({ icon, title, children }: { icon: IconName; title: string
 // Moldura da resposta
 // ---------------------------------------------------------------------------------------------
 
-/** Uma resposta do assistente na conversa, com a etapa indicada (ex.: "Etapa 3 de 7: Causas"). */
+/**
+ * Uma resposta do assistente na conversa. A sequência interna do diagnóstico não aparece para o
+ * visitante (sem "Etapa X de Y" nem barra de progresso); a máquina de estados continua a mesma.
+ */
 export function AssistantMessage({
   content,
   active,
@@ -504,25 +506,16 @@ export function AssistantMessage({
   id: string;
   headingRef?: RefObject<HTMLHeadingElement | null>;
 }) {
-  const stepNumber = FLOW_STEPS.indexOf(content.step) + 1;
   const final = content.step === "explicacao-final";
   return (
     <article aria-labelledby={`${id}-titulo`} className="message-enter flex scroll-mt-28 gap-3" data-step={content.step}>
       <LogoMark size="sm" className="mt-0.5 hidden sm:grid" />
       <div className="min-w-0 flex-1">
-        <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1">
-          <h3 id={`${id}-titulo`} ref={headingRef} tabIndex={-1} className="text-sm font-semibold text-petrol-soft">
-            <span className="sr-only">Resposta do assistente. </span>
-            Etapa {stepNumber} de {FLOW_STEPS.length}: {STEP_LABELS[content.step]}
-          </h3>
-          {/* Progresso do diagnóstico em segmentos (reforço visual do texto ao lado). */}
-          <span aria-hidden="true" className="flex gap-1">
-            {FLOW_STEPS.map((step, index) => (
-              <span key={step} className={`h-1.5 w-4 rounded-full ${index < stepNumber ? "bg-petrol" : "bg-petrol/15"}`} />
-            ))}
-          </span>
-        </div>
-        {/* Só o conteúdo é digitado; o título da etapa aparece de imediato e recebe o foco. */}
+        {/* Título só para leitores de tela: recebe o foco quando a resposta chega. */}
+        <h3 id={`${id}-titulo`} ref={headingRef} tabIndex={-1} className="sr-only">
+          Resposta do assistente
+        </h3>
+        {/* Só o conteúdo é digitado. */}
         <TypedContent animate={active} className="leading-relaxed">
         {content.step === "diagnostico" ? (
           <DiagnosisBody content={content} active={active} actions={actions} situations={situations} idPrefix={id} />
