@@ -153,6 +153,12 @@ respostas antigas não voltam a animar; movimento reduzido mostra tudo de imedia
 A aplicação na página (`typed-reveal.ts`) depende de um navegador de verdade e não tem teste
 automatizado: o projeto não tem ambiente de DOM nos testes.
 
+## 7.3 Fundo fluido
+
+Manual (Chrome): camadas `fixed`, `z-index -1`, `pointer-events: none`; `transform` muda ao
+longo do tempo; com movimento reduzido `animation: none`; no celular só uma camada; vidro da
+conversa legível; sem rolagem horizontal.
+
 ## 8. Responsividade (manual)
 
 - Larguras: 360 px, 768 px, 1366 px e a tela real da feira.

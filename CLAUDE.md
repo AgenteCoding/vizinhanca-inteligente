@@ -167,6 +167,9 @@ Estilos base ficam em `@layer base` para as classes do Tailwind poderem sobrescr
   `globals.css`, com alternativa quase sólida quando o navegador não tem `backdrop-filter`.
   Use em painéis flutuantes (cabeçalho, campo de conversa, sugestões, painéis dos jogos). Texto
   longo de leitura continua em superfície sólida.
+- **Fundo fluido:** `body::before` e `body::after` em `globals.css` (gradientes radiais maiores que a
+  tela, só `transform`, 48 s e 64 s). Ice White domina; Lime e Petrol só em manchas suaves. No
+  celular fica uma camada só; com movimento reduzido, fundo estático.
 - **3D e movimento:** só CSS e SVG (`.orb`, `EnergyScene.tsx`). Continua proibido instalar
   biblioteca de animação ou 3D. Todo elemento decorativo é `aria-hidden` e
   `pointer-events-none`, e para com `prefers-reduced-motion`.

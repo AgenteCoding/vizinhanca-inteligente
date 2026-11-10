@@ -50,17 +50,47 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Luz ambiente fixa atrás de tudo: dá ao vidro fosco algo para desfocar. */
-  body::before {
+  /*
+   * Fundo fluido: duas camadas fixas e decorativas atrás de tudo (z-index -1, sem cliques).
+   * O Ice White do body domina; as camadas só adicionam manchas de luz difusas em Signal Lime e
+   * Petrol Blue, bem suaves. Cada camada é maior que a tela e só se move com transform
+   * (compositor, sem recalcular layout). O movimento fica em @media (prefers-reduced-motion:
+   * no-preference); sem ele, o fundo é estático e equivalente.
+   */
+  body::before,
+  body::after {
     content: "";
     position: fixed;
-    inset: 0;
     z-index: -1;
     pointer-events: none;
+    inset: -20vmax;
+    will-change: transform;
+  }
+
+  body::before {
     background:
-      radial-gradient(42rem 28rem at 88% -6%, rgb(217 250 87 / 0.3), transparent 62%),
-      radial-gradient(36rem 26rem at -8% 22%, rgb(47 100 114 / 0.2), transparent 64%),
-      radial-gradient(40rem 30rem at 55% 108%, rgb(188 215 210 / 0.55), transparent 60%);
+      radial-gradient(38vmax 30vmax at 82% 14%, rgb(217 250 87 / 0.28), transparent 70%),
+      radial-gradient(34vmax 28vmax at 12% 40%, rgb(47 100 114 / 0.16), transparent 70%),
+      radial-gradient(40vmax 30vmax at 60% 92%, rgb(188 215 210 / 0.55), transparent 70%);
+  }
+
+  body::after {
+    background:
+      radial-gradient(26vmax 22vmax at 30% 18%, rgb(217 250 87 / 0.16), transparent 72%),
+      radial-gradient(30vmax 24vmax at 90% 70%, rgb(47 100 114 / 0.12), transparent 72%),
+      radial-gradient(24vmax 20vmax at 8% 90%, rgb(255 255 255 / 0.5), transparent 72%);
+  }
+
+  /* Telas pequenas ou com economia de dados: uma camada só e manchas mais fracas. */
+  @media (max-width: 767px), (prefers-reduced-data: reduce) {
+    body::after {
+      display: none;
+    }
+
+    body::before {
+      inset: -10vmax;
+      opacity: 0.8;
+    }
   }
 
   h1,
@@ -220,6 +250,15 @@
 /* ------------------------------------------------------------------------------------------- */
 
 @media (prefers-reduced-motion: no-preference) {
+  /* Deriva muito lenta e orgânica do fundo: as duas camadas andam em ritmos diferentes. */
+  body::before {
+    animation: fluid-a 48s ease-in-out infinite alternate;
+  }
+
+  body::after {
+    animation: fluid-b 64s ease-in-out infinite alternate;
+  }
+
   .message-enter {
     /* Sem "fill-mode": se a animação não rodar, o conteúdo continua visível. */
     animation: message-enter 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -276,6 +315,30 @@
     .lift:hover {
       transform: translateY(-2px);
     }
+  }
+}
+
+@keyframes fluid-a {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate3d(4vmax, -3vmax, 0) rotate(5deg) scale(1.06);
+  }
+  100% {
+    transform: translate3d(-3vmax, 4vmax, 0) rotate(-4deg) scale(1.02);
+  }
+}
+
+@keyframes fluid-b {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1.04);
+  }
+  50% {
+    transform: translate3d(-5vmax, 3vmax, 0) rotate(-6deg) scale(1);
+  }
+  100% {
+    transform: translate3d(3vmax, -4vmax, 0) rotate(4deg) scale(1.08);
   }
 }
 
