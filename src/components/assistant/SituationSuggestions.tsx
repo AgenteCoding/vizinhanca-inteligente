@@ -32,7 +32,7 @@ export function SituationSuggestions({
               onClick={() => onSelect(option.id, option.title)}
               data-candidate={option.isCandidate ? "true" : undefined}
               className={`lift group flex min-h-14 w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left hover:border-petrol disabled:cursor-not-allowed disabled:opacity-60 ${
-                option.isCandidate ? "border-[1.5px] border-petrol bg-surface" : "glass"
+                option.isCandidate ? "border-[1.5px] border-petrol bg-surface" : "liquid-chip"
               }`}
             >
               <span

@@ -167,6 +167,10 @@ Estilos base ficam em `@layer base` para as classes do Tailwind poderem sobrescr
   `globals.css`, com alternativa quase sólida quando o navegador não tem `backdrop-filter`.
   Use em painéis flutuantes (cabeçalho, campo de conversa, sugestões, painéis dos jogos). Texto
   longo de leitura continua em superfície sólida.
+- **Liquid Glass do chat:** `.liquid` (painel com um único desfoque), `.liquid-field` (campo
+  integrado, sem vidro próprio) e `.liquid-chip` (sugestões). Escreva só `backdrop-filter` no CSS:
+  o Tailwind/Lightning CSS acrescenta o prefixo, e escrever os dois fazia o navegador perder o
+  desfoque. Sem suporte: `@supports not` deixa o painel quase opaco.
 - **Fundo fluido:** `body::before` e `body::after` em `globals.css` (gradientes radiais maiores que a
   tela, só `transform`, 48 s e 64 s). Ice White domina; Lime e Petrol só em manchas suaves. No
   celular fica uma camada só; com movimento reduzido, fundo estático.

@@ -159,6 +159,12 @@ Manual (Chrome): camadas `fixed`, `z-index -1`, `pointer-events: none`; `transfo
 longo do tempo; com movimento reduzido `animation: none`; no celular só uma camada; vidro da
 conversa legível; sem rolagem horizontal.
 
+## 7.4 Liquid Glass do chat
+
+Manual (Chrome): `backdrop-filter` calculado no painel (14 px no desktop, 10 px no celular);
+foco do campo com borda Petrol e brilho Lime; botão de envio clicável sem nada por cima; campo
+visível sem rolar; fallback `@supports not` presente no CSS gerado.
+
 ## 8. Responsividade (manual)
 
 - Larguras: 360 px, 768 px, 1366 px e a tela real da feira.

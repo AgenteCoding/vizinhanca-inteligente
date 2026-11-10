@@ -37,7 +37,7 @@ function VisitorBubble({ text, pending = false }: { text: string; pending?: bool
   return (
     <div className="flex justify-end">
       <p
-        className={`message-enter max-w-[85%] whitespace-pre-wrap break-words rounded-3xl rounded-br-lg bg-petrol px-4 py-2.5 text-ice shadow-[0_14px_28px_-18px_rgb(16_45_53/0.9)] ${pending ? "opacity-90" : ""}`}
+        className={`message-enter max-w-[85%] whitespace-pre-wrap break-words rounded-3xl rounded-br-lg border border-petrol/10 bg-petrol/[0.07] px-4 py-2.5 text-petrol ${pending ? "opacity-80" : ""}`}
       >
         <span className="sr-only">Você disse: </span>
         {text}
@@ -65,7 +65,7 @@ export function ChatView({
   const composerError = rejection ? REJECTION_MESSAGES[rejection] : null;
 
   return (
-    <div className={`mx-auto flex w-full max-w-3xl flex-col px-4 sm:px-6 ${started ? "min-h-[calc(100svh-4.5rem)]" : ""}`}>
+    <div className={`mx-auto flex w-full max-w-3xl flex-col px-3 sm:px-6 ${started ? "min-h-[calc(100svh-4.5rem)]" : ""}`}>
       {started ? (
         <h1 className="pt-6 text-sm font-semibold uppercase tracking-[0.14em] text-petrol-soft">{CONVERSATION_TITLE}</h1>
       ) : (
@@ -75,8 +75,10 @@ export function ChatView({
         </div>
       )}
 
+      {/* Painel Liquid Glass: abriga as mensagens, o campo de conversa e as sugestões. */}
+      <div className={`liquid ${started ? "mb-4 mt-3 flex flex-1 flex-col" : "mb-14 mt-8"}`}>
       {started ? (
-        <ol aria-label="Mensagens da conversa" className="grid flex-1 content-start gap-7 py-6">
+        <ol aria-label="Mensagens da conversa" className="grid flex-1 content-start gap-7 px-3 py-5 sm:px-6 sm:py-6">
           {turns.map((turn, index) => (
             <li key={turn.id} data-role={turn.role} className="scroll-mt-24">
               {turn.role === "visitor" ? (
@@ -119,7 +121,7 @@ export function ChatView({
         </ol>
       ) : null}
 
-      <div className={started ? "sticky bottom-0 z-10 -mx-4 bg-gradient-to-t from-ice via-ice/85 to-transparent px-4 pb-3 pt-6 sm:-mx-6 sm:px-6" : "mt-8"}>
+      <div className={started ? "liquid-dock sticky bottom-0 z-10 rounded-b-[inherit] px-3 pb-3 pt-6 sm:px-5" : "p-3 sm:p-5"}>
         <Composer
           onSubmit={actions.submitReport}
           placeholder={canType ? COMPOSER_PLACEHOLDER : COMPOSER_LOCKED_PLACEHOLDER}
@@ -144,7 +146,7 @@ export function ChatView({
       </div>
 
       {started ? null : (
-        <div className="mx-auto mt-9 w-full max-w-3xl pb-14">
+        <div className="mx-auto w-full px-3 pb-4 pt-1 sm:px-5 sm:pb-6">
           <h2 className="mb-3 text-center text-sm font-semibold uppercase tracking-[0.14em] text-petrol-soft">{SUGGESTIONS_LABEL}</h2>
           <SituationSuggestions
             label={SUGGESTIONS_LABEL}
@@ -153,6 +155,7 @@ export function ChatView({
           />
         </div>
       )}
+      </div>
     </div>
   );
 }

@@ -42,6 +42,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  // Teclado virtual: a página se redimensiona e o campo de conversa não fica coberto.
+  interactiveWidget: "resizes-content",
   themeColor: "#102d35",
 };
 

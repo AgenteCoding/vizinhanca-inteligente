@@ -53,9 +53,8 @@ export function Composer({
   return (
     <form onSubmit={handleSubmit} aria-busy={pending}>
       <div
-        className={`glass flex items-end gap-2 rounded-[1.75rem] p-2 pl-5 transition-shadow focus-within:ring-2 focus-within:ring-petrol ${
-          error ? "ring-2 ring-wrong" : ""
-        } ${blocked ? "opacity-85" : ""}`}
+        data-invalid={error ? "true" : undefined}
+        className={`liquid-field flex items-end gap-2 rounded-[1.5rem] p-2 pl-4 sm:rounded-[1.75rem] sm:pl-5 ${blocked ? "opacity-85" : ""}`}
       >
         <label htmlFor="relato" className="sr-only">
           {COMPOSER_LABEL}
@@ -77,7 +76,7 @@ export function Composer({
         <button
           type="submit"
           disabled={!canSend}
-          className="mb-1 grid size-12 shrink-0 place-items-center rounded-full border-[1.5px] border-petrol bg-lime text-petrol shadow-[0_10px_22px_-12px_rgb(120_150_30/0.9)] transition duration-150 hover:bg-lime-strong active:scale-95 disabled:border-line disabled:bg-ice-strong disabled:text-petrol-soft disabled:shadow-none"
+          className="mb-1 grid size-12 shrink-0 place-items-center rounded-full border-[1.5px] border-petrol bg-lime text-petrol shadow-[inset_0_1px_0_rgb(255_255_255/0.55),0_10px_22px_-12px_rgb(120_150_30/0.9)] transition duration-150 hover:-translate-y-px hover:bg-lime-strong hover:shadow-[inset_0_1px_0_rgb(255_255_255/0.7),0_14px_26px_-12px_rgb(140_175_30/1)] active:translate-y-0 active:scale-95 disabled:border-line disabled:bg-ice-strong disabled:text-petrol-soft disabled:shadow-none"
         >
           <Icon name="send" />
           <span className="sr-only">Enviar</span>
