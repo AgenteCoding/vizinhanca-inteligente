@@ -1,20 +1,22 @@
 import type { ButtonHTMLAttributes } from "react";
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "primary" | "secondary";
-};
+export type ButtonVariant = "primary" | "secondary";
 
-/** Botão genérico com alvo de toque de pelo menos 48px (provisório até a etapa de interface). */
-export function Button({ variant = "primary", className = "", type = "button", ...props }: ButtonProps) {
+/**
+ * Classes dos botões, também usadas em links com cara de botão (`next/link`).
+ * Primário: verde-limão com borda e texto verde-escuro. Secundário: contorno verde-escuro.
+ * Altura mínima de 48px (alvo de toque confortável).
+ */
+export function buttonClasses(variant: ButtonVariant = "primary", extra = ""): string {
   const look =
     variant === "primary"
-      ? "bg-foreground text-background"
-      : "border-2 border-current bg-transparent";
-  return (
-    <button
-      type={type}
-      className={`min-h-12 rounded-lg px-4 py-2 text-left font-semibold disabled:opacity-50 ${look} ${className}`}
-      {...props}
-    />
-  );
+      ? "border-ink bg-lime text-ink hover:bg-lime-strong"
+      : "border-ink bg-surface text-ink hover:bg-paper";
+  return `inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border-2 px-5 py-2.5 text-center font-bold leading-tight transition-colors disabled:cursor-not-allowed disabled:border-line disabled:bg-paper disabled:text-ink-soft ${look} ${extra}`;
+}
+
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & { variant?: ButtonVariant };
+
+export function Button({ variant = "primary", className = "", type = "button", ...props }: ButtonProps) {
+  return <button type={type} className={buttonClasses(variant, className)} {...props} />;
 }

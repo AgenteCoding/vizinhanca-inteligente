@@ -1,25 +1,46 @@
 import Link from "next/link";
+import { GamesPreview } from "@/components/home/GamesPreview";
+import { Hero } from "@/components/home/Hero";
+import { HowItWorks } from "@/components/home/HowItWorks";
+import { Purpose } from "@/components/home/Purpose";
+import { SituationGrid } from "@/components/home/SituationGrid";
+import { buttonClasses } from "@/components/ui/Button";
+import { SiteFooter } from "@/components/ui/SiteFooter";
+import { SiteHeader } from "@/components/ui/SiteHeader";
+import { knowledgeBase } from "@/data";
 
-// Página inicial provisória. A interface definitiva será construída na etapa de interface
-// (ver docs/DEVELOPMENT_PLAN.md).
+// Página estática: os dados são lidos e validados no build (Server Component, sem JS extra).
 export default function Home() {
+  const situations = knowledgeBase.problems.map(({ id, title, summary }) => ({ id, title, summary }));
+
   return (
-    <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col justify-center gap-6 px-4 py-16">
-      <h1 className="text-4xl font-bold tracking-tight">Vizinhança Inteligente</h1>
-      <p className="text-lg leading-relaxed">
-        Uma simulação educacional de inteligência artificial que ajuda você a entender e resolver
-        desperdícios de energia em uma vizinhança.
-      </p>
-      <Link
-        href="/diagnostico"
-        className="min-h-12 self-start rounded-lg bg-foreground px-6 py-3 text-lg font-semibold text-background"
-      >
-        Começar o diagnóstico
-      </Link>
-      <p className="rounded-lg border border-current/20 px-4 py-3 text-base">
-        Projeto em desenvolvimento para a feira de ciências. Versão de teste, sem o visual
-        definitivo.
-      </p>
-    </main>
+    <>
+      <SiteHeader>
+        <nav aria-label="Seções da página" className="hidden items-center gap-1 md:flex">
+          <a href="#como-funciona" className="flex min-h-12 items-center rounded-lg px-3 font-bold hover:bg-paper">
+            Como funciona
+          </a>
+          <a href="#situacoes" className="flex min-h-12 items-center rounded-lg px-3 font-bold hover:bg-paper">
+            Situações
+          </a>
+          <a href="#jogos" className="flex min-h-12 items-center rounded-lg px-3 font-bold hover:bg-paper">
+            Minigames
+          </a>
+        </nav>
+        <div className="hidden sm:block">
+          <Link href="/diagnostico" className={buttonClasses("primary")}>
+            Começar
+          </Link>
+        </div>
+      </SiteHeader>
+      <main className="flex-1">
+        <Hero />
+        <HowItWorks />
+        <SituationGrid situations={situations} />
+        <GamesPreview />
+        <Purpose sourceCount={knowledgeBase.sources.length} />
+      </main>
+      <SiteFooter />
+    </>
   );
 }

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { DiagnosticoFlow } from "@/components/assistant/DiagnosticoFlow";
 
 export const metadata: Metadata = {
-  title: "Diagnóstico | Vizinhança Inteligente",
+  title: "Diagnóstico",
   description: "Relate um desperdício de energia e descubra causas, soluções e o porquê de cada uma.",
 };
 

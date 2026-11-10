@@ -1,38 +1,133 @@
 @import "tailwindcss";
 
-/* Tokens provisórios. A identidade visual definitiva será definida na etapa de interface. */
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Identidade visual "Mapa vivo da vizinhança" (etapa 3).
+ * Fundo claro e fixo (igual em qualquer aparelho e legível sob a luz da feira).
+ * - ink: verde-escuro, cor principal de textos e traços.
+ * - lime: verde-limão, só como preenchimento de ações e destaques, sempre com texto ink.
+ * - ai: azul, tudo o que é raciocínio da IA, links e foco.
+ * Contrastes conferidos (WCAG AA): ink/paper 11:1, ink-soft/paper 6,9:1, ai/paper 5,4:1,
+ * ink/lime 9,5:1, review/review-soft 5,9:1, ink/wrong-soft 12:1.
+ */
+@theme {
+  --color-paper: #f2f6f1;
+  --color-surface: #ffffff;
+  --color-ink: #0f3d2e;
+  --color-ink-soft: #3d5a4f;
+  --color-line: #c9d6ce;
+  --color-lime: #c6f432;
+  --color-lime-strong: #b2e01c;
+  --color-ai: #1f5bd8;
+  --color-ai-soft: #e6eefc;
+  --color-review: #9a4508;
+  --color-review-soft: #fdf3e7;
+  --color-wrong: #b42318;
+  --color-wrong-soft: #fdecea;
+  --color-map: #e3ede2;
+  --color-leaf: #cde3c6;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-atkinson), system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-mono: var(--font-atkinson-mono), ui-monospace, "Cascadia Mono", Consolas, monospace;
 }
 
 html {
   /* Base de 18px: leitura confortável em telas de quiosque. */
   font-size: 112.5%;
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--color-lime);
+  color: var(--color-ink);
 }
 
 :focus-visible {
-  outline: 3px solid currentColor;
+  outline: 3px solid var(--color-ai);
   outline-offset: 3px;
+}
+
+/* Títulos recebem foco por código a cada troca de etapa (leitores de tela); sem moldura. */
+[tabindex="-1"]:focus {
+  outline: none;
+}
+
+/* Movimento só para quem não pediu redução: a troca de etapa e a "leitura" do mapa. */
+@media (prefers-reduced-motion: no-preference) {
+  .step-enter {
+    /* Sem "fill-mode": se a animação não rodar, o conteúdo continua visível. */
+    animation: step-enter 220ms ease-out;
+  }
+
+  .map-scan {
+    animation: map-scan 1.8s ease-in-out 0.2s both;
+  }
+
+  .map-marker {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: map-marker 360ms ease-out both;
+  }
+}
+
+@keyframes step-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes map-scan {
+  0% {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(420px);
+  }
+}
+
+@keyframes map-marker {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.map-scan {
+  opacity: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {

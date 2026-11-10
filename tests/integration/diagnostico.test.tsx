@@ -9,9 +9,16 @@
 import { isValidElement, type ReactElement, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
+import { ChallengeView } from "@/components/assistant/ChallengeStep";
 import { DiagnosticoView } from "@/components/assistant/DiagnosticoView";
-import { CLARIFICATION_MESSAGES, REJECTION_MESSAGES, STEP_TITLES } from "@/components/assistant/messages";
-import { ChallengeView, DiagnosisView, ReportView } from "@/components/assistant/StepViews";
+import {
+  CLARIFICATION_MESSAGES,
+  EVALUATION_MESSAGES,
+  REJECTION_MESSAGES,
+  STEP_LABELS,
+  STEP_TITLES,
+} from "@/components/assistant/messages";
+import { DiagnosisView, ReportView } from "@/components/assistant/StepViews";
 import { knowledgeBase } from "@/data";
 import {
   diagnosticoReducer,
@@ -66,6 +73,21 @@ function clickables(node: ReactNode): ReactElement<{ onClick: () => void; childr
   return [...own, ...clickables(node.props.children)];
 }
 
+/** Elementos (não expandidos) da árvore que têm a propriedade pedida (ex.: `onChange`). */
+function withProp<P extends string>(node: ReactNode, prop: P): ReactElement<Record<P, () => void>>[] {
+  if (Array.isArray(node)) return node.flatMap((child: ReactNode) => withProp(child, prop));
+  if (!isValidElement<Record<string, unknown> & { children?: ReactNode }>(node)) return [];
+  const own = typeof node.props[prop] === "function" ? [node as ReactElement<Record<P, () => void>>] : [];
+  return [...own, ...withProp(node.props.children, prop)];
+}
+
+/** Trecho do HTML de um botão marcado com o atributo indicado, até o fim do botão. */
+function segmentAfter(html: string, marker: string): string {
+  const start = html.indexOf(marker);
+  if (start < 0) return "";
+  return html.slice(start, html.indexOf("</button>", start));
+}
+
 const textOf = (node: ReactNode): string =>
   Array.isArray(node)
     ? node.map(textOf).join("")
@@ -87,6 +109,9 @@ describe("fluxo completo navegável, para cada categoria", () => {
       visited.push(stepOf(state));
       expect(html).toContain(escape(STEP_TITLES[stepOf(state)]));
       expect(html).toContain("Recomeçar"); // sempre visível
+      // indicador de progresso: etapa atual marcada para leitores de tela
+      expect(html).toContain('aria-current="step"');
+      expect(html).toContain(`${escape(STEP_LABELS[stepOf(state)])} (etapa atual)`);
       return html;
     };
 
@@ -111,7 +136,9 @@ describe("fluxo completo navegável, para cada categoria", () => {
       for (const l of alternative.limitations) expect(html).toContain(escape(l.text));
     }
     const recommended = problem.alternatives.find((a) => a.id === problem.recommendedAlternativeId);
-    expect(html).toContain(`★ Recomendada: ${escape(recommended?.title ?? "")}`);
+    expect(html).toContain(`data-alternative-id="${recommended?.id}" data-recommended="true"`);
+    expect(html.match(/data-recommended="true"/g)).toHaveLength(1);
+    expect(html).toContain("Solução recomendada");
 
     // 5. desafio: pergunta e opções, sem revelar a correta
     html = step({ type: "ADVANCE" });
@@ -124,14 +151,19 @@ describe("fluxo completo navegável, para cada categoria", () => {
     // 6. avaliação
     const correct = optionOf(categoryId, true);
     html = step({ type: "ANSWER_CHALLENGE", optionId: correct.id });
-    expect(html).toContain("✔ Boa escolha!");
+    expect(html).toContain(escape(EVALUATION_MESSAGES.correctTitle));
+    expect(html).toContain('data-result="correct"');
     expect(html).toContain(escape(correct.feedback));
 
     // 7. explicação final, com fontes
     html = step({ type: "ADVANCE" });
     expect(html).toContain(escape(problem.scientificExplanation.text));
     expect(html).toContain(escape(problem.finalExplanation.text));
-    expect(html).toContain(escape(problem.causes[0].title));
+    for (const cause of problem.causes) expect(html).toContain(escape(cause.title));
+    expect(html).toContain(escape(correct.text)); // solução escolhida
+    expect(html).toContain("Escolha adequada"); // resultado da avaliação
+    expect(html).toContain(escape(recommended?.title ?? "")); // solução recomendada
+    expect(html).toContain("Fontes utilizadas");
 
     expect(visited).toEqual([...FLOW_STEPS]);
   });
@@ -148,8 +180,10 @@ describe("fluxo completo navegável, para cada categoria", () => {
     };
     const state = dispatchAll([{ type: "SUBMIT_REPORT", text: typed[categoryId] }]);
     const html = render(state);
-    expect(html).toContain(`Situação identificada: <strong>${escape(problemOf(categoryId).title)}</strong>`);
-    expect(html).toContain("Como cheguei a esse diagnóstico");
+    expect(html).toContain(`data-diagnosis="confirmed" data-category="${categoryId}"`);
+    expect(html).toContain("Situação identificada");
+    expect(html).toContain(escape(problemOf(categoryId).title));
+    expect(html).toContain("Como a IA chegou a esse diagnóstico");
   });
 });
 
@@ -179,7 +213,9 @@ describe("entradas inválidas e ambíguas", () => {
     const pending = dispatchAll([
       { type: "SUBMIT_REPORT", text: "O poste da rua fica aceso de dia e a luz do quarto fica acesa sem ninguém." },
     ]);
-    expect(render(pending)).toContain(`Sugestão: ${escape(problemOf("iluminacao-publica-dia").title)}`);
+    const suggestion = segmentAfter(render(pending), 'data-candidate="true"');
+    expect(suggestion).toContain("Sugestão da IA");
+    expect(suggestion).toContain(escape(problemOf("iluminacao-publica-dia").title));
     const confirmed = dispatchAll([{ type: "SELECT_CATEGORY", categoryId: "luzes-ambientes-vazios" }], pending);
     expect(render(confirmed)).toContain(escape(problemOf("luzes-ambientes-vazios").title));
     expect(render(confirmed)).toContain("Ver as causas");
@@ -206,20 +242,40 @@ describe("respostas do desafio", () => {
     const wrong = optionOf(id, false);
     const correct = optionOf(id, true);
     const html = render(dispatchAll([{ type: "ANSWER_CHALLENGE", optionId: wrong.id }], atChallenge(id)));
-    expect(html).toContain("✘ Essa não é a melhor escolha.");
+    expect(html).toContain(escape(EVALUATION_MESSAGES.incorrectTitle));
+    expect(html).toContain('data-result="incorrect"');
     expect(html).toContain(escape(wrong.feedback));
     expect(html).toContain(escape(correct.text));
     expect(html).toContain(escape(correct.feedback));
   });
 
-  it("cada botão do desafio envia a resposta da sua opção", () => {
+  it("cada opção do desafio marca a sua resposta, e confirmar envia a escolha", () => {
     const content = viewOf(atChallenge("solar-sem-geracao")).content;
     if (content.step !== "desafio") throw new Error(content.step);
-    const answer = vi.fn();
-    const buttons = clickables(ChallengeView({ content, actions: { ...noop, answer } }));
-    expect(buttons).toHaveLength(3);
-    buttons.forEach((button) => button.props.onClick());
-    expect(answer.mock.calls.map(([id]) => id)).toEqual(content.options.map((o) => o.id));
+    const onSelect = vi.fn();
+    const onConfirm = vi.fn();
+    const tree = ChallengeView({ content, selectedId: null, onSelect, onConfirm });
+    const radios = withProp(tree, "onChange");
+    expect(radios).toHaveLength(3);
+    radios.forEach((radio) => radio.props.onChange());
+    expect(onSelect.mock.calls.map(([id]) => id)).toEqual(content.options.map((o) => o.id));
+    const [form] = withProp(tree, "onSubmit");
+    (form.props.onSubmit as unknown as (event: { preventDefault: () => void }) => void)({
+      preventDefault: () => {},
+    });
+    expect(onConfirm).toHaveBeenCalledOnce();
+  });
+
+  it("o botão de confirmar fica desativado até o visitante marcar uma opção", () => {
+    const content = viewOf(atChallenge("ar-condicionado-aberto")).content;
+    if (content.step !== "desafio") throw new Error(content.step);
+    const props = { content, onSelect: () => {}, onConfirm: () => {} };
+    const empty = renderToStaticMarkup(<ChallengeView {...props} selectedId={null} />);
+    expect(empty).toMatch(/<button[^>]*type="submit"[^>]*disabled=""/);
+    const chosen = renderToStaticMarkup(<ChallengeView {...props} selectedId={content.options[1].id} />);
+    expect(chosen).not.toMatch(/<button[^>]*type="submit"[^>]*disabled=""/);
+    const chosenInput = chosen.match(new RegExp(`<input[^>]*value="${content.options[1].id}"[^>]*>`))?.[0];
+    expect(chosenInput).toContain('checked=""');
   });
 });
 
@@ -256,14 +312,14 @@ describe("navegação e ligação dos botões", () => {
 describe("reinicialização", () => {
   it("recomeçar no meio do fluxo volta ao relato, sem dados do visitante anterior", () => {
     const middle = dispatchAll([
-      { type: "SUBMIT_REPORT", text: "Deixo o ar ligado com a janela aberta." },
+      { type: "SUBMIT_REPORT", text: "Meu split fica ligado com a porta da sala aberta." },
       { type: "ADVANCE" },
       { type: "ADVANCE" },
     ]);
     expect(stepOf(middle)).toBe("alternativas");
     const restarted = dispatchAll([{ type: "RESTART" }], middle);
     expect(restarted).toEqual(initialDiagnosticoState);
-    expect(render(restarted)).not.toContain("janela aberta");
+    expect(render(restarted)).not.toContain("split");
   });
 
   it("recomeçar depois da explicação final permite um novo atendimento completo", () => {
